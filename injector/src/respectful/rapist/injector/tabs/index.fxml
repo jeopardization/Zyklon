@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="293.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/10.0.1"
+            fx:controller="respectful.rapist.injector.Controller">
+    <children>
+        <AnchorPane prefHeight="143.0" prefWidth="444.0" style="-fx-background-color: #8dc63f;">
+            <children>
+                <Text fill="WHITE" layoutX="162.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zyklon"
+                      textAlignment="CENTER">
+                    <font>
+                        <Font name="Raleway" size="38.0"/>
+                    </font>
+                </Text>
+                <Text fill="WHITE" layoutX="132.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Minecraft Forge 1.7.10" textAlignment="CENTER">
+                    <font>
+                        <Font name="Raleway" size="18.0"/>
+                    </font>
+                </Text>
+                <Button layoutX="408.0" layoutY="7.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0"
+                        prefWidth="25.0" style="-fx-background-color: RGBA(0,0,0,0);" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@resources/exit.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="143.0" prefHeight="150.0" prefWidth="444.0" style="-fx-background-color: #17171a;">
+            <children>
+                <AnchorPane layoutX="296.0" layoutY="7.0" prefHeight="75.0" prefWidth="148.0"/>
+                <Button layoutX="22.0" layoutY="79.0" mnemonicParsing="false" onAction="#inject" prefHeight="45.0"
+                        prefWidth="400.0" style="-fx-background-color: #333336;" text="Load" textAlignment="CENTER"
+                        textFill="#c3c3c3">
+                    <font>
+                        <Font name="Raleway" size="16.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT"/>
+                    </cursor>
+                </Button>
+                <Label fx:id="info" alignment="CENTER" layoutX="112.0" layoutY="10.0" prefHeight="55.0"
+                       prefWidth="221.0" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Raleway" size="16.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
