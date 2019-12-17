@@ -1,7 +1,8 @@
 # Zyklon
  
 **3.0 - 12/17/2019**<br>
-• Complete recode of the injector, client & cloud configuration backend
+• Complete recode of the injector, client & cloud configuration backend<br>
+• Public release
 
 **2.1 - 8/12/2018**<br>
 • Added HitBoxes
