@@ -125,7 +125,7 @@ public class Main {
                 field.set(null, null);
             }
             for (Object source : Launch.classLoader.getSources()) {
-                if (source.toString().toLowerCase().contains("zyklon")) {
+                if (source.toString().toLowerCase().contains("loader.jar")) {
                     Launch.classLoader.getSources().remove(source);
                     break;
                 }
