@@ -1,6 +1,10 @@
 # Zyklon
+
+![](https://i.imgur.com/WWmH1uA.png)<br>
+![](https://i.imgur.com/TRRcoSz.png)<br>
+![](https://i.imgur.com/X8uhlwCg.png)
  
-**3.0 - 12/17/2019**<br>
+**3.0 - 12/16/2019**<br>
 • Complete recode of the injector, client & cloud configuration backend<br>
 • Public release
 
