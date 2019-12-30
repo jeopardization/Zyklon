@@ -46,6 +46,12 @@ app.locals.wtapMaxTapDelay = 0;
 app.locals.wtapDist = 0;
 app.locals.wtapReqItem = false;
 app.locals.wtapItemWhitelist = [];
+app.locals.reachBind = 0;
+app.locals.reachEnabled = false;
+app.locals.reachMinExpansion = 0;
+app.locals.reachMaxExpansion = 0;
+app.locals.reachReqItem = false;
+app.locals.reachItemWhitelist = [];
 app.locals.hitboxesBind = 0;
 app.locals.hitboxesEnabled = false;
 app.locals.hitboxesExpansion = 0;
@@ -77,47 +83,53 @@ fs.readFile("./public/config", "utf8", (err, data) => {
         app.locals.autoclickerBind = values[0];
         app.locals.aimbotBind = values[1];
         app.locals.brightnessBind = values[2];
-        app.locals.hitboxesBind = values[3];
-        app.locals.wtapBind = values[4];
-        app.locals.selfDestructBind = values[5];
-        app.locals.HUDBind = values[6];
-        app.locals.throwpotBind = values[7];
-        app.locals.refillBind = values[8];
-        app.locals.autoclickerEnabled = values[9];
-        app.locals.aimbotEnabled = values[10];
-        app.locals.brightnessEnabled = values[11];
-        app.locals.hitboxesEnabled = values[12];
-        app.locals.wtapEnabled = values[13];
-        app.locals.HUDEnabled = values[15];
-        app.locals.autoclickerReqItem = values[16];
-        app.locals.aimbotReqItem = values[17];
-        app.locals.hitboxesReqItem = values[18];
-        app.locals.wtapReqItem = values[19];
-        app.locals.autoclickerItemWhitelist = values[20];
-        app.locals.aimbotItemWhitelist = values[21];
-        app.locals.hitboxesItemWhitelist = values[22];
-        app.locals.wtapItemWhitelist = values[23];
-        app.locals.autoclickerMinCPS = values[24];
-        app.locals.autoclickerMaxCPS = values[25];
-        app.locals.aimbotDist = values[26];
-        app.locals.aimbotFOV = values[27];
-        app.locals.aimbotReqMouse = values[28];
-        app.locals.aimbotMinYawSmooth = values[29];
-        app.locals.aimbotMaxYawSmooth = values[30];
-        app.locals.aimbotMinPitchSmooth = values[31];
-        app.locals.aimbotMaxPitchSmooth = values[32];
-        app.locals.aimbotMinRand = values[33];
-        app.locals.aimbotMaxRand = values[34];
-        app.locals.hitboxesExpansion = values[35];
-        app.locals.wtapDist = values[36];
-        app.locals.wtapMinTapDelay = values[37];
-        app.locals.wtapMaxTapDelay = values[38];
-        app.locals.throwpotMinThrowDelay = values[39];
-        app.locals.throwpotMaxThrowDelay = values[40];
-        app.locals.refillMinFillDelay = values[41];
-        app.locals.refillMaxFillDelay = values[42];
-        app.locals.refillMinExitDelay = values[43];
-        app.locals.refillMaxExitDelay = values[44];
+        app.locals.reachBind = values[3];
+        app.locals.hitboxesBind = values[4];
+        app.locals.wtapBind = values[5];
+        app.locals.selfDestructBind = values[6];
+        app.locals.HUDBind = values[7];
+        app.locals.throwpotBind = values[8];
+        app.locals.refillBind = values[9];
+        app.locals.autoclickerEnabled = values[10];
+        app.locals.aimbotEnabled = values[11];
+        app.locals.brightnessEnabled = values[12];
+        app.locals.reachEnabled = values[13];
+        app.locals.hitboxesEnabled = values[14];
+        app.locals.wtapEnabled = values[15];
+        app.locals.HUDEnabled = values[17];
+        app.locals.autoclickerReqItem = values[18];
+        app.locals.aimbotReqItem = values[19];
+        app.locals.reachReqItem = values[20];
+        app.locals.hitboxesReqItem = values[21];
+        app.locals.wtapReqItem = values[22];
+        app.locals.autoclickerItemWhitelist = values[23];
+        app.locals.aimbotItemWhitelist = values[24];
+        app.locals.reachItemWhitelist = values[25];
+        app.locals.hitboxesItemWhitelist = values[26];
+        app.locals.wtapItemWhitelist = values[27];
+        app.locals.autoclickerMinCPS = values[28];
+        app.locals.autoclickerMaxCPS = values[29];
+        app.locals.aimbotDist = values[30];
+        app.locals.aimbotFOV = values[31];
+        app.locals.aimbotReqMouse = values[32];
+        app.locals.aimbotMinYawSmooth = values[33];
+        app.locals.aimbotMaxYawSmooth = values[34];
+        app.locals.aimbotMinPitchSmooth = values[35];
+        app.locals.aimbotMaxPitchSmooth = values[36];
+        app.locals.aimbotMinRand = values[37];
+        app.locals.aimbotMaxRand = values[38];
+        app.locals.reachMinExpansion = values[39];
+        app.locals.reachMaxExpansion = values[40];
+        app.locals.hitboxesExpansion = values[41];
+        app.locals.wtapDist = values[42];
+        app.locals.wtapMinTapDelay = values[43];
+        app.locals.wtapMaxTapDelay = values[44];
+        app.locals.throwpotMinThrowDelay = values[45];
+        app.locals.throwpotMaxThrowDelay = values[46];
+        app.locals.refillMinFillDelay = values[47];
+        app.locals.refillMaxFillDelay = values[48];
+        app.locals.refillMinExitDelay = values[49];
+        app.locals.refillMaxExitDelay = values[50];
     } catch (ex) {
         console.log(ex);
     }
@@ -125,25 +137,28 @@ fs.readFile("./public/config", "utf8", (err, data) => {
 indexRouter.get("/setenabled/:module/:enabled", (req, res) => {
     switch(req.params.module) {
         case "AutoClicker":
-        setEnabled(9, req.params.enabled);
-        break;
-        case "Aimbot":
         setEnabled(10, req.params.enabled);
         break;
-        case "Brightness":
+        case "Aimbot":
         setEnabled(11, req.params.enabled);
         break;
-        case "HitBoxes":
+        case "Brightness":
         setEnabled(12, req.params.enabled);
         break;
-        case "WTap":
+        case "Reach":
         setEnabled(13, req.params.enabled);
         break;
-        case "Self Destruct":
+        case "HitBoxes":
         setEnabled(14, req.params.enabled);
         break;
-        case "HUD":
+        case "WTap":
         setEnabled(15, req.params.enabled);
+        break;
+        case "Self Destruct":
+        setEnabled(16, req.params.enabled);
+        break;
+        case "HUD":
+        setEnabled(17, req.params.enabled);
         break;
     }
     res.end();
@@ -154,7 +169,7 @@ indexRouter.post("/apply", (req, res) => {
     });
 });
 indexRouter.post("/self-destruct", (req, res) => {
-    setEnabled(14, 1);
+    setEnabled(16, 1);
     res.send("Client will be self destructed.")
 });
 function setEnabled(index, enabled) {

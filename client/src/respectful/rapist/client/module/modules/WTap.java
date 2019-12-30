@@ -14,7 +14,7 @@ public class WTap extends Module {
     private Timer timer = new Timer();
 
     public WTap() {
-        super(35, "WTap", "9E0000", false);
+        super(35, "WTap", "9E0000");
     }
 
     @Override

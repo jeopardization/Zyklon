@@ -6,7 +6,7 @@ import respectful.rapist.client.module.Module;
 public class SelfDestruct extends Module {
 
     public SelfDestruct() {
-        super(211, "Self Destruct", "000000", true);
+        super(211, "Self Destruct", "000000");
     }
 
     @Override

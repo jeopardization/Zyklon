@@ -9,6 +9,7 @@ public class ModuleManager {
     public AutoClicker autoClicker = new AutoClicker();
     public Aimbot aimbot = new Aimbot();
     public Brightness brightness = new Brightness();
+    public Reach reach = new Reach();
     public HitBoxes hitBoxes = new HitBoxes();
     public WTap wTap = new WTap();
     public SelfDestruct selfDestruct = new SelfDestruct();
@@ -20,6 +21,7 @@ public class ModuleManager {
         modules.add(autoClicker);
         modules.add(aimbot);
         modules.add(brightness);
+        modules.add(reach);
         modules.add(hitBoxes);
         modules.add(wTap);
         modules.add(selfDestruct);

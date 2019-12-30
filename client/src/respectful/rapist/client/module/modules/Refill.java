@@ -12,7 +12,7 @@ public class Refill extends Module {
     private Timer timer = new Timer();
 
     public Refill() {
-        super(34, "Refill", "000000", true);
+        super(34, "Refill", "000000");
     }
 
     @Override
@@ -50,6 +50,6 @@ public class Refill extends Module {
     @Override
     public void enable() {
         timer = new Timer();
-        this.enabled = true;
+        super.enable();
     }
 }

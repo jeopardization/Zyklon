@@ -2,6 +2,7 @@ package respectful.rapist.loader;
 
 import net.minecraft.launchwrapper.Launch;
 import respectful.rapist.loader.transformer.transformers.Entity;
+import respectful.rapist.loader.transformer.transformers.EntityRenderer;
 import respectful.rapist.loader.transformer.transformers.GuiIngame;
 import respectful.rapist.loader.transformer.transformers.Minecraft;
 
@@ -15,11 +16,10 @@ import java.net.URL;
 
 public class Main {
     public static Loader loader;
-    public static Class eventManager;
-    public static Class hitBoxes;
+    public static Class eventManager, hitBoxes, reach;
     public static Method onKey, onRender, onTick;
     public static Instrumentation inst;
-    public static byte[] origMinecraft, origEntity, origGuiIngame;
+    public static byte[] origMinecraft, origEntity, origEntityRenderer, origGuiIngame;
 
     static {
         try {
@@ -27,6 +27,7 @@ public class Main {
             loader = new Loader(URLs);
             eventManager = loader.findClass("respectful.rapist.client.EventManager");
             hitBoxes = loader.findClass("respectful.rapist.client.module.modules.HitBoxes");
+            reach = loader.findClass("respectful.rapist.client.module.modules.Reach");
             onKey = eventManager.getDeclaredMethod("onKey", int.class);
             onRender = eventManager.getDeclaredMethod("onRender");
             onTick = eventManager.getDeclaredMethod("onTick");
@@ -57,6 +58,13 @@ public class Main {
                         transformer = new Entity();
                     } else {
                         transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> getOrigEntity();
+                    }
+                    break;
+                case "net.minecraft.client.renderer.EntityRenderer":
+                    if (transforming) {
+                        transformer = new EntityRenderer();
+                    } else {
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> getOrigEntityRenderer();
                     }
                     break;
                 case "net.minecraftforge.client.GuiIngameForge":
@@ -93,6 +101,10 @@ public class Main {
         return (byte[]) getField("origEntity");
     }
 
+    private static byte[] getOrigEntityRenderer() {
+        return (byte[]) getField("origEntityRenderer");
+    }
+
     private static byte[] getOrigGuiIngame() {
         return (byte[]) getField("origGuiIngame");
     }
@@ -114,11 +126,13 @@ public class Main {
             loader = null;
             eventManager = null;
             hitBoxes = null;
+            reach = null;
             onKey = null;
             onRender = null;
             onTick = null;
             origMinecraft = null;
             origEntity = null;
+            origEntityRenderer = null;
             origGuiIngame = null;
             inst = null;
             for (Field field : ClassLoader.getSystemClassLoader().loadClass(Main.class.getName()).getDeclaredFields()) {
@@ -165,12 +179,21 @@ public class Main {
         }
     }
 
-    public static float getAdd() {
+    public static float getHitboxesAdd() {
         try {
             return hitBoxes.getDeclaredField("add").getFloat(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return 0.0F;
+    }
+
+    public static double getReachAdd() {
+        try {
+            return reach.getDeclaredField("add").getDouble(null);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0.0D;
     }
 }

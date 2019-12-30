@@ -7,13 +7,13 @@ import respectful.rapist.client.util.Random;
 import respectful.rapist.client.util.Timer;
 
 public class AutoClicker extends Module {
-    public float minCPS = 9.0F, maxCPS = 14.0F;
+    public float minCPS = 8.0F, maxCPS = 13.0F;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
     public boolean reqItem, held;
     private Timer timer = new Timer();
 
     public AutoClicker() {
-        super(19, "AutoClicker", "FF0000", false);
+        super(19, "AutoClicker", "FF0000");
     }
 
     @Override

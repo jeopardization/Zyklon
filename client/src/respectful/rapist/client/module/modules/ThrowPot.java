@@ -4,8 +4,8 @@ import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 import respectful.rapist.client.util.Timer;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ThrowPot extends Module {
     public int minThrowDelay = 75, maxThrowDelay = 100, slot = -1;
@@ -13,7 +13,7 @@ public class ThrowPot extends Module {
     private boolean held;
 
     public ThrowPot() {
-        super(33, "ThrowPot", "000000", true);
+        super(33, "ThrowPot", "000000");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ThrowPot extends Module {
                     }
                 }
                 if (!pots.isEmpty()) {
-                    slot = pots.get(new Random().nextInt(pots.size()));
+                    slot = pots.get(new SecureRandom().nextInt(pots.size()));
                 }
             } else if (slot > -1 && !held) {
                 Mappings.InventoryPlayer.setCurrentItem(Mappings.EntityPlayer.getInventory(Mappings.Minecraft.getThePlayer()), slot);
@@ -53,6 +53,6 @@ public class ThrowPot extends Module {
     @Override
     public void enable() {
         timer = new Timer();
-        this.enabled = true;
+        super.enable();
     }
 }

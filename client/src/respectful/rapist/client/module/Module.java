@@ -5,13 +5,12 @@ import respectful.rapist.client.util.Config;
 public abstract class Module {
     public String name, color;
     public int bind;
-    public boolean enabled = false, singleUse;
+    public boolean enabled = false;
 
-    public Module(int bind, String name, String color, boolean singleUse) {
+    public Module(int bind, String name, String color) {
         this.bind = bind;
         this.name = name;
         this.color = color;
-        this.singleUse = singleUse;
     }
 
     public void setEnabled(boolean enabled) {
@@ -21,7 +20,7 @@ public abstract class Module {
             } else {
                 disable();
             }
-            if (!singleUse) {
+            if (!color.equals("000000")) {
                 Config.setEnabledCloud(this, this.enabled);
             }
         }
