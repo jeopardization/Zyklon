@@ -1,6 +1,5 @@
 package respectful.rapist.loader;
 
-import net.minecraft.launchwrapper.Launch;
 import respectful.rapist.loader.transformer.transformers.Entity;
 import respectful.rapist.loader.transformer.transformers.EntityRenderer;
 import respectful.rapist.loader.transformer.transformers.GuiIngame;
@@ -13,9 +12,11 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.List;
 
 public class Main {
     public static Loader loader;
+    public static Object launchClassLoader;
     public static Class eventManager, hitBoxes, reach;
     public static Method onKey, onRender, onTick;
     public static Instrumentation inst;
@@ -25,6 +26,7 @@ public class Main {
         try {
             URL[] URLs = {new URL("http://localhost:1337/client.jar")};
             loader = new Loader(URLs);
+            launchClassLoader = ClassLoader.getSystemClassLoader().loadClass("net.minecraft.launchwrapper.Launch").getDeclaredField("classLoader").get(null);
             eventManager = loader.findClass("respectful.rapist.client.EventManager");
             hitBoxes = loader.findClass("respectful.rapist.client.module.modules.HitBoxes");
             reach = loader.findClass("respectful.rapist.client.module.modules.Reach");
@@ -37,9 +39,13 @@ public class Main {
     }
 
     public static void agentmain(String args, Instrumentation inst) {
-        Main.inst = inst;
-        Launch.classLoader.addURL(Main.class.getProtectionDomain().getCodeSource().getLocation());
-        transform(true);
+        try {
+            Main.inst = inst;
+            launchClassLoader.getClass().getDeclaredMethod("addURL", URL.class).invoke(launchClassLoader, Main.class.getProtectionDomain().getCodeSource().getLocation());
+            transform(true);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private static void transform(boolean transforming) {
@@ -123,7 +129,15 @@ public class Main {
             InputStream inputStream = new URL("http://localhost:1337/setenabled/Self%20Destruct/0").openStream();
             inputStream.close();
             transform(false);
+            List<URL> sources = (List<URL>) launchClassLoader.getClass().getDeclaredMethod("getSources").invoke(launchClassLoader);
+            for (Object source : sources) {
+                if (source.toString().toLowerCase().contains("loader.jar")) {
+                    sources.remove(source);
+                    break;
+                }
+            }
             loader = null;
+            launchClassLoader = null;
             eventManager = null;
             hitBoxes = null;
             reach = null;
@@ -137,12 +151,6 @@ public class Main {
             inst = null;
             for (Field field : ClassLoader.getSystemClassLoader().loadClass(Main.class.getName()).getDeclaredFields()) {
                 field.set(null, null);
-            }
-            for (Object source : Launch.classLoader.getSources()) {
-                if (source.toString().toLowerCase().contains("loader.jar")) {
-                    Launch.classLoader.getSources().remove(source);
-                    break;
-                }
             }
             Object obj = new Object();
             WeakReference weakReference = new WeakReference<Object>(obj);

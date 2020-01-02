@@ -1,6 +1,5 @@
 package respectful.rapist.client.module.modules;
 
-import net.minecraft.launchwrapper.Launch;
 import respectful.rapist.client.module.Module;
 
 public class SelfDestruct extends Module {
@@ -12,7 +11,8 @@ public class SelfDestruct extends Module {
     @Override
     public void enable() {
         try {
-            Launch.classLoader.findClass("respectful.rapist.loader.Main").getDeclaredMethod("destroy").invoke(null);
+            Object classLoader = ClassLoader.getSystemClassLoader().loadClass("net.minecraft.launchwrapper.Launch").getDeclaredField("classLoader").get(null);
+            ((Class) classLoader.getClass().getDeclaredMethod("findClass", String.class).invoke(classLoader, "respectful.rapist.loader.Main")).getDeclaredMethod("destroy").invoke(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
