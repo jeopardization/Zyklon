@@ -29,8 +29,8 @@ public class Controller {
     }
 
     public void inject() {
+        Alert alert;
         try {
-            boolean success = false;
             System.setProperty("java.library.path", System.getenv("JAVA_HOME") + "\\jre\\bin");
             Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
             sysPath.setAccessible(true);
@@ -38,20 +38,16 @@ public class Controller {
             for (VirtualMachineDescriptor VM : VirtualMachine.list()) {
                 if (VM.displayName().contains("net.minecraft.launchwrapper.Launch")) {
                     attach(new File("loader.jar"), VM.id());
-                    success = true;
-                    break;
+                    alert = new Alert(Alert.AlertType.CONFIRMATION, "Success", ButtonType.OK);
+                    alert.showAndWait();
+                    exit();
                 }
             }
-            Alert alert;
-            if (success) {
-                alert = new Alert(Alert.AlertType.CONFIRMATION, "Success", ButtonType.OK);
-            } else {
-                alert = new Alert(Alert.AlertType.ERROR, "Make sure you have Minecraft Forge 1.7.10 running", ButtonType.OK);
-            }
+            alert = new Alert(Alert.AlertType.WARNING, "Make sure you have Minecraft Forge 1.7.10 running", ButtonType.OK);
             alert.showAndWait();
-            exit();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            alert = new Alert(Alert.AlertType.ERROR, ex.toString(), ButtonType.OK);
+            alert.showAndWait();
         }
     }
 
