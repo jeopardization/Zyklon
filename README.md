@@ -1,9 +1,16 @@
 # Zyklon
 
-![](https://i.imgur.com/WWmH1uA.png)<br>
-![](https://i.imgur.com/TRRcoSz.png)<br>
-![](https://i.imgur.com/X8uhlwCg.png)
+![](https://i.imgur.com/xbq4WtJg.png)<br>
+![](https://i.imgur.com/cVSOvGa.png)<br>
+![](https://i.imgur.com/FHjIiOkg.png)<br>
+![](https://i.imgur.com/XwrddPI.png)
  
+**3.2 - 1/3/2020**<br>
+• Added NameTags<br>
+• Added Refresh Rate option<br>
+• Improved security for Aimbot<br>
+• Bug fixes
+
 **3.1 - 12/29/2019**<br>
 • Added Reach<br>
 • Improved security for all modules<br>
