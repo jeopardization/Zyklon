@@ -18,7 +18,7 @@ public class Main {
     public static Loader loader;
     public static Object launchClassLoader;
     public static Class eventManager, hitBoxes, reach;
-    public static Method onKey, onRender, onTick;
+    public static Method onKey, onRenderGUI, onRender, onTick;
     public static Instrumentation inst;
     public static byte[] origMinecraft, origEntity, origEntityRenderer, origGuiIngame;
 
@@ -28,10 +28,11 @@ public class Main {
             loader = new Loader(URLs);
             launchClassLoader = ClassLoader.getSystemClassLoader().loadClass("net.minecraft.launchwrapper.Launch").getDeclaredField("classLoader").get(null);
             eventManager = loader.findClass("respectful.rapist.client.EventManager");
-            hitBoxes = loader.findClass("respectful.rapist.client.module.modules.HitBoxes");
-            reach = loader.findClass("respectful.rapist.client.module.modules.Reach");
+            hitBoxes = loader.findClass("respectful.rapist.client.module.modules.combat.HitBoxes");
+            reach = loader.findClass("respectful.rapist.client.module.modules.combat.Reach");
             onKey = eventManager.getDeclaredMethod("onKey", int.class);
             onRender = eventManager.getDeclaredMethod("onRender");
+            onRenderGUI = eventManager.getDeclaredMethod("onRenderGUI");
             onTick = eventManager.getDeclaredMethod("onTick");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -143,6 +144,7 @@ public class Main {
             reach = null;
             onKey = null;
             onRender = null;
+            onRenderGUI = null;
             onTick = null;
             origMinecraft = null;
             origEntity = null;
@@ -166,6 +168,14 @@ public class Main {
     public static void onKey(int keyCode) {
         try {
             onKey.invoke(null, keyCode);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void onRenderGUI() {
+        try {
+            onRenderGUI.invoke(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

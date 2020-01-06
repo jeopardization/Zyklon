@@ -19,7 +19,8 @@ public interface Mappings {
     World World = new World();
     Entity Entity = new Entity();
     MovingObjectPosition MovingObjectPosition = new MovingObjectPosition();
-    Mouse Mouse = new Mouse();
-    Keyboard Keyboard = new Keyboard();
+    RenderManager RenderManager = new RenderManager();
+    OpenGLHelper OpenGLHelper = new OpenGLHelper();
+    Tessellator Tessellator = new Tessellator();
     respectful.rapist.client.mapping.mappings.KeyBinding KeyBinding = new KeyBinding();
 }

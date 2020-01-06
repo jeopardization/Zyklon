@@ -17,6 +17,7 @@ public class Minecraft extends Transformer {
                             insns.add(new MethodInsnNode(INVOKESTATIC, "org/lwjgl/input/Keyboard", "getEventKey", "()I", false));
                             insns.add(new MethodInsnNode(INVOKESTATIC, "respectful/rapist/loader/Main", "onKey", "(I)V", false));
                             method.instructions.insert(instruction.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext(), insns);
+                            break;
                         }
                     }
                 case "func_71411_J":

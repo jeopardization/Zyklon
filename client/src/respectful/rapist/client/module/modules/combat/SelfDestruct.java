@@ -1,4 +1,4 @@
-package respectful.rapist.client.module.modules;
+package respectful.rapist.client.module.modules.combat;
 
 import respectful.rapist.client.module.Module;
 

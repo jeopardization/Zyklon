@@ -29,6 +29,9 @@ public abstract class Module {
     public void onTick() {
     }
 
+    public void onRenderGUI() {
+    }
+
     public void onRender() {
     }
 

@@ -1,31 +1,30 @@
-package respectful.rapist.client.module.modules;
+package respectful.rapist.client.module.modules.combat;
 
 import respectful.rapist.client.module.Module;
 import respectful.rapist.client.util.Config;
-import respectful.rapist.client.util.Random;
 
-public class Reach extends Module {
-    public static double add;
-    public double minExpansion = 0.1D, maxExpansion = 0.3D;
+public class HitBoxes extends Module {
+    public static float add;
+    public float expansion = 0.05F;
     public boolean reqItem;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
 
-    public Reach() {
-        super(45, "Reach", "00E6B8");
+    public HitBoxes() {
+        super(47, "HitBoxes", "4DECF2");
     }
 
     @Override
     public void onTick() {
         if (Config.safe(reqItem, itemWhitelist, false)) {
-            add = Random.nextDouble(minExpansion, maxExpansion);
+            add = expansion;
         } else {
-            add = 0.0D;
+            add = 0.0F;
         }
     }
 
     @Override
     public void disable() {
-        add = 0.0D;
+        add = 0.0F;
         super.disable();
     }
 }

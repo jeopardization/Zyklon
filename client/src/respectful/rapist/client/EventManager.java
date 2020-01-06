@@ -12,11 +12,20 @@ import java.util.Scanner;
 public class EventManager {
     public static ModuleManager moduleManager = new ModuleManager();
     private static Timer timer = new Timer();
+    private static long refreshRate = 5L;
 
     public static void onKey(int keyCode) {
         for (Module module : moduleManager.modules) {
             if (keyCode == module.bind) {
                 module.setEnabled(!module.enabled);
+            }
+        }
+    }
+
+    public static void onRenderGUI() {
+        for (Module module : moduleManager.modules) {
+            if (module.enabled) {
+                module.onRenderGUI();
             }
         }
     }
@@ -31,67 +40,70 @@ public class EventManager {
 
     public static void onTick() {
         if (Mappings.Minecraft.getTheWorld() != null) {
-            if (timer.elapsed(5000L)) {
+            if (timer.elapsed(refreshRate * 1000L)) {
                 try {
                     String[] values = new Scanner(new URL("http://localhost:1337/config").openStream()).next().split(";");
                     /*
                     0: AutoClicker Bind
                     1: Aimbot Bind
-                    2: Brightness Bind
-                    3: Reach Bind
-                    4: HitBoxes Bind
-                    5: WTap Bind
-                    6: Self Destruct Bind
-                    7: HUD Bind
-                    8: ThrowPot Bind
-                    9: Refill Bind
-                    10: AutoClicker State
-                    11: Aimbot State
-                    12: Brightness State
-                    13: Reach State
-                    14: HitBoxes State
-                    15: WTap State
-                    16: Self Destruct State
-                    17: HUD State
-                    18: AutoClicker Require Item
-                    19: Aimbot Require Item
-                    20: Reach Require Item
-                    21: HitBoxes Require Item
-                    22: WTap Require Item
-                    23: AutoClicker Item Whitelist
-                    24: Aimbot Item Whitelist
-                    25: Reach Item Whitelist
-                    26: HitBoxes Item Whitelist
-                    27: WTap Item Whitelist
-                    28: AutoClicker Minimum CPS
-                    29: AutoClicker Maximum CPS
-                    30: Aimbot Distance
-                    31: Aimbot FOV
-                    32: Aimbot Require Mouse
-                    33: Aimbot Minimum Yaw Smoothing
-                    34: Aimbot Maximum Yaw Smoothing
-                    35: Aimbot Minimum Pitch Smoothing
-                    36: Aimbot Maximum Pitch Smoothing
-                    37: Aimbot Minimum Randomize Frequency
-                    38: Aimbot Maximum Randomize Frequency
-                    39: Reach Minimum Expansion
-                    40: Reach Maximum Expansion
-                    41: HitBoxes Expansion
-                    42: WTap Distance
-                    43: WTap Minimum Tap Delay
-                    44: WTap Maximum Tap Delay
-                    45: ThrowPot Minimum Throw Delay
-                    46: ThrowPot Maximum Throw Delay
-                    47: Refill Minimum Fill Delay
-                    48: Refill Maximum Fill Delay
-                    49: Refill Minimum Exit Delay
-                    50: Refill Maximum Exit Delay
+                    2: NameTags Bind
+                    3: Brightness Bind
+                    4: Reach Bind
+                    5: HitBoxes Bind
+                    6: WTap Bind
+                    7: Self Destruct Bind
+                    8: HUD Bind
+                    9: ThrowPot Bind
+                    10: Refill Bind
+                    11: AutoClicker State
+                    12: Aimbot State
+                    13: NameTags State
+                    14: Brightness State
+                    15: Reach State
+                    16: HitBoxes State
+                    17: WTap State
+                    18: Self Destruct State
+                    19: HUD State
+                    20: AutoClicker Require Item
+                    21: Aimbot Require Item
+                    22: Reach Require Item
+                    23: HitBoxes Require Item
+                    24: WTap Require Item
+                    25: AutoClicker Item Whitelist
+                    26: Aimbot Item Whitelist
+                    27: Reach Item Whitelist
+                    28: HitBoxes Item Whitelist
+                    29: WTap Item Whitelist
+                    30: AutoClicker Minimum CPS
+                    31: AutoClicker Maximum CPS
+                    32: Aimbot Distance
+                    33: Aimbot FOV
+                    34: Aimbot Require Mouse
+                    35: Aimbot Minimum Yaw Smoothing
+                    36: Aimbot Maximum Yaw Smoothing
+                    37: Aimbot Minimum Pitch Smoothing
+                    38: Aimbot Maximum Pitch Smoothing
+                    39: Aimbot Minimum Randomize Frequency
+                    40: Aimbot Maximum Randomize Frequency
+                    41: Reach Minimum Expansion
+                    42: Reach Maximum Expansion
+                    43: HitBoxes Expansion
+                    44: WTap Distance
+                    45: WTap Minimum Tap Delay
+                    46: WTap Maximum Tap Delay
+                    47: ThrowPot Minimum Throw Delay
+                    48: ThrowPot Maximum Throw Delay
+                    49: Refill Minimum Fill Delay
+                    50: Refill Maximum Fill Delay
+                    51: Refill Minimum Exit Delay
+                    52: Refill Maximum Exit Delay
+                    53: Refresh Rate
                     */
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 11; i++) {
                         moduleManager.modules.get(i).bind = Integer.parseInt(values[i]);
                     }
-                    for (int i = 10; i < 18; i++) {
-                        int index = i - 10;
+                    for (int i = 11; i < 20; i++) {
+                        int index = i - 11;
                         Module module = moduleManager.modules.get(index);
                         if (Integer.parseInt(values[i]) == 1) {
                             module.enable();
@@ -99,39 +111,40 @@ public class EventManager {
                             module.disable();
                         }
                     }
-                    moduleManager.autoClicker.reqItem = Integer.parseInt(values[18]) == 1;
-                    moduleManager.aimbot.reqItem = Integer.parseInt(values[19]) == 1;
-                    moduleManager.reach.reqItem = Integer.parseInt(values[20]) == 1;
-                    moduleManager.hitBoxes.reqItem = Integer.parseInt(values[21]) == 1;
-                    moduleManager.wTap.reqItem = Integer.parseInt(values[22]) == 1;
-                    moduleManager.autoClicker.itemWhitelist = Config.stringToIntArr(values[23]);
-                    moduleManager.aimbot.itemWhitelist = Config.stringToIntArr(values[24]);
-                    moduleManager.reach.itemWhitelist = Config.stringToIntArr(values[25]);
-                    moduleManager.hitBoxes.itemWhitelist = Config.stringToIntArr(values[26]);
-                    moduleManager.wTap.itemWhitelist = Config.stringToIntArr(values[27]);
-                    moduleManager.autoClicker.minCPS = Float.parseFloat(values[28]);
-                    moduleManager.autoClicker.maxCPS = Float.parseFloat(values[29]);
-                    moduleManager.aimbot.dist = Float.parseFloat(values[30]);
-                    moduleManager.aimbot.FOV = Float.parseFloat(values[31]);
-                    moduleManager.aimbot.reqMouse = Integer.parseInt(values[32]) == 1;
-                    moduleManager.aimbot.minYawSmooth = Float.parseFloat(values[33]);
-                    moduleManager.aimbot.maxYawSmooth = Float.parseFloat(values[34]);
-                    moduleManager.aimbot.minPitchSmooth = Float.parseFloat(values[35]);
-                    moduleManager.aimbot.maxPitchSmooth = Float.parseFloat(values[36]);
-                    moduleManager.aimbot.minRand = Integer.parseInt(values[37]);
-                    moduleManager.aimbot.maxRand = Integer.parseInt(values[38]);
-                    moduleManager.reach.minExpansion = Double.parseDouble(values[39]);
-                    moduleManager.reach.maxExpansion = Double.parseDouble(values[40]);
-                    moduleManager.hitBoxes.expansion = Float.parseFloat(values[41]);
-                    moduleManager.wTap.dist = Float.parseFloat(values[42]);
-                    moduleManager.wTap.minTapDelay = Integer.parseInt(values[43]);
-                    moduleManager.wTap.maxTapDelay = Integer.parseInt(values[44]);
-                    moduleManager.throwPot.minThrowDelay = Integer.parseInt(values[45]);
-                    moduleManager.throwPot.maxThrowDelay = Integer.parseInt(values[46]);
-                    moduleManager.refill.minFillDelay = Integer.parseInt(values[47]);
-                    moduleManager.refill.maxFillDelay = Integer.parseInt(values[48]);
-                    moduleManager.refill.minExitDelay = Integer.parseInt(values[49]);
-                    moduleManager.refill.maxExitDelay = Integer.parseInt(values[50]);
+                    moduleManager.autoClicker.reqItem = Integer.parseInt(values[20]) == 1;
+                    moduleManager.aimbot.reqItem = Integer.parseInt(values[21]) == 1;
+                    moduleManager.reach.reqItem = Integer.parseInt(values[22]) == 1;
+                    moduleManager.hitBoxes.reqItem = Integer.parseInt(values[23]) == 1;
+                    moduleManager.wTap.reqItem = Integer.parseInt(values[24]) == 1;
+                    moduleManager.autoClicker.itemWhitelist = Config.stringToIntArr(values[25]);
+                    moduleManager.aimbot.itemWhitelist = Config.stringToIntArr(values[26]);
+                    moduleManager.reach.itemWhitelist = Config.stringToIntArr(values[27]);
+                    moduleManager.hitBoxes.itemWhitelist = Config.stringToIntArr(values[28]);
+                    moduleManager.wTap.itemWhitelist = Config.stringToIntArr(values[29]);
+                    moduleManager.autoClicker.minCPS = Float.parseFloat(values[30]);
+                    moduleManager.autoClicker.maxCPS = Float.parseFloat(values[31]);
+                    moduleManager.aimbot.dist = Float.parseFloat(values[32]);
+                    moduleManager.aimbot.FOV = Float.parseFloat(values[33]);
+                    moduleManager.aimbot.reqMouse = Integer.parseInt(values[34]) == 1;
+                    moduleManager.aimbot.minYawSmooth = Float.parseFloat(values[35]);
+                    moduleManager.aimbot.maxYawSmooth = Float.parseFloat(values[36]);
+                    moduleManager.aimbot.minPitchSmooth = Float.parseFloat(values[37]);
+                    moduleManager.aimbot.maxPitchSmooth = Float.parseFloat(values[38]);
+                    moduleManager.aimbot.minRand = Integer.parseInt(values[39]);
+                    moduleManager.aimbot.maxRand = Integer.parseInt(values[40]);
+                    moduleManager.reach.minExpansion = Double.parseDouble(values[41]);
+                    moduleManager.reach.maxExpansion = Double.parseDouble(values[42]);
+                    moduleManager.hitBoxes.expansion = Float.parseFloat(values[43]);
+                    moduleManager.wTap.dist = Float.parseFloat(values[44]);
+                    moduleManager.wTap.minTapDelay = Integer.parseInt(values[45]);
+                    moduleManager.wTap.maxTapDelay = Integer.parseInt(values[46]);
+                    moduleManager.throwPot.minThrowDelay = Integer.parseInt(values[47]);
+                    moduleManager.throwPot.maxThrowDelay = Integer.parseInt(values[48]);
+                    moduleManager.refill.minFillDelay = Integer.parseInt(values[49]);
+                    moduleManager.refill.maxFillDelay = Integer.parseInt(values[50]);
+                    moduleManager.refill.minExitDelay = Integer.parseInt(values[51]);
+                    moduleManager.refill.maxExitDelay = Integer.parseInt(values[52]);
+                    refreshRate = Integer.parseInt(values[53]);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

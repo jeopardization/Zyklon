@@ -1,4 +1,4 @@
-package respectful.rapist.client.module.modules;
+package respectful.rapist.client.module.modules.visuals;
 
 import respectful.rapist.client.EventManager;
 import respectful.rapist.client.mapping.Mappings;
@@ -13,7 +13,7 @@ public class HUD extends Module {
     }
 
     @Override
-    public void onRender() {
+    public void onRenderGUI() {
         Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), "Zyklon", 3, 3, "8DC63F");
         Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), new SimpleDateFormat("h:mm a").format(Calendar.getInstance().getTime()), Mappings.FontRenderer.getStringWidth(Mappings.Minecraft.getFontRenderer(), "Zyklon") + 6, 3, "FFFFFF");
         int mult = 0;

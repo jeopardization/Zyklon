@@ -45,12 +45,18 @@
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h4>Home</h4>
-                <p><b>Build Date</b>: 12/29/2019</p>
-                <p><b>Build Version</b>: 3.1</p>
-                <button class="btn btn-primary" type="button" id="apply">Apply Settings
-                </button>
-                <button class="btn btn-primary" type="button" id="self-destruct" style="margin-left: 10px">Self Destruct
-                </button>
+                <p><b>Build Date</b>: 1/3/2020</p>
+                <p><b>Build Version</b>: 3.2</p>
+                <div>
+                    <label for="refresh-rate-label">Refresh Rate</label>
+                    <input type="text" id="refresh-rate-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0)">
+                    <div id="refresh-rate" style="width: 95%"></div>
+                </div>
+                <div style="margin-top: 24px">
+                    <button class="btn btn-primary" type="button" id="apply">Apply Settings</button>
+                    <button class="btn btn-primary" type="button" id="self-destruct" style="margin-left: 10px">Self Destruct</button>
+                </div>
             </div>
             <div class="tab-pane fade" id="autoclicker" role="tabpanel" aria-labelledby="autoclicker-tab">
                 <h4>AutoClicker</h4>
@@ -205,6 +211,9 @@
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="HUD-enabled">
                     <label class="form-check-label" for="HUD-enabled">HUD</label>
+                    <br>
+                    <input type="checkbox" class="form-check-input" id="nametags-enabled">
+                    <label class="form-check-label" for="nametags-enabled">NameTags</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="brightness-enabled">
                     <label class="form-check-label" for="brightness-enabled">Brightness</label>
@@ -1158,6 +1167,137 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
+                        <label for="nametags-bind">NameTags</label><br>
+                        <select name="nametags-bind" id="nametags-bind">
+                            <option value="1">ESCAPE</option>
+                            <option value="2">1</option>
+                            <option value="3">2</option>
+                            <option value="4">3</option>
+                            <option value="5">4</option>
+                            <option value="6">5</option>
+                            <option value="7">6</option>
+                            <option value="8">7</option>
+                            <option value="9">8</option>
+                            <option value="10">9</option>
+                            <option value="11">0</option>
+                            <option value="12">MINUS</option>
+                            <option value="13">EQUALS</option>
+                            <option value="14">BACK</option>
+                            <option value="15">TAB</option>
+                            <option value="16">Q</option>
+                            <option value="17">W</option>
+                            <option value="18">E</option>
+                            <option value="19">R</option>
+                            <option value="20">T</option>
+                            <option value="21">Y</option>
+                            <option value="22">U</option>
+                            <option value="23">I</option>
+                            <option value="24">O</option>
+                            <option value="25">P</option>
+                            <option value="26">LBRACKET</option>
+                            <option value="27">RBRACKET</option>
+                            <option value="28">RETURN</option>
+                            <option value="29">LCONTROL</option>
+                            <option value="30">A</option>
+                            <option value="31">S</option>
+                            <option value="32">D</option>
+                            <option value="33">F</option>
+                            <option value="34">G</option>
+                            <option value="35">H</option>
+                            <option value="36">J</option>
+                            <option value="37">K</option>
+                            <option value="38">L</option>
+                            <option value="39">SEMICOLON</option>
+                            <option value="40">APOSTROPHE</option>
+                            <option value="41">GRAVE</option>
+                            <option value="42">LSHIFT</option>
+                            <option value="43">BACKSLASH</option>
+                            <option value="44">Z</option>
+                            <option value="45">X</option>
+                            <option value="46">C</option>
+                            <option value="47">V</option>
+                            <option value="48">B</option>
+                            <option value="49">N</option>
+                            <option value="50">M</option>
+                            <option value="51">COMMA</option>
+                            <option value="52">PERIOD</option>
+                            <option value="53">SLASH</option>
+                            <option value="54">RSHIFT</option>
+                            <option value="55">MULTIPLY</option>
+                            <option value="56">LMENU</option>
+                            <option value="57">SPACE</option>
+                            <option value="58">CAPITAL</option>
+                            <option value="59">F1</option>
+                            <option value="60">F2</option>
+                            <option value="61">F3</option>
+                            <option value="62">F4</option>
+                            <option value="63">F5</option>
+                            <option value="64">F6</option>
+                            <option value="65">F7</option>
+                            <option value="66">F8</option>
+                            <option value="67">F9</option>
+                            <option value="68">F10</option>
+                            <option value="69">NUMLOCK</option>
+                            <option value="70">SCROLL</option>
+                            <option value="71">NUMPAD7</option>
+                            <option value="72">NUMPAD8</option>
+                            <option value="73">NUMPAD9</option>
+                            <option value="74">SUBTRACT</option>
+                            <option value="75">NUMPAD4</option>
+                            <option value="76">NUMPAD5</option>
+                            <option value="77">NUMPAD6</option>
+                            <option value="78">ADD</option>
+                            <option value="79">NUMPAD1</option>
+                            <option value="80">NUMPAD2</option>
+                            <option value="81">NUMPAD3</option>
+                            <option value="82">NUMPAD0</option>
+                            <option value="83">DECIMAL</option>
+                            <option value="87">F11</option>
+                            <option value="88">F12</option>
+                            <option value="100">F13</option>
+                            <option value="101">F14</option>
+                            <option value="102">F15</option>
+                            <option value="103">F16</option>
+                            <option value="104">F17</option>
+                            <option value="105">F18</option>
+                            <option value="112">KANA</option>
+                            <option value="113">F19</option>
+                            <option value="121">CONVERT</option>
+                            <option value="123">NOCONVERT</option>
+                            <option value="125">YEN</option>
+                            <option value="141">NUMPADEQUALS</option>
+                            <option value="144">CIRCUMFLEX</option>
+                            <option value="145">AT</option>
+                            <option value="146">COLON</option>
+                            <option value="147">UNDERLINE</option>
+                            <option value="148">KANJI</option>
+                            <option value="149">STOP</option>
+                            <option value="150">AX</option>
+                            <option value="151">UNLABELED</option>
+                            <option value="156">NUMPADENTER</option>
+                            <option value="157">RCONTROL</option>
+                            <option value="167">SECTION</option>
+                            <option value="179">NUMPADCOMMA</option>
+                            <option value="181">DIVIDE</option>
+                            <option value="183">SYSRQ</option>
+                            <option value="184">RMENU</option>
+                            <option value="196">RFUNCTION</option>
+                            <option value="197">PAUSE</option>
+                            <option value="199">HOME</option>
+                            <option value="200">UP</option>
+                            <option value="201">PRIOR</option>
+                            <option value="203">LEFT</option>
+                            <option value="205">RIGHT</option>
+                            <option value="207">END</option>
+                            <option value="208">DOWN</option>
+                            <option value="209">NEXT</option>
+                            <option value="210">INSERT</option>
+                            <option value="211">DELETE</option>
+                            <option value="218">CLEAR</option>
+                            <option value="219">LMETA</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 12px">
                         <label for="throwpot-bind">ThrowPot</label><br>
                         <select name="throwpot-bind" id="throwpot-bind">
                             <option value="1">ESCAPE</option>
@@ -1562,6 +1702,7 @@
     $(document).ready(function () {
         $("#autoclicker-bind").val(<%= autoclickerBind %>);
         $("#aimbot-bind").val(<%= aimbotBind %>);
+        $("#nametags-bind").val(<%= nametagsBind %>);
         $("#brightness-bind").val(<%= brightnessBind %>);
         $("#reach-bind").val(<%= reachBind %>);
         $("#hitboxes-bind").val(<%= hitboxesBind %>);
@@ -1572,6 +1713,7 @@
         $("#refill-bind").val(<%= refillBind %>);
         check(<%= autoclickerEnabled %>, "#autoclicker-enabled");
         check(<%= aimbotEnabled %>, "#aimbot-enabled");
+        check(<%= nametagsEnabled %>, "#nametags-enabled");
         check(<%= brightnessEnabled %>, "#brightness-enabled");
         check(<%= reachEnabled %>, "#reach-enabled");
         check(<%= hitboxesEnabled %>, "#hitboxes-enabled");
@@ -1596,11 +1738,12 @@
         setRangeSlider("#throwpot-throw-delay", <%= throwpotMinThrowDelay %>, <%= throwpotMaxThrowDelay %>, 1, 200, 1);
         setRangeSlider("#refill-fill-delay", <%= refillMinFillDelay %>, <%= refillMaxFillDelay %>, 1, 200, 1);
         setRangeSlider("#refill-exit-delay", <%= refillMinExitDelay %>, <%= refillMaxExitDelay %>, 1, 200, 1);
+        setSlider("#refresh-rate", <%= refreshRate %>, 1, 10, 1);
         $("#apply").click(function() {
             $.ajax({
                 url: "/apply",
                 type: "POST",
-                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1]},
+                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value")},
                 success: function(res) {
                     alert(res);
                 }

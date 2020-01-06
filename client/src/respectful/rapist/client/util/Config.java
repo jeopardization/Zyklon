@@ -1,5 +1,6 @@
 package respectful.rapist.client.util;
 
+import org.lwjgl.input.Mouse;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 
@@ -34,7 +35,7 @@ public class Config {
             }
         }
         if (reqMouse) {
-            mouseCheck = Mappings.Mouse.isButtonDown(0);
+            mouseCheck = Mouse.isButtonDown(0);
         }
         return itemCheck && mouseCheck;
     }

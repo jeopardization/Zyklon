@@ -1,11 +1,28 @@
 package respectful.rapist.client.mapping.mappings;
 
 import respectful.rapist.client.mapping.MappedClass;
-import respectful.rapist.client.mapping.Mappings;
 
 public class Entity extends MappedClass {
     public Entity() {
         super("net.minecraft.entity.Entity");
+    }
+
+    public boolean isInvisible(Object obj) {
+        try {
+            return (boolean) clazz.getDeclaredMethod("func_82150_aj").invoke(clazz.cast(obj));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isSneaking(Object obj) {
+        try {
+            return (boolean) clazz.getDeclaredMethod("func_70093_af").invoke(clazz.cast(obj));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     public float getDistanceToEntity(Object obj, Object entity) {
@@ -19,7 +36,7 @@ public class Entity extends MappedClass {
 
     public double getPosX(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70165_t").getDouble(Mappings.Entity.clazz.cast(obj));
+            return clazz.getDeclaredField("field_70165_t").getDouble(clazz.cast(obj));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -28,7 +45,7 @@ public class Entity extends MappedClass {
 
     public double getPosY(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70163_u").getDouble(Mappings.Entity.clazz.cast(obj));
+            return clazz.getDeclaredField("field_70163_u").getDouble(clazz.cast(obj));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -37,7 +54,7 @@ public class Entity extends MappedClass {
 
     public double getPosZ(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70161_v").getDouble(Mappings.Entity.clazz.cast(obj));
+            return clazz.getDeclaredField("field_70161_v").getDouble(clazz.cast(obj));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
