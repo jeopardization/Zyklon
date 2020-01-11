@@ -4,6 +4,10 @@
 ![](https://i.imgur.com/cVSOvGa.png)<br>
 ![](https://i.imgur.com/FHjIiOkg.png)<br>
 ![](https://i.imgur.com/XwrddPI.png)
+
+**3.3 - 1/10/2020**<br>
+• Added Player List<br>
+• Bug fixes
  
 **3.2 - 1/3/2020**<br>
 • Added NameTags<br>
