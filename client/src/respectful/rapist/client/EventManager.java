@@ -11,8 +11,9 @@ import java.util.Scanner;
 
 public class EventManager {
     public static ModuleManager moduleManager = new ModuleManager();
+    public static PlayerManager playerManager = new PlayerManager();
     private static Timer timer = new Timer();
-    private static long refreshRate = 5L;
+    private static long refreshRate = 5000L;
 
     public static void onKey(int keyCode) {
         for (Module module : moduleManager.modules) {
@@ -40,9 +41,24 @@ public class EventManager {
 
     public static void onTick() {
         if (Mappings.Minecraft.getTheWorld() != null) {
-            if (timer.elapsed(refreshRate * 1000L)) {
+            if (timer.elapsed(refreshRate)) {
                 try {
-                    String[] values = new Scanner(new URL("http://localhost:1337/config").openStream()).next().split(";");
+                    String[] players = new Scanner(new URL("http://localhost:1337/players").openStream()).next().split(";");
+                    /*
+                    0: Friends
+                    1: Enemies
+                     */
+                    if ((players.length >= 1)) {
+                        playerManager.friends = players[0].split(",");
+                    } else {
+                        playerManager.friends = null;
+                    }
+                    if ((players.length >= 2)) {
+                        playerManager.enemies = players[1].split(",");
+                    } else {
+                        playerManager.enemies = null;
+                    }
+                    String[] config = new Scanner(new URL("http://localhost:1337/config").openStream()).next().split(";");
                     /*
                     0: AutoClicker Bind
                     1: Aimbot Bind
@@ -100,51 +116,51 @@ public class EventManager {
                     53: Refresh Rate
                     */
                     for (int i = 0; i < 11; i++) {
-                        moduleManager.modules.get(i).bind = Integer.parseInt(values[i]);
+                        moduleManager.modules.get(i).bind = Integer.parseInt(config[i]);
                     }
                     for (int i = 11; i < 20; i++) {
                         int index = i - 11;
                         Module module = moduleManager.modules.get(index);
-                        if (Integer.parseInt(values[i]) == 1) {
+                        if (Integer.parseInt(config[i]) == 1) {
                             module.enable();
                         } else {
                             module.disable();
                         }
                     }
-                    moduleManager.autoClicker.reqItem = Integer.parseInt(values[20]) == 1;
-                    moduleManager.aimbot.reqItem = Integer.parseInt(values[21]) == 1;
-                    moduleManager.reach.reqItem = Integer.parseInt(values[22]) == 1;
-                    moduleManager.hitBoxes.reqItem = Integer.parseInt(values[23]) == 1;
-                    moduleManager.wTap.reqItem = Integer.parseInt(values[24]) == 1;
-                    moduleManager.autoClicker.itemWhitelist = Config.stringToIntArr(values[25]);
-                    moduleManager.aimbot.itemWhitelist = Config.stringToIntArr(values[26]);
-                    moduleManager.reach.itemWhitelist = Config.stringToIntArr(values[27]);
-                    moduleManager.hitBoxes.itemWhitelist = Config.stringToIntArr(values[28]);
-                    moduleManager.wTap.itemWhitelist = Config.stringToIntArr(values[29]);
-                    moduleManager.autoClicker.minCPS = Float.parseFloat(values[30]);
-                    moduleManager.autoClicker.maxCPS = Float.parseFloat(values[31]);
-                    moduleManager.aimbot.dist = Float.parseFloat(values[32]);
-                    moduleManager.aimbot.FOV = Float.parseFloat(values[33]);
-                    moduleManager.aimbot.reqMouse = Integer.parseInt(values[34]) == 1;
-                    moduleManager.aimbot.minYawSmooth = Float.parseFloat(values[35]);
-                    moduleManager.aimbot.maxYawSmooth = Float.parseFloat(values[36]);
-                    moduleManager.aimbot.minPitchSmooth = Float.parseFloat(values[37]);
-                    moduleManager.aimbot.maxPitchSmooth = Float.parseFloat(values[38]);
-                    moduleManager.aimbot.minRand = Integer.parseInt(values[39]);
-                    moduleManager.aimbot.maxRand = Integer.parseInt(values[40]);
-                    moduleManager.reach.minExpansion = Double.parseDouble(values[41]);
-                    moduleManager.reach.maxExpansion = Double.parseDouble(values[42]);
-                    moduleManager.hitBoxes.expansion = Float.parseFloat(values[43]);
-                    moduleManager.wTap.dist = Float.parseFloat(values[44]);
-                    moduleManager.wTap.minTapDelay = Integer.parseInt(values[45]);
-                    moduleManager.wTap.maxTapDelay = Integer.parseInt(values[46]);
-                    moduleManager.throwPot.minThrowDelay = Integer.parseInt(values[47]);
-                    moduleManager.throwPot.maxThrowDelay = Integer.parseInt(values[48]);
-                    moduleManager.refill.minFillDelay = Integer.parseInt(values[49]);
-                    moduleManager.refill.maxFillDelay = Integer.parseInt(values[50]);
-                    moduleManager.refill.minExitDelay = Integer.parseInt(values[51]);
-                    moduleManager.refill.maxExitDelay = Integer.parseInt(values[52]);
-                    refreshRate = Integer.parseInt(values[53]);
+                    moduleManager.autoClicker.reqItem = Integer.parseInt(config[20]) == 1;
+                    moduleManager.aimbot.reqItem = Integer.parseInt(config[21]) == 1;
+                    moduleManager.reach.reqItem = Integer.parseInt(config[22]) == 1;
+                    moduleManager.hitBoxes.reqItem = Integer.parseInt(config[23]) == 1;
+                    moduleManager.wTap.reqItem = Integer.parseInt(config[24]) == 1;
+                    moduleManager.autoClicker.itemWhitelist = Config.stringToIntArr(config[25]);
+                    moduleManager.aimbot.itemWhitelist = Config.stringToIntArr(config[26]);
+                    moduleManager.reach.itemWhitelist = Config.stringToIntArr(config[27]);
+                    moduleManager.hitBoxes.itemWhitelist = Config.stringToIntArr(config[28]);
+                    moduleManager.wTap.itemWhitelist = Config.stringToIntArr(config[29]);
+                    moduleManager.autoClicker.minCPS = Float.parseFloat(config[30]);
+                    moduleManager.autoClicker.maxCPS = Float.parseFloat(config[31]);
+                    moduleManager.aimbot.dist = Float.parseFloat(config[32]);
+                    moduleManager.aimbot.FOV = Float.parseFloat(config[33]);
+                    moduleManager.aimbot.reqMouse = Integer.parseInt(config[34]) == 1;
+                    moduleManager.aimbot.minYawSmooth = Float.parseFloat(config[35]);
+                    moduleManager.aimbot.maxYawSmooth = Float.parseFloat(config[36]);
+                    moduleManager.aimbot.minPitchSmooth = Float.parseFloat(config[37]);
+                    moduleManager.aimbot.maxPitchSmooth = Float.parseFloat(config[38]);
+                    moduleManager.aimbot.minRand = Integer.parseInt(config[39]);
+                    moduleManager.aimbot.maxRand = Integer.parseInt(config[40]);
+                    moduleManager.reach.minExpansion = Double.parseDouble(config[41]);
+                    moduleManager.reach.maxExpansion = Double.parseDouble(config[42]);
+                    moduleManager.hitBoxes.expansion = Float.parseFloat(config[43]);
+                    moduleManager.wTap.dist = Float.parseFloat(config[44]);
+                    moduleManager.wTap.minTapDelay = Integer.parseInt(config[45]);
+                    moduleManager.wTap.maxTapDelay = Integer.parseInt(config[46]);
+                    moduleManager.throwPot.minThrowDelay = Integer.parseInt(config[47]);
+                    moduleManager.throwPot.maxThrowDelay = Integer.parseInt(config[48]);
+                    moduleManager.refill.minFillDelay = Integer.parseInt(config[49]);
+                    moduleManager.refill.maxFillDelay = Integer.parseInt(config[50]);
+                    moduleManager.refill.minExitDelay = Integer.parseInt(config[51]);
+                    moduleManager.refill.maxExitDelay = Integer.parseInt(config[52]);
+                    refreshRate = Integer.parseInt(config[53]) * 1000L;
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

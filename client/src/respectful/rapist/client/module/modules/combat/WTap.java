@@ -1,6 +1,7 @@
 package respectful.rapist.client.module.modules.combat;
 
 import org.lwjgl.input.Keyboard;
+import respectful.rapist.client.EventManager;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 import respectful.rapist.client.util.Config;
@@ -22,7 +23,7 @@ public class WTap extends Module {
     public void onTick() {
         if (Config.safe(reqItem, itemWhitelist, true) && Keyboard.isKeyDown(17)) {
             Object entity = Mappings.MovingObjectPosition.getEntityHit(Mappings.Minecraft.getObjectMouseOver());
-            if (Mappings.EntityPlayer.clazz.isInstance(entity) && Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entity) <= dist && timer.elapsed(Random.nextInt(minTapDelay, maxTapDelay)) && !released) {
+            if (Mappings.EntityPlayer.clazz.isInstance(entity) && Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entity) <= dist && timer.elapsed(Random.nextInt(minTapDelay, maxTapDelay)) && !EventManager.playerManager.isFriend(Mappings.EntityPlayer.getCommandSenderName(entity)) && !released) {
                 Mappings.KeyBinding.setKeyBindState(17, false);
                 timer = new Timer();
                 released = true;

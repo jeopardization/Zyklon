@@ -1,6 +1,7 @@
 package respectful.rapist.client.module.modules.visuals;
 
 import org.lwjgl.opengl.GL11;
+import respectful.rapist.client.EventManager;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 
@@ -42,6 +43,12 @@ public class NameTags extends Module {
                 Mappings.Tessellator.addVertex(Mappings.Tessellator.getInstance(), x + 1, -1.0D, 0.0D);
                 Mappings.Tessellator.draw(Mappings.Tessellator.getInstance());
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
+                String nameColor = "FFFFFF";
+                if (EventManager.playerManager.isFriend(Mappings.EntityPlayer.getCommandSenderName(entityPlayer))) {
+                    nameColor = "00C834";
+                } else if (EventManager.playerManager.isEnemy(Mappings.EntityPlayer.getCommandSenderName(entityPlayer))) {
+                    nameColor = "FF2A36";
+                }
                 String healthColor = "008E34";
                 if (Mappings.EntityLivingBase.getHealth(entityPlayer) <= 3.33F) {
                     healthColor = "D91722";
@@ -54,11 +61,11 @@ public class NameTags extends Module {
                 } else if (Mappings.EntityLivingBase.getHealth(entityPlayer) <= 16.67F) {
                     healthColor = "6BBE48";
                 }
-                Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), name, -x, 0, "FFFFFF");
+                Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), name, -x, 0, nameColor);
                 Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), health, Mappings.FontRenderer.getStringWidth(Mappings.Minecraft.getFontRenderer(), name) - x, 0, healthColor);
                 GL11.glEnable(GL11.GL_DEPTH_TEST);
                 GL11.glDepthMask(true);
-                Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), name, -x, 0, "FFFFFF");
+                Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), name, -x, 0, nameColor);
                 Mappings.FontRenderer.drawStringWithShadow(Mappings.Minecraft.getFontRenderer(), health, Mappings.FontRenderer.getStringWidth(Mappings.Minecraft.getFontRenderer(), name) - x, 0, healthColor);
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_BLEND);

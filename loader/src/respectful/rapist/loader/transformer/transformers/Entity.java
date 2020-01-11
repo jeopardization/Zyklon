@@ -19,6 +19,7 @@ public class Entity extends Transformer {
                         break;
                     }
                 }
+                break;
             }
         }
     }

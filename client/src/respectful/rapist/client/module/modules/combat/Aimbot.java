@@ -1,5 +1,6 @@
 package respectful.rapist.client.module.modules.combat;
 
+import respectful.rapist.client.EventManager;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 import respectful.rapist.client.util.Config;
@@ -21,7 +22,7 @@ public class Aimbot extends Module {
     public void onTick() {
         if (Config.safe(reqItem, itemWhitelist, reqMouse)) {
             for (Object entityPlayer : Mappings.World.getPlayerEntities(Mappings.Minecraft.getTheWorld())) {
-                if (!Mappings.EntityPlayer.clazz.cast(entityPlayer).equals(Mappings.Minecraft.getThePlayer()) && Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entityPlayer) <= dist && Mappings.EntityLivingBase.isEntityAlive(entityPlayer) && !Mappings.Entity.isInvisible(entityPlayer)) {
+                if (!Mappings.EntityPlayer.clazz.cast(entityPlayer).equals(Mappings.Minecraft.getThePlayer()) && Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entityPlayer) <= dist && Mappings.EntityLivingBase.isEntityAlive(entityPlayer) && !Mappings.Entity.isInvisible(entityPlayer) && !EventManager.playerManager.isFriend(Mappings.EntityPlayer.getCommandSenderName(entityPlayer))) {
                     double x = Mappings.Entity.getPosX(entityPlayer) - Mappings.Entity.getPosX(Mappings.Minecraft.getThePlayer()), y = Mappings.Entity.getPosZ(entityPlayer) - Mappings.Entity.getPosZ(Mappings.Minecraft.getThePlayer()), z = Mappings.Entity.getPosY(entityPlayer) - Mappings.Entity.getPosY(Mappings.Minecraft.getThePlayer()) + 1;
                     if (timer.elapsed((long) Random.nextFloat(minRand, maxRand))) {
                         randX = (float) (Random.nextDouble(x - 0.15D, x + 0.15D));

@@ -60,6 +60,8 @@ app.locals.hitboxesExpansion = 0;
 app.locals.hitboxesReqItem = false;
 app.locals.hitboxesItemWhitelist = [];
 app.locals.refreshRate = 0;
+app.locals.friends = [];
+app.locals.enemies = [];
 app.locals.selfDestructBind = 0;
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -140,6 +142,15 @@ fs.readFile("./public/config", "utf8", (err, data) => {
         console.log(ex);
     }
 });
+fs.readFile("./public/players", "utf8", (err, data) => {
+    try {
+        var values = data.split(";");
+        app.locals.friends = values[0];
+        app.locals.enemies = values[1];
+    } catch (ex) {
+        console.log(ex);
+    }
+});
 indexRouter.get("/setenabled/:module/:enabled", (req, res) => {
     switch(req.params.module) {
         case "AutoClicker":
@@ -174,8 +185,16 @@ indexRouter.get("/setenabled/:module/:enabled", (req, res) => {
 });
 indexRouter.post("/apply", (req, res) => {
     fs.writeFile("./public/config", req.body.config, function(err) {
-        err ? console.log(err) : res.send("Settings were saved.");
+        if(err) {
+            console.log(err);
+        }
     });
+    fs.writeFile("./public/players", req.body.players, function(err) {
+        if(err) {
+            console.log(err);
+        }
+    });
+    res.send("Settings saved successfully.");
 });
 indexRouter.post("/self-destruct", (req, res) => {
     setEnabled(18, 1);

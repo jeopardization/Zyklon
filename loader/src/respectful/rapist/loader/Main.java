@@ -1,9 +1,6 @@
 package respectful.rapist.loader;
 
-import respectful.rapist.loader.transformer.transformers.Entity;
-import respectful.rapist.loader.transformer.transformers.EntityRenderer;
-import respectful.rapist.loader.transformer.transformers.GuiIngame;
-import respectful.rapist.loader.transformer.transformers.Minecraft;
+import respectful.rapist.loader.transformer.transformers.*;
 
 import java.io.InputStream;
 import java.lang.instrument.ClassFileTransformer;
@@ -20,7 +17,7 @@ public class Main {
     public static Class eventManager, hitBoxes, reach;
     public static Method onKey, onRenderGUI, onRender, onTick;
     public static Instrumentation inst;
-    public static byte[] origMinecraft, origEntity, origEntityRenderer, origGuiIngame;
+    public static byte[] origMinecraft, origEntity, origEntityRenderer, origRender, origRendererLivingEntity, origGuiIngame;
 
     static {
         try {
@@ -51,34 +48,49 @@ public class Main {
 
     private static void transform(boolean transforming) {
         ClassFileTransformer transformer;
-        for (Class clazz : getInst().getAllLoadedClasses()) {
+        Instrumentation inst = (Instrumentation) getField("inst");
+        for (Class clazz : inst.getAllLoadedClasses()) {
             switch (clazz.getName()) {
                 case "net.minecraft.client.Minecraft":
                     if (transforming) {
                         transformer = new Minecraft();
                     } else {
-                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> getOrigMinecraft();
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origMinecraft");
                     }
                     break;
                 case "net.minecraft.entity.Entity":
                     if (transforming) {
                         transformer = new Entity();
                     } else {
-                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> getOrigEntity();
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origEntity");
                     }
                     break;
                 case "net.minecraft.client.renderer.EntityRenderer":
                     if (transforming) {
                         transformer = new EntityRenderer();
                     } else {
-                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> getOrigEntityRenderer();
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origEntityRenderer");
+                    }
+                    break;
+                case "net.minecraft.client.renderer.entity.Render":
+                    if (transforming) {
+                        transformer = new Render();
+                    } else {
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origRender");
+                    }
+                    break;
+                case "net.minecraft.client.renderer.entity.RendererLivingEntity":
+                    if (transforming) {
+                        transformer = new RendererLivingEntity();
+                    } else {
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origRendererLivingEntity");
                     }
                     break;
                 case "net.minecraftforge.client.GuiIngameForge":
                     if (transforming) {
                         transformer = new GuiIngame();
                     } else {
-                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> getOrigGuiIngame();
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origGuiIngame");
                     }
                     break;
                 default:
@@ -86,34 +98,14 @@ public class Main {
             }
             if (transformer != null) {
                 try {
-                    getInst().addTransformer(transformer, true);
-                    getInst().retransformClasses(clazz);
-                    getInst().removeTransformer(transformer);
+                    inst.addTransformer(transformer, true);
+                    inst.retransformClasses(clazz);
+                    inst.removeTransformer(transformer);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         }
-    }
-
-    private static Instrumentation getInst() {
-        return (Instrumentation) getField("inst");
-    }
-
-    private static byte[] getOrigMinecraft() {
-        return (byte[]) getField("origMinecraft");
-    }
-
-    private static byte[] getOrigEntity() {
-        return (byte[]) getField("origEntity");
-    }
-
-    private static byte[] getOrigEntityRenderer() {
-        return (byte[]) getField("origEntityRenderer");
-    }
-
-    private static byte[] getOrigGuiIngame() {
-        return (byte[]) getField("origGuiIngame");
     }
 
     private static Object getField(String name) {
@@ -149,6 +141,8 @@ public class Main {
             origMinecraft = null;
             origEntity = null;
             origEntityRenderer = null;
+            origRender = null;
+            origRendererLivingEntity = null;
             origGuiIngame = null;
             inst = null;
             for (Field field : ClassLoader.getSystemClassLoader().loadClass(Main.class.getName()).getDeclaredFields()) {
@@ -213,5 +207,16 @@ public class Main {
             ex.printStackTrace();
         }
         return 0.0D;
+    }
+
+    public static boolean getNametagsEnabled() {
+        try {
+            Object moduleManager = eventManager.getDeclaredField("moduleManager").get(null);
+            Object nameTags = moduleManager.getClass().getDeclaredField("nameTags").get(moduleManager);
+            return nameTags.getClass().getSuperclass().getDeclaredField("enabled").getBoolean(nameTags);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }
