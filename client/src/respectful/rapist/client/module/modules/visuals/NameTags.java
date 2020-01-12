@@ -13,7 +13,7 @@ public class NameTags extends Module {
     @Override
     public void onRender() {
         for (Object entityPlayer : Mappings.World.getPlayerEntities(Mappings.Minecraft.getTheWorld())) {
-            if (!Mappings.EntityPlayer.clazz.cast(entityPlayer).equals(Mappings.Minecraft.getThePlayer())) {
+            if (!Mappings.EntityPlayer.clazz.cast(entityPlayer).equals(Mappings.Minecraft.getThePlayer()) && Mappings.EntityLivingBase.isEntityAlive(entityPlayer)) {
                 float scale = Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entityPlayer) / 150.0F;
                 GL11.glPushMatrix();
                 GL11.glTranslatef((float) (Mappings.Entity.getPosX(entityPlayer) - Mappings.Entity.getPosX(Mappings.Minecraft.getThePlayer())), (float) (Mappings.Entity.getPosY(entityPlayer) - Mappings.Entity.getPosY(Mappings.Minecraft.getThePlayer()) + 2.3F), (float) (Mappings.Entity.getPosZ(entityPlayer) - Mappings.Entity.getPosZ(Mappings.Minecraft.getThePlayer())));
