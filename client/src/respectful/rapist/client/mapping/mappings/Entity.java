@@ -71,10 +71,12 @@ public class Entity extends MappedClass {
     }
 
     public void setRotationYaw(Object obj, float value) {
-        try {
-            clazz.getDeclaredField("field_70177_z").setFloat(obj, value);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (!Float.isNaN(value)) {
+            try {
+                clazz.getDeclaredField("field_70177_z").setFloat(obj, value);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -88,10 +90,12 @@ public class Entity extends MappedClass {
     }
 
     public void setRotationPitch(Object obj, float value) {
-        try {
-            clazz.getDeclaredField("field_70125_A").setFloat(obj, value);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (!Float.isNaN(value)) {
+            try {
+                clazz.getDeclaredField("field_70125_A").setFloat(obj, value);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

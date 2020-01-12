@@ -24,7 +24,7 @@ public class Aimbot extends Module {
             for (Object entityPlayer : Mappings.World.getPlayerEntities(Mappings.Minecraft.getTheWorld())) {
                 if (!Mappings.EntityPlayer.clazz.cast(entityPlayer).equals(Mappings.Minecraft.getThePlayer()) && Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entityPlayer) <= dist && Mappings.EntityLivingBase.isEntityAlive(entityPlayer) && !Mappings.Entity.isInvisible(entityPlayer) && !EventManager.playerManager.isFriend(Mappings.EntityPlayer.getCommandSenderName(entityPlayer))) {
                     double x = Mappings.Entity.getPosX(entityPlayer) - Mappings.Entity.getPosX(Mappings.Minecraft.getThePlayer()), y = Mappings.Entity.getPosZ(entityPlayer) - Mappings.Entity.getPosZ(Mappings.Minecraft.getThePlayer()), z = Mappings.Entity.getPosY(entityPlayer) - Mappings.Entity.getPosY(Mappings.Minecraft.getThePlayer()) + 1;
-                    if (timer.elapsed((long) Random.nextFloat(minRand, maxRand))) {
+                    if (timer.elapsed(Random.nextInt(minRand, maxRand))) {
                         randX = (float) (Random.nextDouble(x - 0.15D, x + 0.15D));
                         randY = (float) (Random.nextDouble(y - 0.15D, y + 0.15D));
                         randZ = (float) (Random.nextDouble(z - 0.15D, z + 0.15D));

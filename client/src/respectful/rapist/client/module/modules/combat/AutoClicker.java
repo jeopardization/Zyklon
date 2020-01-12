@@ -19,9 +19,10 @@ public class AutoClicker extends Module {
     @Override
     public void onTick() {
         if (Config.safe(reqItem, itemWhitelist, true)) {
-            if (timer.elapsed((long) Random.nextFloat(1000.0F / minCPS, 1000.0F / maxCPS)) && !held) {
+            if (timer.elapsed((long) Random.nextFloat(1000.0F / maxCPS, 1000.0F / minCPS)) && !held) {
                 Mappings.KeyBinding.setKeyBindState(-100, true);
                 Mappings.KeyBinding.onTick(-100);
+                Mappings.CPSMod.addClick();
                 held = true;
                 timer = new Timer();
             } else if (timer.elapsed(Random.nextInt(15, 30)) && held) {
