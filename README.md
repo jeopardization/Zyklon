@@ -5,6 +5,10 @@
 ![](https://i.imgur.com/FHjIiOkg.png)<br>
 ![](https://i.imgur.com/XwrddPI.png)
 
+**3.4 - 1/12/2020**<br>
+• Implemented CPSMod support<br>
+• Bug fixes
+
 **3.3 - 1/10/2020**<br>
 • Added Player List<br>
 • Bug fixes
