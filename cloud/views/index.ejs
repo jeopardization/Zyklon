@@ -5,8 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="stylesheets/custom.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
@@ -47,10 +47,10 @@
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h4>Home</h4>
-                <p><b>Build Date</b>: 1/12/2020</p>
-                <p><b>Build Version</b>: 3.4</p>
+                <p><b>Build Date</b>: 1/20/2020</p>
+                <p><b>Build Version</b>: 3.5</p>
                 <div>
-                    <label for="refresh-rate-label">Refresh Rate</label>
+                    <label for="refresh-rate-label" title="How often the client should re-apply settings from your configuration">Refresh Rate</label>
                     <input type="text" id="refresh-rate-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0)">
                     <div id="refresh-rate" style="width: 95%"></div>
@@ -61,187 +61,195 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="autoclicker" role="tabpanel" aria-labelledby="autoclicker-tab">
-                <h4>AutoClicker</h4>
+                <h4 title="Clicks when holding down your mouse">AutoClicker</h4>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="autoclicker-enabled">
-                    <label class="form-check-label" for="autoclicker-enabled">Enabled</label>
+                    <label class="form-check-label" for="autoclicker-enabled" title="Enable AutoClicker">Enabled</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="autoclicker-req-item">
-                    <label class="form-check-label" for="autoclicker-req-item">Require Item</label>
+                    <label class="form-check-label" for="autoclicker-req-item" title="AutoClicker will only activate if you are holding an item from the Item Whitelist">Require Item</label>
                 </div>
                 <div>
-                    <label for="autoclicker-CPS-label">CPS</label>
+                    <label for="autoclicker-CPS-label" title="Clicks Per Second">CPS</label>
                     <input type="text" id="autoclicker-CPS-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="autoclicker-CPS" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="autoclicker-item-whitelist">Item Whitelist</label>
+                    <label for="autoclicker-item-whitelist" title="If Require Item is enabled, AutoClicker will activate only if you are holding an item from this whitelist&#013;Items are in the form of IDs and are separated with commas">Item Whitelist</label>
                     <br>
                     <textarea id="autoclicker-item-whitelist"><%= autoclickerItemWhitelist %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="aimbot" role="tabpanel" aria-labelledby="aimbot-tab">
-                <h4>Aimbot</h4>
+                <h4 title="Aims at other players">Aimbot</h4>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="aimbot-enabled">
-                    <label class="form-check-label" for="aimbot-enabled">Enabled</label>
+                    <label class="form-check-label" for="aimbot-enabled" title="Enable Aimbot">Enabled</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="aimbot-req-item">
-                    <label class="form-check-label" for="aimbot-req-item">Require Item</label>
+                    <label class="form-check-label" for="aimbot-req-item" title="Aimbot will activate only if you are holding an item from the Item Whitelist">Require Item</label>
                     <br>
-                    <input type="checkbox" class="form-check-input" id="aimbot-req-mouse">
-                    <label class="form-check-label" for="aimbot-req-mouse">Require Mouse</label>
+                    <input type="checkbox" class="form-check-input" id="aimbot-req-mouse" title="Aimbot will activate only if your mouse is held down">
+                    <label class="form-check-label" for="aimbot-req-mouse" title="Aimbot will activate only if your mouse is held down">Require Mouse</label>
+                </div>
+                <div style="margin-bottom: 16px">
+                    <label for="aimbot-target" title="How the Aimbot should prioritize targets&#013;Distance: Aims at the player closest to your position&#013;Lowest Health: Aims at the player with the lowest amount of health&#013;Random: Aims at a randomly selected player">Target Selection</label><br>
+                    <select name="aimbot-target" id="aimbot-target">
+                        <option value="0">Distance</option>
+                        <option value="1">Lowest Health</option>
+                        <option value="2">Random</option>
+                    </select>
                 </div>
                 <div>
-                    <label for="aimbot-yaw-smooth-label">Smooth (Yaw)</label>
+                    <label for="aimbot-yaw-smooth-label" title="How smoothly the Aimbot should aim to the target horizontally">Smooth (Yaw)</label>
                     <input type="text" id="aimbot-yaw-smooth-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-yaw-smooth" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-pitch-smoot-label">Smooth (Pitch)</label>
+                    <label for="aimbot-pitch-smoot-label" title="How smoothly the Aimbot should aim to the target vertically">Smooth (Pitch)</label>
                     <input type="text" id="aimbot-pitch-smooth-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-pitch-smooth" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-rand-freq-label">Randomize Frequency</label>
+                    <label for="aimbot-rand-freq-label" title="How often the Aimbot will randomly select a new point to aim at">Randomize Frequency</label>
                     <input type="text" id="aimbot-rand-freq-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-rand-freq" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-dist-label">Distance</label>
+                    <label for="aimbot-dist-label" title="Maximum distance player needs to be from you to allow Aimbot to activate">Distance</label>
                     <input type="text" id="aimbot-dist-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-dist" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-fov-label">FOV</label>
+                    <label for="aimbot-fov-label" title="Maximum FOV (Field of Vision) target needs to be within your crosshair for Aimbot to activate">FOV</label>
                     <input type="text" id="aimbot-fov-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-fov" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-item-whitelist">Item Whitelist</label>
+                    <label for="aimbot-item-whitelist" title="If Require Item is enabled, Aimbot will activate only if you are holding an item from this whitelist&#013;Items are in the form of IDs and are separated with commas">Item Whitelist</label>
                     <br>
                     <textarea id="aimbot-item-whitelist"><%= aimbotItemWhitelist %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="wtap" role="tabpanel" aria-labelledby="wtap-tab">
-                <h4>WTap</h4>
+                <h4 title="Resets forward movement when moving towards a target">WTap</h4>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="wtap-enabled">
-                    <label class="form-check-label" for="wtap-enabled">Enabled</label>
+                    <label class="form-check-label" for="wtap-enabled" title="Enable WTap">Enabled</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="wtap-req-item">
-                    <label class="form-check-label" for="wtap-req-item">Require Item</label>
+                    <label class="form-check-label" for="wtap-req-item" title="WTap will activate only if you are holding an item from the Item Whitelist">Require Item</label>
                 </div>
                 <div>
-                    <label for="wtap-dist-label">Distance</label>
+                    <label for="wtap-dist-label" title="Maximum distance player needs to be from you to allow WTap to activate">Distance</label>
                     <input type="text" id="wtap-dist-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="wtap-dist" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="wtap-tap-delay-label">Tap Delay</label>
+                    <label for="wtap-tap-delay-label" title="Amount of time (in milliseconds) to wait before WTap activates">Tap Delay</label>
                     <input type="text" id="wtap-tap-delay-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="wtap-tap-delay" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="wtap-item-whitelist">Item Whitelist</label>
+                    <label for="wtap-item-whitelist" title="If Require Item is enabled, WTap will activate only if you are holding an item from this whitelist&#013;Items are in the form of IDs and are separated with commas">Item Whitelist</label>
                     <br>
                     <textarea id="wtap-item-whitelist"><%= wtapItemWhitelist %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="reach" role="tabpanel" aria-labelledby="reach-tab">
-                <h4>Reach</h4>
+                <h4 title="Extends the distance allowed for you to be able to attack a player">Reach</h4>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="reach-enabled">
-                    <label class="form-check-label" for="reach-enabled">Enabled</label>
+                    <label class="form-check-label" for="reach-enabled" title="Enable Reach">Enabled</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="reach-req-item">
-                    <label class="form-check-label" for="reach-req-item">Require Item</label>
+                    <label class="form-check-label" for="reach-req-item" title="Reach will activate only if you are holding an item from the Item Whitelist">Require Item</label>
                 </div>
                 <div>
-                    <label for="reach-expansion-label">Expansion</label>
+                    <label for="reach-expansion-label" title="How much extra reach you will be given (Normally 3.0)">Expansion</label>
                     <input type="text" id="reach-expansion-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="reach-expansion" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="reach-item-whitelist">Item Whitelist</label>
+                    <label for="reach-item-whitelist" title="If Require Item is enabled, Reach will activate only if you are holding an item from this whitelist&#013;Items are in the form of IDs and are separated with commas">Item Whitelist</label>
                     <br>
                     <textarea id="reach-item-whitelist"><%= reachItemWhitelist %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="hitboxes" role="tabpanel" aria-labelledby="hitboxes-tab">
-                <h4>HitBoxes</h4>
+                <h4 title="Expands player hitboxes">HitBoxes</h4>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="hitboxes-enabled">
-                    <label class="form-check-label" for="hitboxes-enabled">Enabled</label>
+                    <label class="form-check-label" for="hitboxes-enabled" title="Enable HitBoxes">Enabled</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="hitboxes-req-item">
-                    <label class="form-check-label" for="hitboxes-req-item">Require Item</label>
+                    <label class="form-check-label" for="hitboxes-req-item" title="HitBoxes will activate only if you are holding an item from the Item Whitelist">Require Item</label>
                 </div>
                 <div>
-                    <label for="hitboxes-expansion-label">Expansion</label>
+                    <label for="hitboxes-expansion-label" title="How much larger other player hitboxes will be (Normally 0.1)">Expansion</label>
                     <input type="text" id="hitboxes-expansion-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="hitboxes-expansion" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="hitboxes-item-whitelist">Item Whitelist</label>
+                    <label for="hitboxes-item-whitelist" title="If Require Item is enabled, HitBoxes will activate only if you are holding an item from this whitelist&#013;Items are in the form of IDs and are separated with commas">Item Whitelist</label>
                     <br>
                     <textarea id="hitboxes-item-whitelist"><%= wtapItemWhitelist %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="visuals" role="tabpanel" aria-labelledby="visuals-tab">
-                <h4>Visuals</h4>
+                <h4 title="Visual based modules">Visuals</h4>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="HUD-enabled">
-                    <label class="form-check-label" for="HUD-enabled">HUD</label>
+                    <label class="form-check-label" for="HUD-enabled" title="Displays client watermark, current time and array list">HUD</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="nametags-enabled">
-                    <label class="form-check-label" for="nametags-enabled">NameTags</label>
+                    <label class="form-check-label" for="nametags-enabled" title="Modified player nametags (Darker, larger, see-through, sneaking indication, health indication, friend/enemy indication)">NameTags</label>
                     <br>
                     <input type="checkbox" class="form-check-input" id="brightness-enabled">
-                    <label class="form-check-label" for="brightness-enabled">Brightness</label>
+                    <label class="form-check-label" for="brightness-enabled" title="Turns up gamma setting beyond the maximum threshold">Brightness</label>
                 </div>
             </div>
             <div class="tab-pane fade" id="throwpot" role="tabpanel" aria-labelledby="throwpot-tab">
-                <h4>ThrowPot</h4>
+                <h4 title="Switches to a randomly selected hotbar slot containing a health potion and throws it&#013;This is a single-use module">ThrowPot</h4>
                 <div>
-                    <label for="throwpot-throw-delay-label">Throw Delay</label>
+                    <label for="throwpot-throw-delay-label" title="Amount of time (in milliseconds) to wait before ThrowPot activates">Throw Delay</label>
                     <input type="text" id="throwpot-throw-delay-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="throwpot-throw-delay" style="width: 95%"></div>
                 </div>
             </div>
             <div class="tab-pane fade" id="refill" role="tabpanel" aria-labelledby="refill-tab">
-                <h4>Refill</h4>
+                <h4 title="Opens inventory, randomly selects health potions to fill to empty hotbar slots, then closes inventory&#013;This is a single-use module">Refill</h4>
                 <div>
                     <div>
-                        <label for="refill-fill-delay-label">Fill Delay</label>
+                        <label for="refill-fill-delay-label" title="Amount of time (in milliseconds) to wait before filling an empty hotbar slot">Fill Delay</label>
                         <input type="text" id="refill-fill-delay-label" readonly
                                style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                         <div id="refill-fill-delay" style="width: 95%"></div>
                     </div>
                     <br>
                     <div>
-                        <label for="refill-exit-delay-label">Exit Delay</label>
+                        <label for="refill-exit-delay-label" title="Amount of time (in milliseconds) to wait before closing inventory">Exit Delay</label>
                         <input type="text" id="refill-exit-delay-label" readonly
                                style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                         <div id="refill-exit-delay" style="width: 95%"></div>
@@ -249,24 +257,24 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="players" role="tabpanel" aria-labelledby="players-tab">
-                <h4>Player List</h4>
+                <h4 title="Label ingame players as friend/enemy">Player List</h4>
                 <div>
-                    <label for="friends">Friends</label>
+                    <label for="friends" title="Aimbot and WTap will not activate on these players. NameTags will set these players' names to a green color&#013;Usernames are case insensitive and separated with commas">Friends</label>
                     <br>
                     <textarea id="friends"><%= friends %></textarea>
                 </div>
                 <br>
                 <div>
-                    <label for="enemies">Enemies</label>
+                    <label for="enemies" title="NameTags will set these players' names to a red color&#013;Usernames are case insensitive and separated with commas">Enemies</label>
                     <br>
                     <textarea id="enemies"><%= enemies %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="keybinds" role="tabpanel" aria-labelledby="keybinds-tab">
-                <h4>Key Binds</h4>
+                <h4 title="Toggle modules upon pressing the specified key">Key Binds</h4>
                 <div>
                     <div style="margin-bottom: 12px">
-                        <label for="HUD-bind">HUD</label><br>
+                        <label for="HUD-bind" title="HUD key bind">HUD</label><br>
                         <select name="HUD-bind" id="HUD-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -397,7 +405,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="autoclicker-bind">AutoClicker</label><br>
+                        <label for="autoclicker-bind" title="AutoClicker key bind">AutoClicker</label><br>
                         <select name="autoclicker-bind" id="autoclicker-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -528,7 +536,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="aimbot-bind">Aimbot</label><br>
+                        <label for="aimbot-bind" title="Aimbot key bind">Aimbot</label><br>
                         <select name="aimbot-bind" id="aimbot-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -659,7 +667,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="wtap-bind">WTap</label><br>
+                        <label for="wtap-bind" title="WTap key bind">WTap</label><br>
                         <select name="wtap-bind" id="wtap-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -790,7 +798,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="reach-bind">Reach</label><br>
+                        <label for="reach-bind" title="Reach key bind">Reach</label><br>
                         <select name="reach-bind" id="reach-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -921,7 +929,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="hitboxes-bind">HitBoxes</label><br>
+                        <label for="hitboxes-bind" title="HitBoxes key bind">HitBoxes</label><br>
                         <select name="hitboxes-bind" id="hitboxes-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -1052,7 +1060,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="brightness-bind">Brightness</label><br>
+                        <label for="brightness-bind" title="Brightness key bind">Brightness</label><br>
                         <select name="brightness-bind" id="brightness-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -1183,7 +1191,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="nametags-bind">NameTags</label><br>
+                        <label for="nametags-bind" title="NameTags key bind">NameTags</label><br>
                         <select name="nametags-bind" id="nametags-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -1314,7 +1322,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="throwpot-bind">ThrowPot</label><br>
+                        <label for="throwpot-bind" title="ThrowPot key bind">ThrowPot</label><br>
                         <select name="throwpot-bind" id="throwpot-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -1445,7 +1453,7 @@
                         </select>
                     </div>
                     <div style="margin-bottom: 12px">
-                        <label for="refill-bind">Refill</label><br>
+                        <label for="refill-bind" title="Refill key bind">Refill</label><br>
                         <select name="refill-bind" id="refill-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -1576,7 +1584,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="self-destruct-bind">Self Destruct</label><br>
+                        <label for="self-destruct-bind" title="Self Destruct key bind">Self Destruct</label><br>
                         <select name="self-destruct-bind" id="self-destruct-bind">
                             <option value="1">ESCAPE</option>
                             <option value="2">1</option>
@@ -1711,11 +1719,17 @@
         </div>
     </div>
 </div>
-<script src="javascripts/jquery-3.3.1.min.js"></script>
-<script src="javascripts/jquery-ui.min.js"></script>
+<script src="javascripts/jquery-3.4.1.min.js"></script>
 <script src="javascripts/bootstrap.bundle.min.js"></script>
+<script src="javascripts/jquery-ui.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(function () {
+        $(document).tooltip({
+                  show: {
+        effect: "slideDown",
+      },
+            track: true
+        });
         $("#autoclicker-bind").val(<%= autoclickerBind %>);
         $("#aimbot-bind").val(<%= aimbotBind %>);
         $("#nametags-bind").val(<%= nametagsBind %>);
@@ -1727,6 +1741,7 @@
         $("#HUD-bind").val(<%= HUDBind %>);
         $("#throwpot-bind").val(<%= throwpotBind %>);
         $("#refill-bind").val(<%= refillBind %>);
+        $("#aimbot-target").val(<%= aimbotTarget %>);
         check(<%= autoclickerEnabled %>, "#autoclicker-enabled");
         check(<%= aimbotEnabled %>, "#aimbot-enabled");
         check(<%= nametagsEnabled %>, "#nametags-enabled");
@@ -1750,16 +1765,16 @@
         setRangeSlider("#reach-expansion", <%= reachMinExpansion %>, <%= reachMaxExpansion %>, 0, 1, 0.01);
         setSlider("#hitboxes-expansion", <%= hitboxesExpansion %>, 0.01, 1, 0.01);
         setSlider("#wtap-dist", <%= wtapDist %>, 0.1, 6.0, 0.1);
-        setRangeSlider("#wtap-tap-delay", <%= wtapMinTapDelay %>, <%= wtapMaxTapDelay %>, 1, 200, 1);
-        setRangeSlider("#throwpot-throw-delay", <%= throwpotMinThrowDelay %>, <%= throwpotMaxThrowDelay %>, 1, 200, 1);
-        setRangeSlider("#refill-fill-delay", <%= refillMinFillDelay %>, <%= refillMaxFillDelay %>, 1, 200, 1);
-        setRangeSlider("#refill-exit-delay", <%= refillMinExitDelay %>, <%= refillMaxExitDelay %>, 1, 200, 1);
+        setRangeSlider("#wtap-tap-delay", <%= wtapMinTapDelay %>, <%= wtapMaxTapDelay %>, 1, 1000, 1);
+        setRangeSlider("#throwpot-throw-delay", <%= throwpotMinThrowDelay %>, <%= throwpotMaxThrowDelay %>, 1, 1000, 1);
+        setRangeSlider("#refill-fill-delay", <%= refillMinFillDelay %>, <%= refillMaxFillDelay %>, 1, 1000, 1);
+        setRangeSlider("#refill-exit-delay", <%= refillMinExitDelay %>, <%= refillMaxExitDelay %>, 1, 1000, 1);
         setSlider("#refresh-rate", <%= refreshRate %>, 1, 10, 1);
         $("#apply").click(function() {
             $.ajax({
                 url: "/apply",
                 type: "POST",
-                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
+                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
                 success: function(res) {
                     alert(res);
                 }
