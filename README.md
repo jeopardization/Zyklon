@@ -1,9 +1,17 @@
 # Zyklon
 
-![](https://i.imgur.com/xbq4WtJg.png)<br>
-![](https://i.imgur.com/cVSOvGa.png)<br>
-![](https://i.imgur.com/FHjIiOkg.png)<br>
-![](https://i.imgur.com/XwrddPI.png)
+![](https://i.imgur.com/kMBh9tMg.png)<br>
+![](https://i.imgur.com/vqzdw88g.png)<br>
+![](https://i.imgur.com/hkeMrcu.png)<br>
+![](https://i.imgur.com/sk5bzHUg.png)
+
+**3.5 - 1/20/2020**<br>
+• Extended maximum delays for ThrowPot, Refill & WTap<br>
+• NameTags will now highlight Aimbot target<br>
+• Improved Aimbot target selection<br>
+• Added Target Selection options for Aimbot (Distance, Lowest HP, Random)<br>
+• Aimbot FOV now takes pitch rotation into account as well<br>
+• Added tooltips to cloud configuration UI
 
 **3.4 - 1/12/2020**<br>
 • Implemented CPSMod support<br>

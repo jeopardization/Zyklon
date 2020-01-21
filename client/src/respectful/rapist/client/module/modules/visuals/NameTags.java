@@ -44,9 +44,9 @@ public class NameTags extends Module {
                 Mappings.Tessellator.draw(Mappings.Tessellator.getInstance());
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
                 String nameColor = "FFFFFF";
-                if (EventManager.playerManager.isFriend(Mappings.EntityPlayer.getCommandSenderName(entityPlayer))) {
+                if (EventManager.playerManager.isFriend(name)) {
                     nameColor = "00C834";
-                } else if (EventManager.playerManager.isEnemy(Mappings.EntityPlayer.getCommandSenderName(entityPlayer))) {
+                } else if (EventManager.playerManager.isEnemy(name) || (EventManager.moduleManager.aimbot.target != null && Mappings.EntityPlayer.getCommandSenderName(EventManager.moduleManager.aimbot.target).equalsIgnoreCase(name))) {
                     nameColor = "FF2A36";
                 }
                 String healthColor = "008E34";

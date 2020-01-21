@@ -7,7 +7,7 @@ public class PlayerManager {
     public boolean isFriend(String name) {
         if (friends != null && friends.length > 0) {
             for (String friend : friends) {
-                return friend.equals(name);
+                return friend.equalsIgnoreCase(name);
             }
         }
         return false;
@@ -16,7 +16,7 @@ public class PlayerManager {
     public boolean isEnemy(String name) {
         if (enemies != null && enemies.length > 0) {
             for (String enemy : enemies) {
-                return enemy.equals(name);
+                return enemy.equalsIgnoreCase(name);
             }
         }
         return false;

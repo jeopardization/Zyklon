@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 Agent-Class: respectful.rapist.loader.Main
 Can-Retransform-Classes: true
 Can-Redefine-Classes: true
-Build-Date: 1/12/2020
-Build-Version: 3.4
+Build-Date: 1/20/2020
+Build-Version: 3.5
