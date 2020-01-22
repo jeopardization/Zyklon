@@ -22,6 +22,6 @@ public interface Mappings {
     RenderManager RenderManager = new RenderManager();
     OpenGLHelper OpenGLHelper = new OpenGLHelper();
     Tessellator Tessellator = new Tessellator();
-    respectful.rapist.client.mapping.mappings.KeyBinding KeyBinding = new KeyBinding();
+    KeyBinding KeyBinding = new KeyBinding();
     CPSMod CPSMod = new CPSMod();
 }

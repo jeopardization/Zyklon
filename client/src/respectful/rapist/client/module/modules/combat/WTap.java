@@ -8,11 +8,12 @@ import respectful.rapist.client.util.Config;
 import respectful.rapist.client.util.Random;
 import respectful.rapist.client.util.Timer;
 
-public class WTap extends Module {
+public class WTap extends Module implements Mappings {
     public float dist = 2.5F;
-    public int minTapDelay = 75, maxTapDelay = 100;
+    public int minTapDelay = 100, maxTapDelay = 350;
     public boolean reqItem, released;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
+    private long tapDelay = Random.nextInt(minTapDelay, maxTapDelay);
     private Timer timer = new Timer();
 
     public WTap() {
@@ -22,21 +23,23 @@ public class WTap extends Module {
     @Override
     public void onTick() {
         if (Config.safe(reqItem, itemWhitelist, true) && Keyboard.isKeyDown(17)) {
-            Object entity = Mappings.MovingObjectPosition.getEntityHit(Mappings.Minecraft.getObjectMouseOver());
-            if (Mappings.EntityPlayer.clazz.isInstance(entity) && Mappings.Entity.getDistanceToEntity(Mappings.Minecraft.getThePlayer(), entity) <= dist && timer.elapsed(Random.nextInt(minTapDelay, maxTapDelay)) && !EventManager.playerManager.isFriend(Mappings.EntityPlayer.getCommandSenderName(entity)) && !released) {
-                Mappings.KeyBinding.setKeyBindState(17, false);
-                timer = new Timer();
+            Object entity = MovingObjectPosition.getEntityHit(Minecraft.getObjectMouseOver());
+            if (EntityPlayer.clazz.isInstance(entity) && Entity.getDistanceToEntity(Minecraft.getThePlayer(), entity) <= dist && timer.elapsed(tapDelay) && !EventManager.playerManager.isFriend(EntityPlayer.getCommandSenderName(entity)) && !released) {
+                KeyBinding.setKeyBindState(17, false);
+                tapDelay = Random.nextInt(minTapDelay, maxTapDelay);
                 released = true;
-            } else if (timer.elapsed(Random.nextInt(minTapDelay, maxTapDelay)) && released) {
-                Mappings.KeyBinding.setKeyBindState(17, true);
-                Mappings.KeyBinding.onTick(17);
                 timer = new Timer();
+            } else if (timer.elapsed(tapDelay) && released) {
+                KeyBinding.setKeyBindState(17, true);
+                KeyBinding.onTick(17);
+                tapDelay = Random.nextInt(minTapDelay, maxTapDelay);
                 released = false;
+                timer = new Timer();
                 if (Keyboard.isKeyDown(17)) {
-                    Mappings.KeyBinding.setKeyBindState(17, true);
-                    Mappings.KeyBinding.onTick(17);
+                    KeyBinding.setKeyBindState(17, true);
+                    KeyBinding.onTick(17);
                 } else {
-                    Mappings.KeyBinding.setKeyBindState(17, false);
+                    KeyBinding.setKeyBindState(17, false);
                 }
             }
         }

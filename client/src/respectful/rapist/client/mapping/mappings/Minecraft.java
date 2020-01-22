@@ -3,7 +3,7 @@ package respectful.rapist.client.mapping.mappings;
 import respectful.rapist.client.mapping.MappedClass;
 import respectful.rapist.client.mapping.Mappings;
 
-public class Minecraft extends MappedClass {
+public class Minecraft extends MappedClass implements Mappings {
     public Minecraft() {
         super("net.minecraft.client.Minecraft");
     }
@@ -28,7 +28,7 @@ public class Minecraft extends MappedClass {
 
     public Object getCurrentScreen() {
         try {
-            clazz.getDeclaredField("field_71462_r").get(getMinecraft());
+            return clazz.getDeclaredField("field_71462_r").get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,7 +82,7 @@ public class Minecraft extends MappedClass {
 
     public void displayGuiScreen(Object guiScreen) {
         try {
-            clazz.getDeclaredMethod("func_147108_a", Mappings.GuiScreen.clazz).invoke(getMinecraft(), guiScreen == null ? null : Mappings.GuiScreen.clazz.cast(guiScreen));
+            clazz.getDeclaredMethod("func_147108_a", GuiScreen.clazz).invoke(getMinecraft(), guiScreen == null ? null : GuiScreen.clazz.cast(guiScreen));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

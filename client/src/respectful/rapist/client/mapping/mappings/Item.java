@@ -3,7 +3,7 @@ package respectful.rapist.client.mapping.mappings;
 import respectful.rapist.client.mapping.MappedClass;
 import respectful.rapist.client.mapping.Mappings;
 
-public class Item extends MappedClass {
+public class Item extends MappedClass implements Mappings {
     public Item() {
         super("net.minecraft.item.Item");
     }
@@ -19,7 +19,7 @@ public class Item extends MappedClass {
 
     public String getItemStackDisplayName(Object obj, Object itemStack) {
         try {
-            return (String) clazz.getDeclaredMethod("func_77653_i", Mappings.ItemStack.clazz).invoke(obj, Mappings.ItemStack.clazz.cast(itemStack));
+            return (String) clazz.getDeclaredMethod("func_77653_i", ItemStack.clazz).invoke(obj, ItemStack.clazz.cast(itemStack));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -7,7 +7,7 @@ import respectful.rapist.client.module.Module;
 import java.io.InputStream;
 import java.net.URL;
 
-public class Config {
+public class Config implements Mappings {
     public static int[] stringToIntArr(String str) {
         String[] arr = str.split(",");
         int[] intArr = new int[arr.length];
@@ -21,11 +21,11 @@ public class Config {
         boolean itemCheck = true;
         boolean mouseCheck = true;
         if (reqItem) {
-            if (Mappings.InventoryPlayer.getCurrentItem(Mappings.EntityPlayer.getInventory(Mappings.Minecraft.getThePlayer())) == null) {
+            if (InventoryPlayer.getCurrentItem(EntityPlayer.getInventory(Minecraft.getThePlayer())) == null) {
                 itemCheck = false;
             } else {
                 for (int ID : itemWhitelist) {
-                    if (ID == Mappings.Item.getIdFromItem(Mappings.ItemStack.getItem(Mappings.InventoryPlayer.getCurrentItem(Mappings.EntityPlayer.getInventory(Mappings.Minecraft.getThePlayer()))))) {
+                    if (ID == Item.getIdFromItem(ItemStack.getItem(InventoryPlayer.getCurrentItem(EntityPlayer.getInventory(Minecraft.getThePlayer()))))) {
                         itemCheck = true;
                         break;
                     } else {
@@ -37,7 +37,7 @@ public class Config {
         if (reqMouse) {
             mouseCheck = Mouse.isButtonDown(0);
         }
-        return itemCheck && mouseCheck;
+        return itemCheck && mouseCheck && Minecraft.getCurrentScreen() == null;
     }
 
     public static void setEnabledCloud(Module module, boolean enabled) {

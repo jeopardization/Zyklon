@@ -9,7 +9,7 @@ import respectful.rapist.client.util.Timer;
 import java.net.URL;
 import java.util.Scanner;
 
-public class EventManager {
+public class EventManager implements Mappings {
     public static ModuleManager moduleManager = new ModuleManager();
     public static PlayerManager playerManager = new PlayerManager();
     private static Timer timer = new Timer();
@@ -40,7 +40,7 @@ public class EventManager {
     }
 
     public static void onTick() {
-        if (Mappings.Minecraft.getTheWorld() != null) {
+        if (Minecraft.getTheWorld() != null) {
             if (timer.elapsed(refreshRate)) {
                 try {
                     String[] players = new Scanner(new URL("http://localhost:1337/players").openStream()).next().split(";");

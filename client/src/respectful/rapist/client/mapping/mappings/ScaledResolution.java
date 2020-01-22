@@ -3,14 +3,14 @@ package respectful.rapist.client.mapping.mappings;
 import respectful.rapist.client.mapping.MappedClass;
 import respectful.rapist.client.mapping.Mappings;
 
-public class ScaledResolution extends MappedClass {
+public class ScaledResolution extends MappedClass implements Mappings {
     public ScaledResolution() {
         super("net.minecraft.client.gui.ScaledResolution");
     }
 
     public Object newInstance(Object minecraft, int width, int height) {
         try {
-            return clazz.getDeclaredConstructor(Mappings.Minecraft.clazz, int.class, int.class).newInstance(minecraft, width, height);
+            return clazz.getDeclaredConstructor(Minecraft.clazz, int.class, int.class).newInstance(minecraft, width, height);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

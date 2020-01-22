@@ -3,7 +3,7 @@ package respectful.rapist.client.module.modules.visuals;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 
-public class Brightness extends Module {
+public class Brightness extends Module implements Mappings {
     private float origGamma;
 
     public Brightness() {
@@ -12,14 +12,14 @@ public class Brightness extends Module {
 
     @Override
     public void enable() {
-        origGamma = Mappings.GameSettings.getGammaSetting(Mappings.Minecraft.getGameSettings());
-        Mappings.GameSettings.setGammaSetting(Mappings.Minecraft.getGameSettings(), 100.0F);
+        origGamma = GameSettings.getGammaSetting(Minecraft.getGameSettings());
+        GameSettings.setGammaSetting(Minecraft.getGameSettings(), 100.0F);
         super.enable();
     }
 
     @Override
     public void disable() {
-        Mappings.GameSettings.setGammaSetting(Mappings.Minecraft.getGameSettings(), origGamma);
+        GameSettings.setGammaSetting(Minecraft.getGameSettings(), origGamma);
         super.disable();
     }
 }

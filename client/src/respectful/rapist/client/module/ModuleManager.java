@@ -17,7 +17,7 @@ public class ModuleManager {
     public HitBoxes hitBoxes = new HitBoxes();
     public WTap wTap = new WTap();
     public SelfDestruct selfDestruct = new SelfDestruct();
-    public respectful.rapist.client.module.modules.visuals.HUD HUD = new HUD();
+    public HUD HUD = new HUD();
     public ThrowPot throwPot = new ThrowPot();
     public Refill refill = new Refill();
 

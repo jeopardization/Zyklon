@@ -5,6 +5,9 @@
 ![](https://i.imgur.com/hkeMrcu.png)<br>
 ![](https://i.imgur.com/sk5bzHUg.png)
 
+**3.6 - 1/21/2020**<br>
+• Major security improvements for all modules
+
 **3.5 - 1/20/2020**<br>
 • Extended maximum delays for ThrowPot, Refill & WTap<br>
 • NameTags will now highlight Aimbot target<br>
@@ -24,7 +27,7 @@
 **3.2 - 1/3/2020**<br>
 • Added NameTags<br>
 • Added Refresh Rate option<br>
-• Improved security for Aimbot<br>
+• Improved Aimbot security<br>
 • Bug fixes
 
 **3.1 - 12/29/2019**<br>
