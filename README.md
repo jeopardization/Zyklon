@@ -6,7 +6,8 @@
 ![](https://i.imgur.com/sk5bzHUg.png)
 
 **3.6 - 1/21/2020**<br>
-• Major security improvements for all modules
+• Major security improvements for all modules<br>
+• Bug fixes
 
 **3.5 - 1/20/2020**<br>
 • Extended maximum delays for ThrowPot, Refill & WTap<br>
