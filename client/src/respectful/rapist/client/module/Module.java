@@ -20,9 +20,13 @@ public abstract class Module {
             } else {
                 disable();
             }
-            if (!color.equals("000000")) {
-                Config.setEnabledCloud(this, this.enabled);
-            }
+        }
+    }
+
+    public void toggle() {
+        enabled = !enabled;
+        if (!color.equals("000000")) {
+            Config.setEnabledCloud(this, enabled);
         }
     }
 

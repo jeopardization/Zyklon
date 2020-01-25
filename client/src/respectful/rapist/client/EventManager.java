@@ -18,7 +18,7 @@ public class EventManager implements Mappings {
     public static void onKey(int keyCode) {
         for (Module module : moduleManager.modules) {
             if (keyCode == module.bind) {
-                module.setEnabled(!module.enabled);
+                module.toggle();
             }
         }
     }
@@ -120,13 +120,7 @@ public class EventManager implements Mappings {
                         moduleManager.modules.get(i).bind = Integer.parseInt(config[i]);
                     }
                     for (int i = 11; i < 20; i++) {
-                        int index = i - 11;
-                        Module module = moduleManager.modules.get(index);
-                        if (Integer.parseInt(config[i]) == 1) {
-                            module.enable();
-                        } else {
-                            module.disable();
-                        }
+                        moduleManager.modules.get(i - 11).setEnabled(Integer.parseInt(config[i]) == 1);
                     }
                     moduleManager.autoClicker.reqItem = Integer.parseInt(config[20]) == 1;
                     moduleManager.aimbot.reqItem = Integer.parseInt(config[21]) == 1;
