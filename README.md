@@ -6,10 +6,10 @@
 ![](https://i.imgur.com/rN48YoW.png)
 
 **3.7 - 2/19/2020**<br>
-• Improved WTap & Aimbot security
-• Added FOV option for WTap
-• Added FOV option to Aimbot Target Selection options
-• Added Fake Lag
+• Improved WTap & Aimbot security<br>
+• Added FOV option for WTap<br>
+• Added FOV option to Aimbot Target Selection options<br>
+• Added Fake Lag<br>
 • Bug fixes
 
 **3.6 - 1/21/2020**<br>
