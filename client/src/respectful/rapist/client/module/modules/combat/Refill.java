@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 public class Refill extends Module implements Mappings {
     public int minFillDelay = 65, maxFillDelay = 110, minExitDelay = 110, maxExitDelay = 200;
-    private long fillDelay = Random.nextInt(minFillDelay, maxFillDelay), exitDelay = Random.nextInt(minExitDelay, maxExitDelay), releaseDelay = fillDelay / 3L;
-    private Timer timer = new Timer(), heldTimer = new Timer();
-    private boolean held;
+    private int fillDelay = Random.nextInt(minFillDelay, maxFillDelay), exitDelay = Random.nextInt(minExitDelay, maxExitDelay), releaseDelay = fillDelay / 3;
+    private Timer timer = new Timer(), heldTimer;
 
     public Refill() {
         super(34, "Refill", "000000");
@@ -36,15 +35,13 @@ public class Refill extends Module implements Mappings {
             }
         }
         if (slotsAvail && !pots.isEmpty()) {
-            if (!held && Minecraft.getCurrentScreen() == null) {
+            if (heldTimer == null && Minecraft.getCurrentScreen() == null) {
                 KeyBinding.setKeyBindState(18, true);
                 KeyBinding.onTick(18);
                 heldTimer = new Timer();
-                held = true;
             }
-            if (held && heldTimer.elapsed(releaseDelay)) {
+            if (heldTimer != null && heldTimer.elapsed(releaseDelay)) {
                 KeyBinding.setKeyBindState(18, false);
-                held = false;
             }
             if (GuiInventory.clazz.isInstance(Minecraft.getCurrentScreen()) && timer.elapsed(fillDelay)) {
                 PlayerControllerMP.windowClick(Minecraft.getPlayerController(), 0, pots.get(new SecureRandom().nextInt(pots.size())), 0, 1, Minecraft.getThePlayer());
@@ -54,7 +51,6 @@ public class Refill extends Module implements Mappings {
         } else {
             if (timer.elapsed(exitDelay)) {
                 Minecraft.displayGuiScreen(null);
-                exitDelay = Random.nextInt(minExitDelay, maxExitDelay);
                 disable();
             }
         }
@@ -64,7 +60,8 @@ public class Refill extends Module implements Mappings {
     public void enable() {
         fillDelay = Random.nextInt(minFillDelay, maxFillDelay);
         exitDelay = Random.nextInt(minExitDelay, maxExitDelay);
-        releaseDelay = fillDelay / 3L;
+        releaseDelay = fillDelay / 3;
+        heldTimer = null;
         timer = new Timer();
         super.enable();
     }

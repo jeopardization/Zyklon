@@ -1,9 +1,16 @@
 # Zyklon
 
-![](https://i.imgur.com/kMBh9tMg.png)<br>
-![](https://i.imgur.com/vqzdw88g.png)<br>
-![](https://i.imgur.com/hkeMrcu.png)<br>
-![](https://i.imgur.com/sk5bzHUg.png)
+![](https://i.imgur.com/UQuaY6j.png)<br>
+![](https://i.imgur.com/vrMqi3bg.png)<br>
+![](https://i.imgur.com/R3ONX6P.png)<br>
+![](https://i.imgur.com/rN48YoW.png)
+
+**3.7 - 2/19/2020**<br>
+• Improved WTap & Aimbot security
+• Added FOV option for WTap
+• Added FOV option to Aimbot Target Selection options
+• Added Fake Lag
+• Bug fixes
 
 **3.6 - 1/21/2020**<br>
 • Major security improvements for all modules<br>

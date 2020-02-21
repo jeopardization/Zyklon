@@ -46,7 +46,7 @@ public class NameTags extends Module implements Mappings {
                 String nameColor = "FFFFFF";
                 if (EventManager.playerManager.isFriend(name)) {
                     nameColor = "00C834";
-                } else if (EventManager.playerManager.isEnemy(name) || (EventManager.moduleManager.aimbot.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.aimbot.target).equalsIgnoreCase(name))) {
+                } else if (EventManager.playerManager.isEnemy(name) || (EventManager.moduleManager.aimbot.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.aimbot.target).equalsIgnoreCase(name)) || (EventManager.moduleManager.wTap.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.wTap.target).equalsIgnoreCase(name))) {
                     nameColor = "FF2A36";
                 }
                 String healthColor = "008E34";

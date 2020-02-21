@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ThrowPot extends Module implements Mappings {
     public int minThrowDelay = 65, maxThrowDelay = 110, slot = -1;
-    private long holdDelay = Random.nextInt(minThrowDelay, maxThrowDelay), releaseDelay = holdDelay / 3L;
+    private int delay = Random.nextInt(minThrowDelay, maxThrowDelay);
     private Timer timer = new Timer();
     private boolean held;
 
@@ -29,24 +29,23 @@ public class ThrowPot extends Module implements Mappings {
                         pots.add(i);
                     }
                 }
-                if (!pots.isEmpty()) {
+                if (pots.isEmpty()) {
+                    disable();
+                } else {
                     slot = pots.get(new SecureRandom().nextInt(pots.size()));
                 }
             }
             if (slot > -1 && !held) {
                 InventoryPlayer.setCurrentItem(EntityPlayer.getInventory(Minecraft.getThePlayer()), slot);
-                if (timer.elapsed(holdDelay)) {
+                if (timer.elapsed(delay)) {
                     KeyBinding.setKeyBindState(-99, true);
                     KeyBinding.onTick(-99);
                     held = true;
-                    releaseDelay = holdDelay / 3L;
+                    delay /= 3;
                     timer = new Timer();
                 }
-            } else if (timer.elapsed(releaseDelay) && slot > -1 && held) {
+            } else if (timer.elapsed(delay) && slot > -1 && held) {
                 KeyBinding.setKeyBindState(-99, false);
-                held = false;
-                holdDelay = Random.nextInt(minThrowDelay, maxThrowDelay);
-                slot = -1;
                 disable();
             }
         } else {
@@ -56,8 +55,9 @@ public class ThrowPot extends Module implements Mappings {
 
     @Override
     public void enable() {
-        holdDelay = Random.nextInt(minThrowDelay, maxThrowDelay);
-        releaseDelay = holdDelay / 3L;
+        held = false;
+        slot = -1;
+        delay = Random.nextInt(minThrowDelay, maxThrowDelay);
         timer = new Timer();
         super.enable();
     }

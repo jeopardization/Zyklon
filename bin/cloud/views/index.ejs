@@ -27,7 +27,7 @@
                aria-selected="false"><i class="fas fa-crosshairs fa-fw"></i> &nbsp;Aimbot</a>
             <a class="nav-link" id="wtap-tab" data-toggle="pill" href="#wtap" role="tab" aria-controls="wtap"
                aria-selected="false"><i class="fas fa-forward fa-fw"></i> &nbsp;WTap</a>
-               <a class="nav-link" id="reach-tab" data-toggle="pill" href="#reach" role="tab" aria-controls="reach"
+            <a class="nav-link" id="reach-tab" data-toggle="pill" href="#reach" role="tab" aria-controls="reach"
                aria-selected="false"><i class="fas fa-hand-paper fa-fw"></i> &nbsp;Reach</a>
             <a class="nav-link" id="hitboxes-tab" data-toggle="pill" href="#hitboxes" role="tab" aria-controls="hitboxes"
                aria-selected="false"><i class="fas fa-cube fa-fw"></i> &nbsp;HitBoxes</a>
@@ -35,6 +35,8 @@
                aria-controls="throwpot" aria-selected="false"><i class="fas fa-prescription-bottle-alt fa-fw"></i> &nbsp;ThrowPot</a>
             <a class="nav-link" id="refill-tab" data-toggle="pill" href="#refill" role="tab"
                aria-controls="refill" aria-selected="false"><i class="fas fa-redo fa-fw"></i> &nbsp;Refill</a>
+            <a class="nav-link" id="fakelag-tab" data-toggle="pill" href="#fakelag" role="tab" aria-controls="fakelag"
+               aria-selected="false"><i class="fas fa-wifi fa-fw"></i> &nbsp;Fake Lag</a>
             <a class="nav-link" id="visuals-tab" data-toggle="pill" href="#visuals" role="tab"
                aria-controls="visuals" aria-selected="false"><i class="far fa-eye fa-fw"></i> &nbsp;Visuals</a>
             <a class="nav-link" id="players-tab" data-toggle="pill" href="#players" role="tab"
@@ -47,8 +49,8 @@
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h4>Home</h4>
-                <p><b>Build Date</b>: 1/21/2020</p>
-                <p><b>Build Version</b>: 3.6</p>
+                <p><b>Build Date</b>: 2/19/2020</p>
+                <p><b>Build Version</b>: 3.7</p>
                 <div>
                     <label for="refresh-rate-label" title="How often the client should re-apply settings from your configuration">Refresh Rate</label>
                     <input type="text" id="refresh-rate-label" readonly
@@ -95,11 +97,12 @@
                     <label class="form-check-label" for="aimbot-req-mouse" title="Aimbot will activate only if your mouse is held down">Require Mouse</label>
                 </div>
                 <div style="margin-bottom: 16px">
-                    <label for="aimbot-target" title="How the Aimbot should prioritize targets&#013;Distance: Aims at the player closest to your position&#013;Lowest Health: Aims at the player with the lowest amount of health&#013;Random: Aims at a randomly selected player">Target Selection</label><br>
+                    <label for="aimbot-target" title="How the Aimbot should prioritize targets&#013;FOV: Aims at the player closest to the center of your FOV (Field of Vision), AKA crosshair&#013;Distance: Aims at the player closest to your position&#013;Lowest Health: Aims at the player with the lowest amount of health&#013;Random: Aims at a randomly selected player">Target Selection</label><br>
                     <select name="aimbot-target" id="aimbot-target">
-                        <option value="0">Distance</option>
-                        <option value="1">Lowest Health</option>
-                        <option value="2">Random</option>
+                        <option value="0">FOV</option>
+                        <option value="1">Distance</option>
+                        <option value="2">Lowest Health</option>
+                        <option value="3">Random</option>
                     </select>
                 </div>
                 <div>
@@ -131,7 +134,7 @@
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-fov-label" title="Maximum FOV (Field of Vision) target needs to be within your crosshair for Aimbot to activate">FOV</label>
+                    <label for="aimbot-fov-label" title="Maximum FOV (Field of Vision) player needs to be within your crosshair for Aimbot to activate">FOV</label>
                     <input type="text" id="aimbot-fov-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-fov" style="width: 95%"></div>
@@ -153,6 +156,13 @@
                     <label class="form-check-label" for="wtap-req-item" title="WTap will activate only if you are holding an item from the Item Whitelist">Require Item</label>
                 </div>
                 <div>
+                    <label for="wtap-tap-delay-label" title="Amount of time (in milliseconds) to wait before WTap activates">Tap Delay</label>
+                    <input type="text" id="wtap-tap-delay-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
+                    <div id="wtap-tap-delay" style="width: 95%"></div>
+                </div>
+                <br>
+                <div>
                     <label for="wtap-dist-label" title="Maximum distance player needs to be from you to allow WTap to activate">Distance</label>
                     <input type="text" id="wtap-dist-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
@@ -160,10 +170,10 @@
                 </div>
                 <br>
                 <div>
-                    <label for="wtap-tap-delay-label" title="Amount of time (in milliseconds) to wait before WTap activates">Tap Delay</label>
-                    <input type="text" id="wtap-tap-delay-label" readonly
+                    <label for="wtap-fov-label" title="Maximum FOV (Field of Vision) player needs to be within your crosshair for WTap to activate">FOV</label>
+                    <input type="text" id="wtap-fov-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
-                    <div id="wtap-tap-delay" style="width: 95%"></div>
+                    <div id="wtap-fov" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
@@ -213,7 +223,7 @@
                 <div>
                     <label for="hitboxes-item-whitelist" title="If Require Item is enabled, HitBoxes will activate only if you are holding an item from this whitelist&#013;Items are in the form of IDs and are separated with commas">Item Whitelist</label>
                     <br>
-                    <textarea id="hitboxes-item-whitelist"><%= wtapItemWhitelist %></textarea>
+                    <textarea id="hitboxes-item-whitelist"><%= hitboxesItemWhitelist %></textarea>
                 </div>
             </div>
             <div class="tab-pane fade" id="visuals" role="tabpanel" aria-labelledby="visuals-tab">
@@ -255,6 +265,34 @@
                         <div id="refill-exit-delay" style="width: 95%"></div>
                     </div>
                 </div>
+            </div>
+            <div class="tab-pane fade" id="fakelag" role="tabpanel" aria-labelledby="fakelag-tab">
+                <h4 title="Delays packets sent to the server, simulating lag. Can be used to mask blatant settings as some anti-cheats will not flag you if your ping is too high.">Fake Lag</h4>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="fakelag-enabled">
+                    <label class="form-check-label" for="fakelag-enabled" title="Enable Fake Lag">Enabled</label>
+                </div>
+                <div>
+                    <label for="fakelag-packet-delay-label" title="Amount of time (in milliseconds) to wait before Fake Lag allows packet to be sent">Packet Delay</label>
+                    <input type="text" id="fakelag-packet-delay-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
+                    <div id="fakelag-packet-delay" style="width: 95%"></div>
+                </div>
+                <br>
+                <div>
+                    <label for="fakelag-dist-label" title="Maximum distance player needs to be from you to halt Fake Lag">Distance</label>
+                    <input type="text" id="fakelag-dist-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
+                    <div id="fakelag-dist" style="width: 95%"></div>
+                </div>
+                <br>
+                <div>
+                    <label for="fakelag-fov-label" title="Maximum FOV (Field of Vision) player needs to be within your crosshair to halt Fake Lag">FOV</label>
+                    <input type="text" id="fakelag-fov-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
+                    <div id="fakelag-fov" style="width: 95%"></div>
+                </div>
+                <br>
             </div>
             <div class="tab-pane fade" id="players" role="tabpanel" aria-labelledby="players-tab">
                 <h4 title="Label ingame players as friend/enemy">Player List</h4>
@@ -1583,6 +1621,137 @@
                             <option value="219">LMETA</option>
                         </select>
                     </div>
+                    <div style="margin-bottom: 12px">
+                        <label for="fakelag-bind" title="Fake Lag key bind">Fake Lag</label><br>
+                        <select name="fakelag-bind" id="fakelag-bind">
+                            <option value="1">ESCAPE</option>
+                            <option value="2">1</option>
+                            <option value="3">2</option>
+                            <option value="4">3</option>
+                            <option value="5">4</option>
+                            <option value="6">5</option>
+                            <option value="7">6</option>
+                            <option value="8">7</option>
+                            <option value="9">8</option>
+                            <option value="10">9</option>
+                            <option value="11">0</option>
+                            <option value="12">MINUS</option>
+                            <option value="13">EQUALS</option>
+                            <option value="14">BACK</option>
+                            <option value="15">TAB</option>
+                            <option value="16">Q</option>
+                            <option value="17">W</option>
+                            <option value="18">E</option>
+                            <option value="19">R</option>
+                            <option value="20">T</option>
+                            <option value="21">Y</option>
+                            <option value="22">U</option>
+                            <option value="23">I</option>
+                            <option value="24">O</option>
+                            <option value="25">P</option>
+                            <option value="26">LBRACKET</option>
+                            <option value="27">RBRACKET</option>
+                            <option value="28">RETURN</option>
+                            <option value="29">LCONTROL</option>
+                            <option value="30">A</option>
+                            <option value="31">S</option>
+                            <option value="32">D</option>
+                            <option value="33">F</option>
+                            <option value="34">G</option>
+                            <option value="35">H</option>
+                            <option value="36">J</option>
+                            <option value="37">K</option>
+                            <option value="38">L</option>
+                            <option value="39">SEMICOLON</option>
+                            <option value="40">APOSTROPHE</option>
+                            <option value="41">GRAVE</option>
+                            <option value="42">LSHIFT</option>
+                            <option value="43">BACKSLASH</option>
+                            <option value="44">Z</option>
+                            <option value="45">X</option>
+                            <option value="46">C</option>
+                            <option value="47">V</option>
+                            <option value="48">B</option>
+                            <option value="49">N</option>
+                            <option value="50">M</option>
+                            <option value="51">COMMA</option>
+                            <option value="52">PERIOD</option>
+                            <option value="53">SLASH</option>
+                            <option value="54">RSHIFT</option>
+                            <option value="55">MULTIPLY</option>
+                            <option value="56">LMENU</option>
+                            <option value="57">SPACE</option>
+                            <option value="58">CAPITAL</option>
+                            <option value="59">F1</option>
+                            <option value="60">F2</option>
+                            <option value="61">F3</option>
+                            <option value="62">F4</option>
+                            <option value="63">F5</option>
+                            <option value="64">F6</option>
+                            <option value="65">F7</option>
+                            <option value="66">F8</option>
+                            <option value="67">F9</option>
+                            <option value="68">F10</option>
+                            <option value="69">NUMLOCK</option>
+                            <option value="70">SCROLL</option>
+                            <option value="71">NUMPAD7</option>
+                            <option value="72">NUMPAD8</option>
+                            <option value="73">NUMPAD9</option>
+                            <option value="74">SUBTRACT</option>
+                            <option value="75">NUMPAD4</option>
+                            <option value="76">NUMPAD5</option>
+                            <option value="77">NUMPAD6</option>
+                            <option value="78">ADD</option>
+                            <option value="79">NUMPAD1</option>
+                            <option value="80">NUMPAD2</option>
+                            <option value="81">NUMPAD3</option>
+                            <option value="82">NUMPAD0</option>
+                            <option value="83">DECIMAL</option>
+                            <option value="87">F11</option>
+                            <option value="88">F12</option>
+                            <option value="100">F13</option>
+                            <option value="101">F14</option>
+                            <option value="102">F15</option>
+                            <option value="103">F16</option>
+                            <option value="104">F17</option>
+                            <option value="105">F18</option>
+                            <option value="112">KANA</option>
+                            <option value="113">F19</option>
+                            <option value="121">CONVERT</option>
+                            <option value="123">NOCONVERT</option>
+                            <option value="125">YEN</option>
+                            <option value="141">NUMPADEQUALS</option>
+                            <option value="144">CIRCUMFLEX</option>
+                            <option value="145">AT</option>
+                            <option value="146">COLON</option>
+                            <option value="147">UNDERLINE</option>
+                            <option value="148">KANJI</option>
+                            <option value="149">STOP</option>
+                            <option value="150">AX</option>
+                            <option value="151">UNLABELED</option>
+                            <option value="156">NUMPADENTER</option>
+                            <option value="157">RCONTROL</option>
+                            <option value="167">SECTION</option>
+                            <option value="179">NUMPADCOMMA</option>
+                            <option value="181">DIVIDE</option>
+                            <option value="183">SYSRQ</option>
+                            <option value="184">RMENU</option>
+                            <option value="196">RFUNCTION</option>
+                            <option value="197">PAUSE</option>
+                            <option value="199">HOME</option>
+                            <option value="200">UP</option>
+                            <option value="201">PRIOR</option>
+                            <option value="203">LEFT</option>
+                            <option value="205">RIGHT</option>
+                            <option value="207">END</option>
+                            <option value="208">DOWN</option>
+                            <option value="209">NEXT</option>
+                            <option value="210">INSERT</option>
+                            <option value="211">DELETE</option>
+                            <option value="218">CLEAR</option>
+                            <option value="219">LMETA</option>
+                        </select>
+                    </div>
                     <div>
                         <label for="self-destruct-bind" title="Self Destruct key bind">Self Destruct</label><br>
                         <select name="self-destruct-bind" id="self-destruct-bind">
@@ -1741,6 +1910,7 @@
         $("#HUD-bind").val(<%= HUDBind %>);
         $("#throwpot-bind").val(<%= throwpotBind %>);
         $("#refill-bind").val(<%= refillBind %>);
+        $("#fakelag-bind").val(<%= fakelagBind %>);
         $("#aimbot-target").val(<%= aimbotTarget %>);
         check(<%= autoclickerEnabled %>, "#autoclicker-enabled");
         check(<%= aimbotEnabled %>, "#aimbot-enabled");
@@ -1749,6 +1919,7 @@
         check(<%= reachEnabled %>, "#reach-enabled");
         check(<%= hitboxesEnabled %>, "#hitboxes-enabled");
         check(<%= wtapEnabled %>, "#wtap-enabled");
+        check(<%= fakelagEnabled %>, "#fakelag-enabled");
         check(<%= HUDEnabled %>, "#HUD-enabled");
         check(<%= autoclickerReqItem %>, "#autoclicker-req-item");
         check(<%= aimbotReqItem %>, "#aimbot-req-item");
@@ -1765,16 +1936,20 @@
         setRangeSlider("#reach-expansion", <%= reachMinExpansion %>, <%= reachMaxExpansion %>, 0, 1, 0.01);
         setSlider("#hitboxes-expansion", <%= hitboxesExpansion %>, 0.01, 1, 0.01);
         setSlider("#wtap-dist", <%= wtapDist %>, 0.1, 6.0, 0.1);
+        setSlider("#wtap-fov", <%= wtapFOV %>, 1, 180, 1);
         setRangeSlider("#wtap-tap-delay", <%= wtapMinTapDelay %>, <%= wtapMaxTapDelay %>, 1, 1000, 1);
         setRangeSlider("#throwpot-throw-delay", <%= throwpotMinThrowDelay %>, <%= throwpotMaxThrowDelay %>, 1, 1000, 1);
         setRangeSlider("#refill-fill-delay", <%= refillMinFillDelay %>, <%= refillMaxFillDelay %>, 1, 1000, 1);
         setRangeSlider("#refill-exit-delay", <%= refillMinExitDelay %>, <%= refillMaxExitDelay %>, 1, 1000, 1);
+        setSlider("#fakelag-dist", <%= fakelagDist %>, 0.1, 6.0, 0.1);
+        setSlider("#fakelag-fov", <%= fakelagFOV %>, 1, 180, 1);
+        setRangeSlider("#fakelag-packet-delay", <%= fakelagMinPacketDelay %>, <%= fakelagMaxPacketDelay %>, 1, 1000, 1);
         setSlider("#refresh-rate", <%= refreshRate %>, 1, 10, 1);
         $("#apply").click(function() {
             $.ajax({
                 url: "/apply",
                 type: "POST",
-                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
+                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#fakelag-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#fakelag-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#fakelag-dist").slider("value") + ";" + $("#fakelag-fov").slider("value") + ";" + $("#fakelag-packet-delay").slider("values")[0] + ";" + $("#fakelag-packet-delay").slider("values")[1] + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-fov").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
                 success: function(res) {
                     alert(res);
                 }

@@ -1,11 +1,13 @@
 package respectful.rapist.client.util;
 
 import org.lwjgl.input.Mouse;
+import respectful.rapist.client.EventManager;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Comparator;
 
 public class Config implements Mappings {
     public static int[] stringToIntArr(String str) {
@@ -47,6 +49,33 @@ public class Config implements Mappings {
             inputStream.close();
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public static class Target implements Comparable<Target> {
+        public static Comparator<Target> distComparator = Comparator.comparing(target1 -> Float.toString(target1.dist)), healthComparator = Comparator.comparing(target1 -> Float.toString(target1.health));
+        public Object target;
+        private float FOV, dist, health;
+
+        public Target(Object target, float FOV, float dist) {
+            this.target = target;
+            this.FOV = FOV;
+            this.dist = dist;
+            this.health = EntityLivingBase.getHealth(target);
+        }
+
+        public static Target check(Object entityPlayer, float maxDist, int maxFOV) {
+            if (entityPlayer != null) {
+                float[] rotations = Angle.findNeededRotations(Entity.getPosX(entityPlayer) - Entity.getPosX(Minecraft.getThePlayer()), Entity.getPosZ(entityPlayer) - Entity.getPosZ(Minecraft.getThePlayer()), Entity.getPosY(entityPlayer) - Entity.getPosY(Minecraft.getThePlayer()) + 1, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(entityPlayer)));
+                float dist = Entity.getDistanceToEntity(Minecraft.getThePlayer(), entityPlayer);
+                return ((!EntityPlayer.clazz.cast(entityPlayer).equals(Minecraft.getThePlayer()) && dist <= maxDist && Angle.isWithinFOV(rotations, maxFOV) && EntityLivingBase.isEntityAlive(entityPlayer) && !Entity.isInvisible(entityPlayer) && !EventManager.playerManager.isFriend(EntityPlayer.getCommandSenderName(entityPlayer)))) ? new Target(entityPlayer, Math.abs(rotations[0]), dist) : null;
+            }
+            return null;
+        }
+
+        @Override
+        public int compareTo(Target target) {
+            return Float.toString(this.FOV).compareTo(Float.toString(target.FOV));
         }
     }
 }

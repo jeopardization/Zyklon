@@ -14,10 +14,10 @@ import java.util.List;
 public class Main {
     public static Loader loader;
     public static Object launchClassLoader;
-    public static Class eventManager, hitBoxes, reach;
-    public static Method onKey, onRenderGUI, onRender, onTick;
+    public static Class eventManager, hitBoxes, reach, fakeLag;
+    public static Method onKey, onRenderGUI, onRender, onTick, sleep;
     public static Instrumentation inst;
-    public static byte[] origMinecraft, origEntity, origEntityRenderer, origRender, origRendererLivingEntity, origGuiIngame;
+    public static byte[] origMinecraft, origEntity, origEntityRenderer, origRender, origRendererLivingEntity, origGuiIngame, origNetHandlerPlayClient;
 
     static {
         try {
@@ -27,10 +27,12 @@ public class Main {
             eventManager = loader.findClass("respectful.rapist.client.EventManager");
             hitBoxes = loader.findClass("respectful.rapist.client.module.modules.combat.HitBoxes");
             reach = loader.findClass("respectful.rapist.client.module.modules.combat.Reach");
+            fakeLag = loader.findClass("respectful.rapist.client.module.modules.misc.FakeLag");
             onKey = eventManager.getDeclaredMethod("onKey", int.class);
             onRender = eventManager.getDeclaredMethod("onRender");
             onRenderGUI = eventManager.getDeclaredMethod("onRenderGUI");
             onTick = eventManager.getDeclaredMethod("onTick");
+            sleep = fakeLag.getDeclaredMethod("sleep");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -93,6 +95,13 @@ public class Main {
                         transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origGuiIngame");
                     }
                     break;
+                case "net.minecraft.client.network.NetHandlerPlayClient":
+                    if (transforming) {
+                        transformer = new NetHandlerPlayClient();
+                    } else {
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origNetHandlerPlayClient");
+                    }
+                    break;
                 default:
                     transformer = null;
             }
@@ -134,16 +143,19 @@ public class Main {
             eventManager = null;
             hitBoxes = null;
             reach = null;
+            fakeLag = null;
             onKey = null;
             onRender = null;
             onRenderGUI = null;
             onTick = null;
+            sleep = null;
             origMinecraft = null;
             origEntity = null;
             origEntityRenderer = null;
             origRender = null;
             origRendererLivingEntity = null;
             origGuiIngame = null;
+            origNetHandlerPlayClient = null;
             inst = null;
             for (Field field : ClassLoader.getSystemClassLoader().loadClass(Main.class.getName()).getDeclaredFields()) {
                 field.set(null, null);
@@ -186,6 +198,14 @@ public class Main {
     public static void onTick() {
         try {
             onTick.invoke(null);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void sleep() {
+        try {
+            sleep.invoke(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
