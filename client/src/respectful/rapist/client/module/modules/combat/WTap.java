@@ -54,7 +54,7 @@ public class WTap extends Module implements Mappings {
                 }
             } else {
                 target = null;
-                if (released) {
+                if (released && Minecraft.getCurrentScreen() == null) {
                     KeyBinding.setKeyBindState(17, true);
                     KeyBinding.onTick(17);
                 }
