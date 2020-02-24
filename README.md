@@ -10,6 +10,7 @@
 • Added FOV option for WTap<br>
 • Added FOV option to Aimbot Target Selection options<br>
 • Added Fake Lag<br>
+• NameTags will now highlight WTap target as well<br>
 • Bug fixes
 
 **3.6 - 1/21/2020**<br>
