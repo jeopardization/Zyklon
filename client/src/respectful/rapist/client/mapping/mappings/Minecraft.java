@@ -3,14 +3,34 @@ package respectful.rapist.client.mapping.mappings;
 import respectful.rapist.client.mapping.MappedClass;
 import respectful.rapist.client.mapping.Mappings;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Minecraft extends MappedClass implements Mappings {
+    private Field thePlayer, theWorld, currentScreen, gameSettings, playerController, fontRenderer, displayWidth, displayHeight;
+    private Method getMinecraft, displayGuiScreen;
+
     public Minecraft() {
         super("net.minecraft.client.Minecraft");
+        try {
+            thePlayer = clazz.getDeclaredField("field_71439_g");
+            theWorld = clazz.getDeclaredField("field_71441_e");
+            currentScreen = clazz.getDeclaredField("field_71462_r");
+            gameSettings = clazz.getDeclaredField("field_71474_y");
+            playerController = clazz.getDeclaredField("field_71442_b");
+            fontRenderer = clazz.getDeclaredField("field_71466_p");
+            displayWidth = clazz.getDeclaredField("field_71443_c");
+            displayHeight = clazz.getDeclaredField("field_71440_d");
+            getMinecraft = clazz.getDeclaredMethod("func_71410_x");
+            displayGuiScreen = clazz.getDeclaredMethod("func_147108_a", GuiScreen.clazz);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Object getThePlayer() {
         try {
-            return clazz.getDeclaredField("field_71439_g").get(getMinecraft());
+            return thePlayer.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -19,7 +39,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public Object getTheWorld() {
         try {
-            return clazz.getDeclaredField("field_71441_e").get(getMinecraft());
+            return theWorld.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -28,7 +48,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public Object getCurrentScreen() {
         try {
-            return clazz.getDeclaredField("field_71462_r").get(getMinecraft());
+            return currentScreen.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -37,7 +57,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public Object getGameSettings() {
         try {
-            return clazz.getDeclaredField("field_71474_y").get(getMinecraft());
+            return gameSettings.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -46,7 +66,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public Object getPlayerController() {
         try {
-            return clazz.getDeclaredField("field_71442_b").get(getMinecraft());
+            return playerController.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -55,16 +75,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public Object getFontRenderer() {
         try {
-            return clazz.getDeclaredField("field_71466_p").get(getMinecraft());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public Object getObjectMouseOver() {
-        try {
-            return clazz.getDeclaredField("field_71476_x").get(getMinecraft());
+            return fontRenderer.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -73,7 +84,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public Object getMinecraft() {
         try {
-            return clazz.getDeclaredMethod("func_71410_x").invoke(null);
+            return getMinecraft.invoke(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,7 +93,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public void displayGuiScreen(Object guiScreen) {
         try {
-            clazz.getDeclaredMethod("func_147108_a", GuiScreen.clazz).invoke(getMinecraft(), guiScreen == null ? null : GuiScreen.clazz.cast(guiScreen));
+            displayGuiScreen.invoke(getMinecraft(), guiScreen == null ? null : GuiScreen.clazz.cast(guiScreen));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -90,7 +101,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public int getDisplayWidth() {
         try {
-            return (int) clazz.getDeclaredField("field_71443_c").get(getMinecraft());
+            return (int) displayWidth.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -99,7 +110,7 @@ public class Minecraft extends MappedClass implements Mappings {
 
     public int getDisplayHeight() {
         try {
-            return (int) clazz.getDeclaredField("field_71440_d").get(getMinecraft());
+            return (int) displayHeight.get(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

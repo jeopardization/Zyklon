@@ -2,14 +2,25 @@ package respectful.rapist.client.mapping.mappings;
 
 import respectful.rapist.client.mapping.MappedClass;
 
+import java.lang.reflect.Field;
+
 public class RenderManager extends MappedClass {
+    private Field instance, playerViewY, playerViewX;
+
     public RenderManager() {
         super("net.minecraft.client.renderer.entity.RenderManager");
+        try {
+            instance = clazz.getDeclaredField("field_78727_a");
+            playerViewY = clazz.getDeclaredField("field_78735_i");
+            playerViewX = clazz.getDeclaredField("field_78732_j");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Object getInstance() {
         try {
-            return clazz.getDeclaredField("field_78727_a").get(null);
+            return instance.get(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -18,7 +29,7 @@ public class RenderManager extends MappedClass {
 
     public float getPlayerViewY(Object obj) {
         try {
-            return clazz.getDeclaredField("field_78735_i").getFloat(clazz.cast(obj));
+            return playerViewY.getFloat(clazz.cast(obj));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -27,7 +38,7 @@ public class RenderManager extends MappedClass {
 
     public float getPlayerViewX(Object obj) {
         try {
-            return clazz.getDeclaredField("field_78732_j").getFloat(clazz.cast(obj));
+            return playerViewX.getFloat(clazz.cast(obj));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

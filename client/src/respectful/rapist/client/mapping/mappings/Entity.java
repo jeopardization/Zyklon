@@ -2,14 +2,32 @@ package respectful.rapist.client.mapping.mappings;
 
 import respectful.rapist.client.mapping.MappedClass;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Entity extends MappedClass {
+    private Method isInvisible, isSneaking, getDistanceToEntity;
+    private Field posX, posY, posZ, rotationYaw, rotationPitch;
+
     public Entity() {
         super("net.minecraft.entity.Entity");
+        try {
+            isInvisible = clazz.getDeclaredMethod("func_82150_aj");
+            isSneaking = clazz.getDeclaredMethod("func_70093_af");
+            getDistanceToEntity = clazz.getDeclaredMethod("func_70032_d", clazz);
+            posX = clazz.getDeclaredField("field_70165_t");
+            posY = clazz.getDeclaredField("field_70163_u");
+            posZ = clazz.getDeclaredField("field_70161_v");
+            rotationYaw = clazz.getDeclaredField("field_70177_z");
+            rotationPitch = clazz.getDeclaredField("field_70125_A");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public boolean isInvisible(Object obj) {
         try {
-            return (boolean) clazz.getDeclaredMethod("func_82150_aj").invoke(clazz.cast(obj));
+            return (boolean) isInvisible.invoke(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -18,7 +36,7 @@ public class Entity extends MappedClass {
 
     public boolean isSneaking(Object obj) {
         try {
-            return (boolean) clazz.getDeclaredMethod("func_70093_af").invoke(clazz.cast(obj));
+            return (boolean) isSneaking.invoke(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -27,7 +45,7 @@ public class Entity extends MappedClass {
 
     public float getDistanceToEntity(Object obj, Object entity) {
         try {
-            return (float) clazz.getDeclaredMethod("func_70032_d", clazz).invoke(obj, clazz.cast(entity));
+            return (float) getDistanceToEntity.invoke(obj, entity);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -36,7 +54,7 @@ public class Entity extends MappedClass {
 
     public double getPosX(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70165_t").getDouble(clazz.cast(obj));
+            return posX.getDouble(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -45,7 +63,7 @@ public class Entity extends MappedClass {
 
     public double getPosY(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70163_u").getDouble(clazz.cast(obj));
+            return posY.getDouble(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -54,7 +72,7 @@ public class Entity extends MappedClass {
 
     public double getPosZ(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70161_v").getDouble(clazz.cast(obj));
+            return posZ.getDouble(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -63,7 +81,7 @@ public class Entity extends MappedClass {
 
     public float getRotationYaw(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70177_z").getFloat(obj);
+            return rotationYaw.getFloat(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -73,7 +91,7 @@ public class Entity extends MappedClass {
     public void setRotationYaw(Object obj, float value) {
         if (!Float.isNaN(value)) {
             try {
-                clazz.getDeclaredField("field_70177_z").setFloat(obj, value);
+                rotationYaw.setFloat(obj, value);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -82,7 +100,7 @@ public class Entity extends MappedClass {
 
     public float getRotationPitch(Object obj) {
         try {
-            return clazz.getDeclaredField("field_70125_A").getFloat(obj);
+            return rotationPitch.getFloat(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -92,7 +110,7 @@ public class Entity extends MappedClass {
     public void setRotationPitch(Object obj, float value) {
         if (!Float.isNaN(value)) {
             try {
-                clazz.getDeclaredField("field_70125_A").setFloat(obj, value);
+                rotationPitch.setFloat(obj, value);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

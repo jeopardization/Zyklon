@@ -2,14 +2,29 @@ package respectful.rapist.client.mapping.mappings;
 
 import respectful.rapist.client.mapping.MappedClass;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Tessellator extends MappedClass {
+    private Field instance;
+    private Method startDrawingQuads, setColorRGBA_F, addVertex, draw;
+
     public Tessellator() {
         super("net.minecraft.client.renderer.Tessellator");
+        try {
+            instance = clazz.getDeclaredField("field_78398_a");
+            startDrawingQuads = clazz.getDeclaredMethod("func_78382_b");
+            setColorRGBA_F = clazz.getDeclaredMethod("func_78369_a", float.class, float.class, float.class, float.class);
+            addVertex = clazz.getDeclaredMethod("func_78377_a", double.class, double.class, double.class);
+            draw = clazz.getDeclaredMethod("func_78381_a");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Object getInstance() {
         try {
-            return clazz.getDeclaredField("field_78398_a").get(null);
+            return instance.get(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -18,7 +33,7 @@ public class Tessellator extends MappedClass {
 
     public void startDrawingQuads(Object obj) {
         try {
-            clazz.getDeclaredMethod("func_78382_b").invoke(obj);
+            startDrawingQuads.invoke(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -26,7 +41,7 @@ public class Tessellator extends MappedClass {
 
     public void setColorRGBA_F(Object obj, float r, float g, float b, float a) {
         try {
-            clazz.getDeclaredMethod("func_78369_a", float.class, float.class, float.class, float.class).invoke(obj, r, g, b, a);
+            setColorRGBA_F.invoke(obj, r, g, b, a);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -34,7 +49,7 @@ public class Tessellator extends MappedClass {
 
     public void addVertex(Object obj, double x, double y, double z) {
         try {
-            clazz.getDeclaredMethod("func_78377_a", double.class, double.class, double.class).invoke(obj, x, y, z);
+            addVertex.invoke(obj, x, y, z);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -42,7 +57,7 @@ public class Tessellator extends MappedClass {
 
     public void draw(Object obj) {
         try {
-            clazz.getDeclaredMethod("func_78381_a").invoke(obj);
+            draw.invoke(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -2,14 +2,23 @@ package respectful.rapist.client.mapping.mappings;
 
 import respectful.rapist.client.mapping.MappedClass;
 
+import java.lang.reflect.Field;
+
 public class GameSettings extends MappedClass {
+    private Field gammaSetting;
+
     public GameSettings() {
         super("net.minecraft.client.settings.GameSettings");
+        try {
+            gammaSetting = clazz.getDeclaredField("field_74333_Y");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public float getGammaSetting(Object obj) {
         try {
-            return clazz.getDeclaredField("field_74333_Y").getFloat(obj);
+            return gammaSetting.getFloat(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -18,7 +27,7 @@ public class GameSettings extends MappedClass {
 
     public void setGammaSetting(Object obj, float value) {
         try {
-            clazz.getDeclaredField("field_74333_Y").setFloat(obj, value);
+            gammaSetting.setFloat(obj, value);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -53,7 +53,7 @@ public class Config implements Mappings {
     }
 
     public static class Target implements Comparable<Target> {
-        public static Comparator<Target> distComparator = Comparator.comparing(target1 -> Float.toString(target1.dist)), healthComparator = Comparator.comparing(target1 -> Float.toString(target1.health));
+        public static Comparator<Target> distComparator = Comparator.comparing(target -> Float.toString(target.dist)), healthComparator = Comparator.comparing(target -> Float.toString(target.health));
         public Object target;
         private float FOV, dist, health;
 
@@ -68,7 +68,7 @@ public class Config implements Mappings {
             if (entityPlayer != null) {
                 float[] rotations = Angle.findNeededRotations(Entity.getPosX(entityPlayer) - Entity.getPosX(Minecraft.getThePlayer()), Entity.getPosZ(entityPlayer) - Entity.getPosZ(Minecraft.getThePlayer()), Entity.getPosY(entityPlayer) - Entity.getPosY(Minecraft.getThePlayer()) + 1, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(entityPlayer)));
                 float dist = Entity.getDistanceToEntity(Minecraft.getThePlayer(), entityPlayer);
-                return ((!EntityPlayer.clazz.cast(entityPlayer).equals(Minecraft.getThePlayer()) && dist <= maxDist && Angle.isWithinFOV(rotations, maxFOV) && EntityLivingBase.isEntityAlive(entityPlayer) && !Entity.isInvisible(entityPlayer) && !EventManager.playerManager.isFriend(EntityPlayer.getCommandSenderName(entityPlayer)))) ? new Target(entityPlayer, Math.abs(rotations[0]), dist) : null;
+                return ((!EntityPlayer.clazz.cast(entityPlayer).equals(Minecraft.getThePlayer()) && dist <= maxDist && Angle.isWithinFOV(rotations, maxFOV) && EntityLivingBase.isEntityAlive(entityPlayer) && !Entity.isInvisible(entityPlayer) && !EventManager.playerManager.isFriend(EntityPlayer.getCommandSenderName(entityPlayer)))) ? new Target(entityPlayer, Math.abs(rotations[0]) + Math.abs(rotations[1]), dist) : null;
             }
             return null;
         }

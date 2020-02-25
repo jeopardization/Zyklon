@@ -3,6 +3,7 @@ package respectful.rapist.client.mapping;
 import respectful.rapist.client.mapping.mappings.*;
 
 public interface Mappings {
+    GuiScreen GuiScreen = new GuiScreen();
     Minecraft Minecraft = new Minecraft();
     EntityPlayer EntityPlayer = new EntityPlayer();
     EntityClientPlayerMP EntityClientPlayerMP = new EntityClientPlayerMP();
@@ -13,12 +14,10 @@ public interface Mappings {
     GameSettings GameSettings = new GameSettings();
     FontRenderer FontRenderer = new FontRenderer();
     ScaledResolution ScaledResolution = new ScaledResolution();
-    GuiScreen GuiScreen = new GuiScreen();
     GuiInventory GuiInventory = new GuiInventory();
     PlayerControllerMP PlayerControllerMP = new PlayerControllerMP();
     World World = new World();
     Entity Entity = new Entity();
-    MovingObjectPosition MovingObjectPosition = new MovingObjectPosition();
     RenderManager RenderManager = new RenderManager();
     OpenGLHelper OpenGLHelper = new OpenGLHelper();
     Tessellator Tessellator = new Tessellator();
