@@ -14,7 +14,8 @@ public class Render extends Transformer {
                     if (instruction.getOpcode() == IFGT) {
                         InsnList insns = new InsnList();
                         LabelNode labelNode = new LabelNode();
-                        insns.add(new MethodInsnNode(INVOKESTATIC, "respectful/rapist/loader/Main", "getNametagsEnabled", "()Z", false));
+                        insns.add(new FieldInsnNode(GETSTATIC, "respectful/rapist/loader/mapping/Mappings", "NameTags", "Lrespectful/rapist/loader/mapping/mappings/NameTags;"));
+                        insns.add(new MethodInsnNode(INVOKEVIRTUAL, "respectful/rapist/loader/mapping/mappings/NameTags", "getEnabled", "()Z", false));
                         insns.add(new JumpInsnNode(IFEQ, labelNode));
                         insns.add(new InsnNode(RETURN));
                         insns.add(labelNode);

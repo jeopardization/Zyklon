@@ -1,5 +1,6 @@
 package respectful.rapist.loader;
 
+import respectful.rapist.loader.mapping.Mappings;
 import respectful.rapist.loader.transformer.transformers.*;
 
 import java.io.InputStream;
@@ -9,30 +10,19 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.List;
 
 public class Main {
-    public static Loader loader;
+    public static URLClassLoader loader;
     public static Object launchClassLoader;
-    public static Class eventManager, hitBoxes, reach, fakeLag;
-    public static Method onKey, onRenderGUI, onRender, onTick, sleep;
     public static Instrumentation inst;
     public static byte[] origMinecraft, origEntity, origEntityRenderer, origRender, origRendererLivingEntity, origGuiIngame, origNetHandlerPlayClient;
 
     static {
         try {
-            URL[] URLs = {new URL("http://localhost:1337/client.jar")};
-            loader = new Loader(URLs);
+            loader = new URLClassLoader(new URL[]{new URL("http://localhost:1337/client.jar")});
             launchClassLoader = ClassLoader.getSystemClassLoader().loadClass("net.minecraft.launchwrapper.Launch").getDeclaredField("classLoader").get(null);
-            eventManager = loader.findClass("respectful.rapist.client.EventManager");
-            hitBoxes = loader.findClass("respectful.rapist.client.module.modules.combat.HitBoxes");
-            reach = loader.findClass("respectful.rapist.client.module.modules.combat.Reach");
-            fakeLag = loader.findClass("respectful.rapist.client.module.modules.misc.FakeLag");
-            onKey = eventManager.getDeclaredMethod("onKey", int.class);
-            onRender = eventManager.getDeclaredMethod("onRender");
-            onRenderGUI = eventManager.getDeclaredMethod("onRenderGUI");
-            onTick = eventManager.getDeclaredMethod("onTick");
-            sleep = fakeLag.getDeclaredMethod("sleep");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -41,7 +31,9 @@ public class Main {
     public static void agentmain(String args, Instrumentation inst) {
         try {
             Main.inst = inst;
-            launchClassLoader.getClass().getDeclaredMethod("addURL", URL.class).invoke(launchClassLoader, Main.class.getProtectionDomain().getCodeSource().getLocation());
+            Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+            addURL.setAccessible(true);
+            addURL.invoke(launchClassLoader, Main.class.getProtectionDomain().getCodeSource().getLocation());
             transform(true);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -49,7 +41,7 @@ public class Main {
     }
 
     private static void transform(boolean transforming) {
-        ClassFileTransformer transformer;
+        ClassFileTransformer transformer = null;
         Instrumentation inst = (Instrumentation) getField("inst");
         for (Class clazz : inst.getAllLoadedClasses()) {
             switch (clazz.getName()) {
@@ -140,15 +132,13 @@ public class Main {
             }
             loader = null;
             launchClassLoader = null;
-            eventManager = null;
-            hitBoxes = null;
-            reach = null;
-            fakeLag = null;
-            onKey = null;
-            onRender = null;
-            onRenderGUI = null;
-            onTick = null;
-            sleep = null;
+            Mappings.ModuleManager = null;
+            Mappings.Module = null;
+            Mappings.EventManager = null;
+            Mappings.NameTags = null;
+            Mappings.HitBoxes = null;
+            Mappings.Reach = null;
+            Mappings.FakeLag = null;
             origMinecraft = null;
             origEntity = null;
             origEntityRenderer = null;
@@ -169,74 +159,5 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public static void onKey(int keyCode) {
-        try {
-            onKey.invoke(null, keyCode);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static void onRenderGUI() {
-        try {
-            onRenderGUI.invoke(null);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static void onRender() {
-        try {
-            onRender.invoke(null);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static void onTick() {
-        try {
-            onTick.invoke(null);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static void sleep() {
-        try {
-            sleep.invoke(null);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static float getHitboxesAdd() {
-        try {
-            return hitBoxes.getDeclaredField("add").getFloat(null);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return 0.0F;
-    }
-
-    public static double getReachAdd() {
-        try {
-            return reach.getDeclaredField("add").getDouble(null);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return 0.0D;
-    }
-
-    public static boolean getNametagsEnabled() {
-        try {
-            Object moduleManager = eventManager.getDeclaredField("moduleManager").get(null);
-            Object nameTags = moduleManager.getClass().getDeclaredField("nameTags").get(moduleManager);
-            return nameTags.getClass().getSuperclass().getDeclaredField("enabled").getBoolean(nameTags);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
     }
 }

@@ -13,7 +13,8 @@ public class Entity extends Transformer {
                 for (AbstractInsnNode instruction : method.instructions.toArray()) {
                     if (instruction.getOpcode() == LDC) {
                         InsnList insns = new InsnList();
-                        insns.add(new MethodInsnNode(INVOKESTATIC, "respectful/rapist/loader/Main", "getHitboxesAdd", "()F", false));
+                        insns.add(new FieldInsnNode(GETSTATIC, "respectful/rapist/loader/mapping/Mappings", "HitBoxes", "Lrespectful/rapist/loader/mapping/mappings/HitBoxes;"));
+                        insns.add(new MethodInsnNode(INVOKEVIRTUAL, "respectful/rapist/loader/mapping/mappings/HitBoxes", "getAdd", "()F", false));
                         insns.add(new InsnNode(FADD));
                         method.instructions.insertBefore(instruction.getNext(), insns);
                         break;

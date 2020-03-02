@@ -14,7 +14,8 @@ public class EntityRenderer extends Transformer {
                     for (AbstractInsnNode instruction : method.instructions.toArray()) {
                         if (instruction.getOpcode() == IFLE) {
                             InsnList insns = new InsnList();
-                            insns.add(new MethodInsnNode(INVOKESTATIC, "respectful/rapist/loader/Main", "getReachAdd", "()D", false));
+                            insns.add(new FieldInsnNode(GETSTATIC, "respectful/rapist/loader/mapping/Mappings", "Reach", "Lrespectful/rapist/loader/mapping/mappings/Reach;"));
+                            insns.add(new MethodInsnNode(INVOKEVIRTUAL, "respectful/rapist/loader/mapping/mappings/Reach", "getAdd", "()D", false));
                             insns.add(new InsnNode(DADD));
                             method.instructions.insert(instruction.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext(), insns);
                             break;
@@ -23,7 +24,10 @@ public class EntityRenderer extends Transformer {
                 case "func_78471_a":
                     for (AbstractInsnNode instruction : method.instructions.toArray()) {
                         if (instruction.getOpcode() == ALOAD && instruction.getNext().getOpcode() == GETFIELD && instruction.getNext().getNext().getOpcode() == IFNE) {
-                            method.instructions.insertBefore(instruction, new MethodInsnNode(INVOKESTATIC, "respectful/rapist/loader/Main", "onRender", "()V", false));
+                            InsnList insns = new InsnList();
+                            insns.add(new FieldInsnNode(GETSTATIC, "respectful/rapist/loader/mapping/Mappings", "EventManager", "Lrespectful/rapist/loader/mapping/mappings/EventManager;"));
+                            insns.add(new MethodInsnNode(INVOKEVIRTUAL, "respectful/rapist/loader/mapping/mappings/EventManager", "onRender", "()V", false));
+                            method.instructions.insertBefore(instruction, insns);
                             break;
                         }
                     }
