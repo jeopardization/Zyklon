@@ -41,7 +41,7 @@ public class Main {
     }
 
     private static void transform(boolean transforming) {
-        ClassFileTransformer transformer = null;
+        ClassFileTransformer transformer;
         Instrumentation inst = (Instrumentation) getField("inst");
         for (Class clazz : inst.getAllLoadedClasses()) {
             switch (clazz.getName()) {
