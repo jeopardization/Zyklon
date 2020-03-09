@@ -2,6 +2,7 @@ package respectful.rapist.client.module;
 
 import respectful.rapist.client.module.modules.combat.*;
 import respectful.rapist.client.module.modules.misc.FakeLag;
+import respectful.rapist.client.module.modules.misc.SelfDestruct;
 import respectful.rapist.client.module.modules.visuals.Brightness;
 import respectful.rapist.client.module.modules.visuals.HUD;
 import respectful.rapist.client.module.modules.visuals.NameTags;
@@ -15,6 +16,7 @@ public class ModuleManager {
     public NameTags nameTags = new NameTags();
     public Brightness brightness = new Brightness();
     public Reach reach = new Reach();
+    public Velocity velocity = new Velocity();
     public HitBoxes hitBoxes = new HitBoxes();
     public FakeLag fakeLag = new FakeLag();
     public WTap wTap = new WTap();
@@ -30,6 +32,7 @@ public class ModuleManager {
         modules.add(brightness);
         modules.add(reach);
         modules.add(hitBoxes);
+        modules.add(velocity);
         modules.add(fakeLag);
         modules.add(wTap);
         modules.add(selfDestruct);

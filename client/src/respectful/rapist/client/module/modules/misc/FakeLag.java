@@ -13,7 +13,7 @@ public class FakeLag extends Module implements Mappings {
     public boolean attacking;
 
     public FakeLag() {
-        super(25, "FakeLag", "FFFFFF");
+        super(25, "FakeLag", "DFE6E9");
     }
 
     public static void sleep() {

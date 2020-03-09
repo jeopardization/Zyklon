@@ -6,12 +6,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class Entity extends MappedClass {
-    private Method isInvisible, isSneaking, getDistanceToEntity;
+    private Method getEntityID, isInvisible, isSneaking, getDistanceToEntity;
     private Field posX, posY, posZ, rotationYaw, rotationPitch;
 
     public Entity() {
         super("net.minecraft.entity.Entity");
         try {
+            getEntityID = clazz.getDeclaredMethod("func_145782_y");
             isInvisible = clazz.getDeclaredMethod("func_82150_aj");
             isSneaking = clazz.getDeclaredMethod("func_70093_af");
             getDistanceToEntity = clazz.getDeclaredMethod("func_70032_d", clazz);
@@ -23,6 +24,15 @@ public class Entity extends MappedClass {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public int getEntityID(Object obj) {
+        try {
+            return (int) getEntityID.invoke(obj);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 
     public boolean isInvisible(Object obj) {

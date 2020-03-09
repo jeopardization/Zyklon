@@ -1,8 +1,9 @@
 # Zyklon
-![](https://i.imgur.com/UQuaY6j.png)<br>
-![](https://i.imgur.com/vrMqi3bg.png)<br>
-![](https://i.imgur.com/R3ONX6P.png)<br>
-![](https://i.imgur.com/rN48YoW.png)
+![](https://i.imgur.com/HGWru9Gg.png)<br>
+![](https://i.imgur.com/4jdaYDj.png)<br>
+![](https://i.imgur.com/RE23M4U.png)<br>
+![](https://i.imgur.com/cuNWBVr.png)<br>
+![](https://i.imgur.com/bdLh675.png)
 
 ## Instructions
 • Ensure that the Java JDK is installed. If you don't have it, get it here: https://www.oracle.com/java/technologies/javase-jdk8-downloads.html<br>
@@ -12,6 +13,15 @@
 • Run "injector.jar" and load the cheat. The web GUI should now be running on your network at port 1337. You may visit http://localhost:1337 on your machine or http://192.168.x.x:1337 on an external device to use it.
 
 ## Changelog
+**3.8 - 3/4/2020**<br>
+• Added Velocity<br>
+• Settings are now periodically refreshed on the frontend. This should prevent module states from being overridden after they were toggled ingame via key binds<br>
+• Added changelog in web GUI homepage<br>
+• Improved cloud configuration UI<br>
+• Changed color schemes<br>
+• You can now hit enter in the web GUI to apply your settings at anytime<br>
+• Bug fixes 
+
 **3.7 - 2/19/2020**<br>
 • Improved performance<br>
 • Improved WTap & Aimbot security<br>

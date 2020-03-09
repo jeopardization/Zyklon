@@ -21,7 +21,7 @@ public class Aimbot extends Module implements Mappings {
     private Timer timer = new Timer();
 
     public Aimbot() {
-        super(21, "Aimbot", "FF0000");
+        super(21, "Aimbot", "D63031");
     }
 
     @Override

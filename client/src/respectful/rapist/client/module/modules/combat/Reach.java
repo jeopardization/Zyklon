@@ -11,7 +11,7 @@ public class Reach extends Module {
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
 
     public Reach() {
-        super(45, "Reach", "00E6B8");
+        super(45, "Reach", "55EFC4");
     }
 
     @Override

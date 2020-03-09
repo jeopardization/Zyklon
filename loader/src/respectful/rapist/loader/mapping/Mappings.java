@@ -10,4 +10,5 @@ public class Mappings {
     public static HitBoxes HitBoxes = new HitBoxes();
     public static Reach Reach = new Reach();
     public static FakeLag FakeLag = new FakeLag();
+    public static Velocity Velocity = new Velocity();
 }

@@ -7,7 +7,7 @@ public class Brightness extends Module implements Mappings {
     private float origGamma;
 
     public Brightness() {
-        super(48, "Brightness", "FFF428");
+        super(48, "Brightness", "FFEAA7");
     }
 
     @Override

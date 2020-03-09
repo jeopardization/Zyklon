@@ -139,6 +139,7 @@ public class Main {
             Mappings.HitBoxes = null;
             Mappings.Reach = null;
             Mappings.FakeLag = null;
+            Mappings.Velocity = null;
             origMinecraft = null;
             origEntity = null;
             origEntityRenderer = null;

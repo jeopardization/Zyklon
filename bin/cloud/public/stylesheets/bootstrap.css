@@ -65,6 +65,7 @@ body {
     line-height: 1.5;
     color: white;
     text-align: left;
+    overflow-x: hidden;
 }
 
 [tabindex="-1"]:focus {
@@ -3770,6 +3771,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     margin-bottom: 0;
     list-style: none;
     background-color: #0c0c0d;
+
 }
 
 .nav-link {

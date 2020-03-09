@@ -7,7 +7,7 @@ import respectful.rapist.client.module.Module;
 
 public class NameTags extends Module implements Mappings {
     public NameTags() {
-        super(49, "NameTags", "6699FF");
+        super(49, "NameTags", "74B9FF");
     }
 
     @Override
@@ -45,9 +45,9 @@ public class NameTags extends Module implements Mappings {
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
                 String nameColor = "FFFFFF";
                 if (EventManager.playerManager.isFriend(name)) {
-                    nameColor = "00C834";
+                    nameColor = "00B894";
                 } else if (EventManager.playerManager.isEnemy(name) || (EventManager.moduleManager.aimbot.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.aimbot.target).equalsIgnoreCase(name)) || (EventManager.moduleManager.wTap.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.wTap.target).equalsIgnoreCase(name))) {
-                    nameColor = "FF2A36";
+                    nameColor = "D63031";
                 }
                 String healthColor = "008E34";
                 if (EntityLivingBase.getHealth(entityPlayer) <= 3.33F) {
