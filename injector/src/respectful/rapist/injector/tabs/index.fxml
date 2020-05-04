@@ -8,8 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="293.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/10.0.1"
             fx:controller="respectful.rapist.injector.Controller">
     <children>
@@ -56,7 +55,8 @@
                     </cursor>
                 </Button>
                 <Label fx:id="info" alignment="CENTER" layoutX="112.0" layoutY="10.0" prefHeight="55.0"
-                       prefWidth="221.0" textAlignment="CENTER" textFill="WHITE">
+                       prefWidth="221.0" text="Build Date: &#10;Build Version: " textAlignment="CENTER"
+                       textFill="WHITE">
                     <font>
                         <Font name="Raleway" size="16.0"/>
                     </font>
