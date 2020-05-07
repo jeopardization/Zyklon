@@ -19,9 +19,8 @@ public class Config implements Mappings {
         return intArr;
     }
 
-    public static boolean safe(boolean reqItem, int[] itemWhitelist, boolean reqMouse) {
-        boolean itemCheck = true;
-        boolean mouseCheck = true;
+    public static boolean safe(boolean reqItem, int[] itemWhitelist, boolean reqMouse, boolean reqSprint, boolean reqFocus) {
+        boolean itemCheck = true, mouseCheck = true, sprintCheck = true, focusCheck = true;
         if (reqItem) {
             if (InventoryPlayer.getCurrentItem(EntityPlayer.getInventory(Minecraft.getThePlayer())) == null) {
                 itemCheck = false;
@@ -39,7 +38,13 @@ public class Config implements Mappings {
         if (reqMouse) {
             mouseCheck = Mouse.isButtonDown(0);
         }
-        return itemCheck && mouseCheck && Minecraft.getCurrentScreen() == null;
+        if (reqSprint) {
+            sprintCheck = Entity.isSprinting(Minecraft.getThePlayer());
+        }
+        if (reqFocus) {
+            focusCheck = Minecraft.getCurrentScreen() == null;
+        }
+        return itemCheck && mouseCheck && sprintCheck && focusCheck;
     }
 
     public static void setEnabledCloud(Module module, boolean enabled) {
@@ -54,8 +59,10 @@ public class Config implements Mappings {
 
     public static class Target implements Comparable<Target> {
         public static Comparator<Target> distComparator = Comparator.comparing(target -> Float.toString(target.dist)), healthComparator = Comparator.comparing(target -> Float.toString(target.health));
+        private final float FOV;
+        private final float dist;
+        private final float health;
         public Object target;
-        private float FOV, dist, health;
 
         public Target(Object target, float FOV, float dist) {
             this.target = target;

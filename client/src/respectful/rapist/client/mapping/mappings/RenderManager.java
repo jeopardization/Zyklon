@@ -1,16 +1,19 @@
 package respectful.rapist.client.mapping.mappings;
 
 import respectful.rapist.client.mapping.MappedClass;
+import respectful.rapist.client.mapping.Mappings;
 
 import java.lang.reflect.Field;
 
-public class RenderManager extends MappedClass {
+public class RenderManager extends MappedClass implements Mappings {
     private Field instance, playerViewY, playerViewX;
 
     public RenderManager() {
         super("net.minecraft.client.renderer.entity.RenderManager");
         try {
-            instance = clazz.getDeclaredField("field_78727_a");
+            if (RealmsSharedConstants.getVersion().equals("1.7.10")) {
+                instance = clazz.getDeclaredField("field_78727_a");
+            }
             playerViewY = clazz.getDeclaredField("field_78735_i");
             playerViewX = clazz.getDeclaredField("field_78732_j");
         } catch (Exception ex) {
@@ -20,7 +23,9 @@ public class RenderManager extends MappedClass {
 
     public Object getInstance() {
         try {
-            return instance.get(null);
+            if (instance != null) {
+                return instance.get(null);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

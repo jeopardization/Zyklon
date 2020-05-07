@@ -19,7 +19,7 @@ public class HUD extends Module implements Mappings {
         int mult = 0;
         for (Module module : EventManager.moduleManager.modules) {
             if (module.enabled && !module.equals(this)) {
-                FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), module.name, ScaledResolution.getScaledWidth(ScaledResolution.newInstance(Minecraft.getMinecraft(), Minecraft.getDisplayWidth(), Minecraft.getDisplayHeight())) - FontRenderer.getStringWidth(Minecraft.getFontRenderer(), module.name) - 3, 3 + (mult * 10), module.color);
+                FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), module.name, ScaledResolution.getScaledWidth(RealmsSharedConstants.getVersion().equals("1.8.9") ? ScaledResolution.newInstance(Minecraft.getMinecraft()) : ScaledResolution.newInstance(Minecraft.getMinecraft(), Minecraft.getDisplayWidth(), Minecraft.getDisplayHeight())) - FontRenderer.getStringWidth(Minecraft.getFontRenderer(), module.name) - 3, 3 + (mult * 10), module.color);
                 mult++;
             }
         }

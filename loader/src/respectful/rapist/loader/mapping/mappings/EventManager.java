@@ -6,8 +6,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class EventManager extends MappedClass {
-    private Method onKey, onRenderGUI, onRender, onTick;
     private Field moduleManager;
+    private Method onKey, onRenderGUI, onRender, onTick;
 
     public EventManager() {
         super("respectful.rapist.client.EventManager");

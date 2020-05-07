@@ -17,7 +17,7 @@ public class Main {
     public static URLClassLoader loader;
     public static Object launchClassLoader;
     public static Instrumentation inst;
-    public static byte[] origMinecraft, origEntity, origEntityRenderer, origRender, origRendererLivingEntity, origGuiIngame, origNetHandlerPlayClient;
+    public static byte[] origMinecraft, origEntity, origEntityRenderer, origRender, origRendererLivingEntity, origGuiIngame, origNetHandlerPlayClient, origRenderGlobal;
 
     static {
         try {
@@ -71,6 +71,13 @@ public class Main {
                         transformer = new Render();
                     } else {
                         transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origRender");
+                    }
+                    break;
+                case "net.minecraft.client.renderer.RenderGlobal":
+                    if (transforming) {
+                        transformer = new RenderGlobal();
+                    } else {
+                        transformer = (loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> (byte[]) getField("origRenderGlobal");
                     }
                     break;
                 case "net.minecraft.client.renderer.entity.RendererLivingEntity":
@@ -147,6 +154,7 @@ public class Main {
             origRendererLivingEntity = null;
             origGuiIngame = null;
             origNetHandlerPlayClient = null;
+            origRenderGlobal = null;
             inst = null;
             for (Field field : ClassLoader.getSystemClassLoader().loadClass(Main.class.getName()).getDeclaredFields()) {
                 field.set(null, null);

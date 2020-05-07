@@ -3,7 +3,7 @@ package respectful.rapist.client.util;
 import java.security.SecureRandom;
 
 public class Random {
-    private static SecureRandom secureRandom = new SecureRandom();
+    private static final SecureRandom secureRandom = new SecureRandom();
 
     public static int nextInt(int min, int max) {
         return (int) nextDouble(min, max);

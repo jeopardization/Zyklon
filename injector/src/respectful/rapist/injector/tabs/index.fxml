@@ -20,8 +20,8 @@
                         <Font name="Raleway" size="38.0"/>
                     </font>
                 </Text>
-                <Text fill="WHITE" layoutX="132.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Minecraft Forge 1.7.10" textAlignment="CENTER">
+                <Text fill="WHITE" layoutX="103.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Minecraft Forge 1.7.10 &amp; 1.8.9" textAlignment="CENTER">
                     <font>
                         <Font name="Raleway" size="18.0"/>
                     </font>

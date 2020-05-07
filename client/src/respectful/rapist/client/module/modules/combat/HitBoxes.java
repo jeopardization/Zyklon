@@ -6,7 +6,7 @@ import respectful.rapist.client.util.Config;
 public class HitBoxes extends Module {
     public static float add;
     public float expansion = 0.05F;
-    public boolean reqItem;
+    public boolean reqItem, reqSprint;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
 
     public HitBoxes() {
@@ -15,7 +15,7 @@ public class HitBoxes extends Module {
 
     @Override
     public void onTick() {
-        if (Config.safe(reqItem, itemWhitelist, false)) {
+        if (Config.safe(reqItem, itemWhitelist, false, reqSprint, true)) {
             add = expansion;
         } else {
             add = 0.0F;

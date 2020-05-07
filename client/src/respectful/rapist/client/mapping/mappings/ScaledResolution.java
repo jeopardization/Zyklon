@@ -13,7 +13,7 @@ public class ScaledResolution extends MappedClass implements Mappings {
     public ScaledResolution() {
         super("net.minecraft.client.gui.ScaledResolution");
         try {
-            scaledResolution = clazz.getDeclaredConstructor(Minecraft.clazz, int.class, int.class);
+            scaledResolution = RealmsSharedConstants.getVersion().equals("1.8.9") ? clazz.getDeclaredConstructor(Minecraft.clazz) : clazz.getDeclaredConstructor(Minecraft.clazz, int.class, int.class);
             getScaledWidth = clazz.getDeclaredMethod("func_78326_a");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -23,6 +23,15 @@ public class ScaledResolution extends MappedClass implements Mappings {
     public Object newInstance(Object minecraft, int width, int height) {
         try {
             return scaledResolution.newInstance(minecraft, width, height);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object newInstance(Object minecraft) {
+        try {
+            return scaledResolution.newInstance(minecraft);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

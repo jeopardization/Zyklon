@@ -65,15 +65,11 @@
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h4>Home</h4>
-                <p><b>Build Date</b>: 3/4/2020</p>
-                <p><b>Build Version</b>: 3.8</p>
+                <p><b>Build Date</b>: 3/28/2020</p>
+                <p><b>Build Version</b>: 3.9</p>
                 <p><b>Changelog</b>:<br>
-                • Added Velocity<br>
-				• Settings are now periodically refreshed on the frontend. This should prevent module states from being overridden after they were toggled ingame via key binds<br>
-				• Added changelog in web GUI homepage<br>
-                • Improved cloud configuration UI<br>
-                • Changed color schemes<br>
-                • You can now hit enter in the web GUI to apply your settings at anytime<br>
+                • Implemented support for 1.8.9<br>
+                • Added Require Sprint mode to Reach, HitBoxes and Velocity<br>
                 • Bug fixes
                 </p>
                 <div>
@@ -215,6 +211,9 @@
                     <br>
                     <input type="checkbox" class="form-check-input" id="reach-req-item">
                     <label class="form-check-label" for="reach-req-item" title="Reach will activate only if you are holding an item from the Item Whitelist">Require Item</label>
+                    <br>
+                    <input type="checkbox" class="form-check-input" id="reach-req-sprint">
+                    <label class="form-check-label" for="reach-req-sprint" title="Reach will activate only if you are sprinting">Require Sprint</label>
                 </div>
                 <div>
                     <label for="reach-expansion-label" title="How much extra reach you will be given (Normally 3.0)">Expansion</label>
@@ -237,6 +236,9 @@
                     <br>
                     <input type="checkbox" class="form-check-input" id="hitboxes-req-item">
                     <label class="form-check-label" for="hitboxes-req-item" title="HitBoxes will activate only if you are holding an item from the Item Whitelist">Require Item</label>
+                    <br>
+                    <input type="checkbox" class="form-check-input" id="hitboxes-req-sprint">
+                    <label class="form-check-label" for="hitboxes-req-sprint" title="HitBoxes will activate only if you are sprinting">Require Sprint</label>
                 </div>
                 <div>
                     <label for="hitboxes-expansion-label" title="How much larger other player hitboxes will be (Normally 0.1)">Expansion</label>
@@ -262,6 +264,9 @@
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="velocity-enabled">
                     <label class="form-check-label" for="velocity-enabled" title="Enable Velocity">Enabled</label>
+                    <br>
+                    <input type="checkbox" class="form-check-input" id="velocity-req-sprint">
+                    <label class="form-check-label" for="velocity-req-sprint" title="Velocity will activate only if you are sprinting">Require Sprint</label>
                 </div>
                 <div>
                     <label for="velocity-chance-label" title="How often you'll take your modified knockback">Chance</label>
@@ -2127,38 +2132,41 @@
                         check(values[24], "#autoclicker-req-item");
                         check(values[25], "#aimbot-req-item");
                         check(values[26], "#reach-req-item");
-                        check(values[27], "#hitboxes-req-item");
-                        check(values[28], "#wtap-req-item");
-                        $("#autoclicker-item-whitelist").val(values[29]);
-                        $("#aimbot-item-whitelist").val(values[30]);
-                        $("#reach-item-whitelist").val(values[31]);
-                        $("#hitboxes-item-whitelist").val(values[32]);
-                        $("#wtap-item-whitelist").val(values[33]);
-                        setRangeSlider("#autoclicker-CPS", values[34], values[35], 1.0, 20.0, 0.1);
-                        setSlider("#aimbot-dist", values[36], 0.1, 6.0, 0.1);
-                        setSlider("#aimbot-fov", values[37], 1, 180, 1);
-                        check(values[38], "#aimbot-req-mouse");
-		        		$("#aimbot-target").val(values[39]);
-		        		setRangeSlider("#aimbot-yaw-smooth", values[40], values[41], 1, 20, 0.1);
-		        		setRangeSlider("#aimbot-pitch-smooth", values[42], values[43], 1, 20, 0.1);
-		        		setRangeSlider("#aimbot-rand-freq", values[44], values[45], 1, 1000, 1);
-		        		setRangeSlider("#reach-expansion", values[46], values[47], 0, 1, 0.01);
-		        		setSlider("#hitboxes-expansion", values[48], 0.01, 1, 0.01);
-                        setSlider("#velocity-chance", values[49], 1, 100, 1);
-                        setSlider("#velocity-x", values[50], 0, 2, 0.01);
-                        setSlider("#velocity-y", values[51], 0, 2, 0.01);
-                        setSlider("#velocity-z", values[52], 0, 2, 0.01);
-                        setSlider("#fakelag-dist", values[53], 0.1, 6.0, 0.1);
-                        setSlider("#fakelag-fov", values[54], 1, 180, 1);
-                        setRangeSlider("#fakelag-packet-delay", values[55], values[56], 1, 1000, 1);
-		        		setSlider("#wtap-dist", values[57], 0.1, 6.0, 0.1);
-		        		setSlider("#wtap-fov", values[58], 1, 180, 1);
-		        		setRangeSlider("#wtap-tap-delay", values[59], values[60], 1, 1000, 1);
-		        		setRangeSlider("#throwpot-throw-delay", values[61], values[62], 1, 1000, 1);
-		        		setRangeSlider("#refill-fill-delay", values[63], values[64], 1, 1000, 1);
-		        		setRangeSlider("#refill-exit-delay", values[65], values[66], 1, 1000, 1);
-		        		setSlider("#refresh-rate", values[67], 1, 10, 1);
-		        		timeout = values[67] * 1000;
+                        check(values[27], "#reach-req-sprint");
+                        check(values[28], "#hitboxes-req-item");
+                        check(values[29], "#hitboxes-req-sprint");
+                        check(values[30], "#velocity-req-sprint");
+                        check(values[31], "#wtap-req-item");
+                        $("#autoclicker-item-whitelist").val(values[32]);
+                        $("#aimbot-item-whitelist").val(values[33]);
+                        $("#reach-item-whitelist").val(values[34]);
+                        $("#hitboxes-item-whitelist").val(values[35]);
+                        $("#wtap-item-whitelist").val(values[36]);
+                        setRangeSlider("#autoclicker-CPS", values[37], values[38], 1.0, 20.0, 0.1);
+                        setSlider("#aimbot-dist", values[39], 0.1, 6.0, 0.1);
+                        setSlider("#aimbot-fov", values[40], 1, 180, 1);
+                        check(values[41], "#aimbot-req-mouse");
+		        		$("#aimbot-target").val(values[42]);
+		        		setRangeSlider("#aimbot-yaw-smooth", values[43], values[44], 1, 20, 0.1);
+		        		setRangeSlider("#aimbot-pitch-smooth", values[45], values[46], 1, 20, 0.1);
+		        		setRangeSlider("#aimbot-rand-freq", values[47], values[48], 1, 1000, 1);
+		        		setRangeSlider("#reach-expansion", values[49], values[50], 0, 1, 0.01);
+		        		setSlider("#hitboxes-expansion", values[51], 0.01, 1, 0.01);
+                        setSlider("#velocity-chance", values[52], 1, 100, 1);
+                        setSlider("#velocity-x", values[53], 0, 2, 0.01);
+                        setSlider("#velocity-y", values[54], 0, 2, 0.01);
+                        setSlider("#velocity-z", values[55], 0, 2, 0.01);
+                        setSlider("#fakelag-dist", values[56], 0.1, 6.0, 0.1);
+                        setSlider("#fakelag-fov", values[57], 1, 180, 1);
+                        setRangeSlider("#fakelag-packet-delay", values[58], values[59], 1, 1000, 1);
+		        		setSlider("#wtap-dist", values[60], 0.1, 6.0, 0.1);
+		        		setSlider("#wtap-fov", values[61], 1, 180, 1);
+		        		setRangeSlider("#wtap-tap-delay", values[62], values[63], 1, 1000, 1);
+		        		setRangeSlider("#throwpot-throw-delay", values[64], values[65], 1, 1000, 1);
+		        		setRangeSlider("#refill-fill-delay", values[66], values[67], 1, 1000, 1);
+		        		setRangeSlider("#refill-exit-delay", values[68], values[69], 1, 1000, 1);
+		        		setSlider("#refresh-rate", values[70], 1, 10, 1);
+		        		timeout = values[70] * 1000;
 		        	}
 	        	}
 	        });
@@ -2183,7 +2191,7 @@
             $.ajax({
                 url: "/apply",
                 type: "POST",
-                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#velocity-bind").val() + ";" + $("#fakelag-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#velocity-enabled") + ";" + checkboxToNum("#fakelag-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#velocity-chance").slider("value") + ";" + $("#velocity-x").slider("value") + ";" + $("#velocity-y").slider("value") + ";" + $("#velocity-z").slider("value") + ";" + $("#fakelag-dist").slider("value") + ";" + $("#fakelag-fov").slider("value") + ";" + $("#fakelag-packet-delay").slider("values")[0] + ";" + $("#fakelag-packet-delay").slider("values")[1] + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-fov").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
+                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#velocity-bind").val() + ";" + $("#fakelag-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#velocity-enabled") + ";" + checkboxToNum("#fakelag-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#reach-req-sprint") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#hitboxes-req-sprint") + ";" + checkboxToNum("#velocity-req-sprint") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#velocity-chance").slider("value") + ";" + $("#velocity-x").slider("value") + ";" + $("#velocity-y").slider("value") + ";" + $("#velocity-z").slider("value") + ";" + $("#fakelag-dist").slider("value") + ";" + $("#fakelag-fov").slider("value") + ";" + $("#fakelag-packet-delay").slider("values")[0] + ";" + $("#fakelag-packet-delay").slider("values")[1] + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-fov").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
                 success: function(res) {
                     alert(res);
                 }

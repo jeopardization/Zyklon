@@ -43,7 +43,7 @@ public class Controller {
                     exit();
                 }
             }
-            alert = new Alert(Alert.AlertType.WARNING, "Make sure you have Minecraft Forge 1.7.10 running", ButtonType.OK);
+            alert = new Alert(Alert.AlertType.WARNING, "Make sure you have Minecraft Forge 1.7.10/1.8.9 running", ButtonType.OK);
             alert.showAndWait();
         } catch (Exception ex) {
             alert = new Alert(Alert.AlertType.ERROR, ex.toString(), ButtonType.OK);

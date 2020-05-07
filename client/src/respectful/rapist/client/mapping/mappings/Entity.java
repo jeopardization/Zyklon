@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class Entity extends MappedClass {
-    private Method getEntityID, isInvisible, isSneaking, getDistanceToEntity;
+    private Method getEntityID, isInvisible, isSneaking, isSprinting, getDistanceToEntity;
     private Field posX, posY, posZ, rotationYaw, rotationPitch;
 
     public Entity() {
@@ -15,6 +15,7 @@ public class Entity extends MappedClass {
             getEntityID = clazz.getDeclaredMethod("func_145782_y");
             isInvisible = clazz.getDeclaredMethod("func_82150_aj");
             isSneaking = clazz.getDeclaredMethod("func_70093_af");
+            isSprinting = clazz.getDeclaredMethod("func_70051_ag");
             getDistanceToEntity = clazz.getDeclaredMethod("func_70032_d", clazz);
             posX = clazz.getDeclaredField("field_70165_t");
             posY = clazz.getDeclaredField("field_70163_u");
@@ -47,6 +48,15 @@ public class Entity extends MappedClass {
     public boolean isSneaking(Object obj) {
         try {
             return (boolean) isSneaking.invoke(obj);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isSprinting(Object obj) {
+        try {
+            return (boolean) isSprinting.invoke(obj);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

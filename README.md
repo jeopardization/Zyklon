@@ -13,6 +13,11 @@
 • Run "injector.jar" and load the cheat. The web GUI should now be running on your network at port 1337. You may visit http://localhost:1337 on your machine or http://192.168.x.x:1337 on an external device to use it.
 
 ## Changelog
+**3.9 - 3/28/2020**<br>
+• Implemented support for 1.8.9<br>
+• Added Require Sprint mode to Reach, HitBoxes and Velocity<br>
+• Bug fixes 
+
 **3.8 - 3/4/2020**<br>
 • Added Velocity<br>
 • Settings are now periodically refreshed on the frontend. This should prevent module states from being overridden after they were toggled ingame via key binds<br>

@@ -26,7 +26,7 @@ public class Aimbot extends Module implements Mappings {
 
     @Override
     public void onTick() {
-        if (Config.safe(reqItem, itemWhitelist, reqMouse)) {
+        if (Config.safe(reqItem, itemWhitelist, reqMouse, false, true)) {
             Config.Target target = Config.Target.check(this.target, dist, FOV);
             this.target = (target != null) ? target.target : null;
             if (this.target == null) {
@@ -65,7 +65,10 @@ public class Aimbot extends Module implements Mappings {
                     delay = Random.nextInt(minRand, maxRand);
                     timer = new Timer();
                 }
-                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + randZ + 1;
+                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + randZ;
+                if (RealmsSharedConstants.getVersion().equals("1.7.10")) {
+                    z += 1.0D;
+                }
                 float[] neededRotations = Angle.findNeededRotations(x, y, z, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(this.target)));
                 Entity.setRotationYaw(Minecraft.getThePlayer(), Entity.getRotationYaw(Minecraft.getThePlayer()) + (neededRotations[0] / (Random.nextFloat(minYawSmooth, maxYawSmooth) * 50)));
                 Entity.setRotationPitch(Minecraft.getThePlayer(), Entity.getRotationPitch(Minecraft.getThePlayer()) + (neededRotations[1] / (Random.nextFloat(minPitchSmooth, maxPitchSmooth) * 50)));

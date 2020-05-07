@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 public class Minecraft extends MappedClass implements Mappings {
     private Field thePlayer, theWorld, currentScreen, gameSettings, playerController, fontRenderer, displayWidth, displayHeight;
-    private Method getMinecraft, displayGuiScreen;
+    private Method getMinecraft, displayGuiScreen, getRenderManager;
 
     public Minecraft() {
         super("net.minecraft.client.Minecraft");
@@ -22,6 +22,9 @@ public class Minecraft extends MappedClass implements Mappings {
             displayWidth = clazz.getDeclaredField("field_71443_c");
             displayHeight = clazz.getDeclaredField("field_71440_d");
             getMinecraft = clazz.getDeclaredMethod("func_71410_x");
+            if (RealmsSharedConstants.getVersion().equals("1.8.9")) {
+                getRenderManager = clazz.getDeclaredMethod("func_175598_ae");
+            }
             displayGuiScreen = clazz.getDeclaredMethod("func_147108_a", GuiScreen.clazz);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -76,6 +79,15 @@ public class Minecraft extends MappedClass implements Mappings {
     public Object getFontRenderer() {
         try {
             return fontRenderer.get(getMinecraft());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object getRenderManager() {
+        try {
+            return getRenderManager.invoke(getMinecraft());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -3,6 +3,7 @@ package respectful.rapist.client.mapping;
 import respectful.rapist.client.mapping.mappings.*;
 
 public interface Mappings {
+    RealmsSharedConstants RealmsSharedConstants = new RealmsSharedConstants();
     GuiScreen GuiScreen = new GuiScreen();
     Minecraft Minecraft = new Minecraft();
     Entity Entity = new Entity();
@@ -22,6 +23,9 @@ public interface Mappings {
     RenderManager RenderManager = new RenderManager();
     OpenGLHelper OpenGLHelper = new OpenGLHelper();
     Tessellator Tessellator = new Tessellator();
+    VertexFormat VertexFormat = RealmsSharedConstants.getVersion().equals("1.8.9") ? new VertexFormat() : null;
+    DefaultVertexFormats DefaultVertexFormats = RealmsSharedConstants.getVersion().equals("1.8.9") ? new DefaultVertexFormats() : null;
+    WorldRenderer WorldRenderer = RealmsSharedConstants.getVersion().equals("1.8.9") ? new WorldRenderer() : null;
     KeyBinding KeyBinding = new KeyBinding();
     CPSMod CPSMod = new CPSMod();
 }

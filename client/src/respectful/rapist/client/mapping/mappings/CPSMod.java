@@ -10,7 +10,9 @@ public class CPSMod extends MappedClass {
     public CPSMod() {
         super("pw.cinque.cpsmod.CPSMod");
         try {
-            addClick = clazz.getDeclaredMethod("addClick");
+            if (clazz != null) {
+                addClick = clazz.getDeclaredMethod("addClick");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

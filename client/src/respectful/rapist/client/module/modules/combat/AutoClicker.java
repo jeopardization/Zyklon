@@ -19,7 +19,7 @@ public class AutoClicker extends Module implements Mappings {
 
     @Override
     public void onTick() {
-        if (Config.safe(reqItem, itemWhitelist, true)) {
+        if (Config.safe(reqItem, itemWhitelist, true, false, true)) {
             if (timer.elapsed(delay - releaseDelay) && !held) {
                 KeyBinding.setKeyBindState(-100, true);
                 KeyBinding.onTick(-100);

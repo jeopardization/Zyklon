@@ -22,7 +22,7 @@ public class WTap extends Module implements Mappings {
     @Override
     public void onTick() {
         if (Keyboard.isKeyDown(17)) {
-            if (Config.safe(reqItem, itemWhitelist, true)) {
+            if (Config.safe(reqItem, itemWhitelist, true, false, true)) {
                 Config.Target target = Config.Target.check(this.target, dist, FOV);
                 this.target = (target != null) ? target.target : null;
                 if (this.target == null) {

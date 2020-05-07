@@ -1,7 +1,7 @@
 package respectful.rapist.client.util;
 
 public class Timer {
-    private long lastTime;
+    private final long lastTime;
 
     public Timer() {
         lastTime = System.currentTimeMillis();
