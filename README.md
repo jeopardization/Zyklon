@@ -5,6 +5,9 @@
 ![](https://i.imgur.com/cuNWBVr.png)<br>
 ![](https://i.imgur.com/bdLh675.png)
 
+## Download
+https://github.com/xertxa/Zyklon/releases
+
 ## Instructions
 • Ensure that the Java JDK is installed. If you don't have it, get it here: https://www.oracle.com/java/technologies/javase-jdk8-downloads.html<br>
 • Ensure that your JAVA_HOME environment variable is set to the Java JDK's installation path. Here's a tutorial on how to do that: https://confluence.atlassian.com/doc/setting-the-java_home-variable-in-windows-8895.html<br>
