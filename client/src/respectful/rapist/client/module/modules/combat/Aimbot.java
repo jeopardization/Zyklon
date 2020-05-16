@@ -65,9 +65,9 @@ public class Aimbot extends Module implements Mappings {
                     delay = Random.nextInt(minRand, maxRand);
                     timer = new Timer();
                 }
-                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + randZ;
-                if (RealmsSharedConstants.getVersion().equals("1.7.10")) {
-                    z += 1.0D;
+                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + 1.0D + randZ;
+                if (RealmsSharedConstants.getVersion().equals("1.8.9")) {
+                    z -= 1.62D;
                 }
                 float[] neededRotations = Angle.findNeededRotations(x, y, z, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(this.target)));
                 Entity.setRotationYaw(Minecraft.getThePlayer(), Entity.getRotationYaw(Minecraft.getThePlayer()) + (neededRotations[0] / (Random.nextFloat(minYawSmooth, maxYawSmooth) * 50)));
