@@ -19,6 +19,7 @@ https://github.com/xertxa/Zyklon/releases
 **3.9 - 3/28/2020**<br>
 • Implemented support for 1.8.9<br>
 • Added Require Sprint mode to Reach, HitBoxes and Velocity<br>
+• Improved aimbot accuracy<br>
 • Bug fixes 
 
 **3.8 - 3/4/2020**<br>

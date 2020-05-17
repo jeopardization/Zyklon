@@ -65,10 +65,16 @@ public class Aimbot extends Module implements Mappings {
                     delay = Random.nextInt(minRand, maxRand);
                     timer = new Timer();
                 }
-                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + 1.0D + randZ;
+                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + randZ;
                 if (RealmsSharedConstants.getVersion().equals("1.8.9")) {
                     z -= 1.62D;
                 }
+                ArrayList<AimPoint> aimPoints = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    aimPoints.add(new AimPoint(z + ((i + 1) * (0.3))));
+                }
+                Collections.sort(aimPoints);
+                z = aimPoints.get(0).point;
                 float[] neededRotations = Angle.findNeededRotations(x, y, z, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(this.target)));
                 Entity.setRotationYaw(Minecraft.getThePlayer(), Entity.getRotationYaw(Minecraft.getThePlayer()) + (neededRotations[0] / (Random.nextFloat(minYawSmooth, maxYawSmooth) * 50)));
                 Entity.setRotationPitch(Minecraft.getThePlayer(), Entity.getRotationPitch(Minecraft.getThePlayer()) + (neededRotations[1] / (Random.nextFloat(minPitchSmooth, maxPitchSmooth) * 50)));
@@ -82,5 +88,19 @@ public class Aimbot extends Module implements Mappings {
     public void disable() {
         target = null;
         super.disable();
+    }
+
+    private static class AimPoint implements Comparable<AimPoint> {
+        double dist, point;
+
+        public AimPoint(double point) {
+            dist = 1.62 - Math.abs(point);
+            this.point = point;
+        }
+
+        @Override
+        public int compareTo(AimPoint aimPoint) {
+            return Double.toString(aimPoint.dist).compareTo(Double.toString(this.dist));
+        }
     }
 }
