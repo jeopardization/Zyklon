@@ -59,9 +59,9 @@ public class Aimbot extends Module implements Mappings {
             }
             if (this.target != null) {
                 if (randDelayTimer.elapsed(randDelay)) {
-                    randX = Random.nextDouble(-0.08D, 0.08D);
-                    randY = Random.nextDouble(-0.08D, 0.08D);
-                    randZ = Random.nextDouble(-0.08D, 0.08D);
+                    randX = Random.nextDouble(-0.12D, 0.12D);
+                    randY = Random.nextDouble(-0.12D, 0.12D);
+                    randZ = Random.nextDouble(-0.12D, 0.12D);
                     randDelay = Random.nextInt(minRand, maxRand);
                     randDelayTimer = new Timer();
                 }
