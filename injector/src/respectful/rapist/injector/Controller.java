@@ -30,6 +30,7 @@ public class Controller {
                     alert = new Alert(Alert.AlertType.CONFIRMATION, "Success", ButtonType.OK);
                     alert.showAndWait();
                     exit();
+                    return;
                 }
             }
             alert = new Alert(Alert.AlertType.WARNING, "Make sure you have Minecraft Forge 1.7.10/1.8.9 running", ButtonType.OK);

@@ -27,7 +27,7 @@
                     </graphic>
                 </Button>
                 <Text fill="WHITE" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Host Options">
+                      text="Setup">
                     <font>
                         <Font name="Titillium Web" size="16.0"/>
                     </font>
