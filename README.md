@@ -1,9 +1,9 @@
 # Zyklon
-![](https://i.imgur.com/HGWru9Gg.png)<br>
-![](https://i.imgur.com/4jdaYDj.png)<br>
-![](https://i.imgur.com/RE23M4U.png)<br>
-![](https://i.imgur.com/cuNWBVr.png)<br>
-![](https://i.imgur.com/bdLh675.png)
+![](https://i.imgur.com/Zwo2Onog.png)<br>
+![](https://i.imgur.com/li08zjx.png)<br>
+![](https://i.imgur.com/sX2f3fV.png)<br>
+![](https://i.imgur.com/UqEBubd.png)<br>
+![](https://i.imgur.com/SPnRt07.png)
 
 ## Download
 https://github.com/xertxa/Zyklon/releases
