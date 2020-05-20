@@ -10,7 +10,7 @@ public class HitBoxes extends Module {
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
 
     public HitBoxes() {
-        super(47, "HitBoxes", "81ECEC");
+        super(47, "HitBoxes", 0x81ECEC);
     }
 
     @Override

@@ -57,8 +57,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 }
 
 body {
-    background-color: #17171a;
-    font-family: "Raleway", sans-serif;
+    font-family: "Titillium Web", sans-serif;
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
@@ -66,6 +65,11 @@ body {
     color: white;
     text-align: left;
     overflow-x: hidden;
+    background: url("/background.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 [tabindex="-1"]:focus {
@@ -3770,8 +3774,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
-    background-color: #0c0c0d;
-
+    background-color: rgba(12, 12, 13, 0.6);
 }
 
 .nav-link {

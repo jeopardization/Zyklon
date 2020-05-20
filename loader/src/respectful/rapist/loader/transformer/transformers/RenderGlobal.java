@@ -1,13 +1,11 @@
 package respectful.rapist.loader.transformer.transformers;
 
 import org.objectweb.asm.tree.*;
-import respectful.rapist.loader.Main;
 import respectful.rapist.loader.transformer.Transformer;
 
 public class RenderGlobal extends Transformer {
     @Override
     public void transform(ClassNode classNode) {
-        Main.origRenderGlobal = orig;
         for (MethodNode method : classNode.methods) {
             if (method.name.equals("func_147589_a") || method.name.equals("func_180446_a")) {
                 InsnList insns = new InsnList();

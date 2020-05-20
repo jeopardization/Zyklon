@@ -9,13 +9,13 @@ import java.util.Calendar;
 
 public class HUD extends Module implements Mappings {
     public HUD() {
-        super(200, "HUD", "FF0000");
+        super(200, "HUD", 0xFF0000);
     }
 
     @Override
     public void onRenderGUI() {
-        FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), "Zyklon", 3, 3, "8DC63F");
-        FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), new SimpleDateFormat("h:mm a").format(Calendar.getInstance().getTime()), FontRenderer.getStringWidth(Minecraft.getFontRenderer(), "Zyklon") + 6, 3, "FFFFFF");
+        FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), "Zyklon", 3, 3, 0x8DC63F);
+        FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), new SimpleDateFormat("h:mm a").format(Calendar.getInstance().getTime()), FontRenderer.getStringWidth(Minecraft.getFontRenderer(), "Zyklon") + 6, 3, 0xFFFFFF);
         int mult = 0;
         for (Module module : EventManager.moduleManager.modules) {
             if (module.enabled && !module.equals(this)) {

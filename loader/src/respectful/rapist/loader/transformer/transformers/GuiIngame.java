@@ -1,13 +1,11 @@
 package respectful.rapist.loader.transformer.transformers;
 
 import org.objectweb.asm.tree.*;
-import respectful.rapist.loader.Main;
 import respectful.rapist.loader.transformer.Transformer;
 
 public class GuiIngame extends Transformer {
     @Override
     public void transform(ClassNode classNode) {
-        Main.origGuiIngame = orig;
         for (MethodNode method : classNode.methods) {
             if (method.name.equals("func_73830_a") || method.name.equals("func_175180_a")) {
                 InsnList insns = new InsnList();

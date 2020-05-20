@@ -7,12 +7,12 @@ import respectful.rapist.client.util.Config;
 import respectful.rapist.client.util.Random;
 
 public class Velocity extends Module implements Mappings {
-    public int chance = 70;
+    public int chance = 80;
     public boolean reqSprint;
-    public double x = 0.8D, y = 0.8D, z = 0.8D;
+    public double x = 0.8D, y = 0.8D, z = 1.0D;
 
     public Velocity() {
-        super(51, "Velocity", "E84393");
+        super(51, "Velocity", 0xE84393);
     }
 
     public static void intercept(Object packet) {

@@ -3,11 +3,11 @@ package respectful.rapist.client.module;
 import respectful.rapist.client.util.Config;
 
 public abstract class Module {
-    public String name, color;
-    public int bind;
+    public String name;
+    public int bind, color;
     public boolean enabled = false;
 
-    public Module(int bind, String name, String color) {
+    public Module(int bind, String name, int color) {
         this.bind = bind;
         this.name = name;
         this.color = color;
@@ -29,7 +29,7 @@ public abstract class Module {
         } else {
             disable();
         }
-        if (!color.equals("000000")) {
+        if (!(color == 0x000000)) {
             Config.setEnabledCloud(this, enabled);
         }
     }

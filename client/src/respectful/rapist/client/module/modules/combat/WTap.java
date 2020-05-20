@@ -8,15 +8,15 @@ import respectful.rapist.client.util.Random;
 import respectful.rapist.client.util.Timer;
 
 public class WTap extends Module implements Mappings {
-    public float dist = 3.0F;
-    public int FOV = 25, minTapDelay = 100, maxTapDelay = 400, delay = Random.nextInt(minTapDelay, maxTapDelay);
+    public float dist = 2.8F;
+    public int FOV = 30, minTapDelay = 100, maxTapDelay = 200, delay = Random.nextInt(minTapDelay, maxTapDelay);
     public boolean reqItem, released;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
     public Object target;
     private Timer timer = new Timer();
 
     public WTap() {
-        super(35, "WTap", "9E0000");
+        super(35, "WTap", 0x9E0000);
     }
 
     @Override

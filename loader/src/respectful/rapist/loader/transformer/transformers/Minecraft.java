@@ -1,13 +1,12 @@
 package respectful.rapist.loader.transformer.transformers;
 
 import org.objectweb.asm.tree.*;
-import respectful.rapist.loader.Main;
 import respectful.rapist.loader.transformer.Transformer;
 
 public class Minecraft extends Transformer {
+
     @Override
     public void transform(ClassNode classNode) {
-        Main.origMinecraft = orig;
         for (MethodNode method : classNode.methods) {
             switch (method.name) {
                 case "func_71407_l":
@@ -21,11 +20,13 @@ public class Minecraft extends Transformer {
                             break;
                         }
                     }
+                    break;
                 case "func_71411_J":
                     InsnList insns = new InsnList();
                     insns.add(new FieldInsnNode(GETSTATIC, "respectful/rapist/loader/mapping/Mappings", "EventManager", "Lrespectful/rapist/loader/mapping/mappings/EventManager;"));
                     insns.add(new MethodInsnNode(INVOKEVIRTUAL, "respectful/rapist/loader/mapping/mappings/EventManager", "onTick", "()V", false));
                     method.instructions.insert(insns);
+                    break;
             }
         }
     }

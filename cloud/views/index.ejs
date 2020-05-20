@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="stylesheets/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 <div class="row">
     <div class="col-3">
-        <div aria-orientation="vertical" style="height: 100%; width: 23%; position: fixed; background-color: #0c0c0d">
+        <div aria-orientation="vertical" style="height: 100%; width: 23%; position: fixed; background-color: rgba(12, 12, 13, 0.4)">
             <div class="navbar-brand">
                 <h4 style="font-weight: 300">Zyklon</h4>
                 <h6 style="font-weight: 300; font-size: .95rem">Cloud Configuration</h6>
@@ -65,16 +65,17 @@
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h4>Home</h4>
-                <p><b>Build Date</b>: 3/28/2020</p>
-                <p><b>Build Version</b>: 3.9</p>
+                <p><b>Build Date</b>: 5/17/2020</p>
+                <p><b>Build Version</b>: 4.0</p>
                 <p><b>Changelog</b>:<br>
-                • Implemented support for 1.8.9<br>
-                • Added Require Sprint mode to Reach, HitBoxes and Velocity<br>
-                • Improved aimbot accuracy<br>
+                • Improved cloud configuration UI<br>
+                • Improved performance<br>
+                • Added Aim Delay and Points Scale options to Aimbot<br>
+                • Added ability to change localhost port and use external host<br>
                 • Bug fixes
                 </p>
                 <div>
-                    <label for="refresh-rate-label" title="How often the client should re-apply settings from your configuration">Refresh Rate</label>
+                    <label for="refresh-rate-label" title="How often (in seconds) the client should re-apply settings from your configuration">Refresh Rate</label>
                     <input type="text" id="refresh-rate-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0)">
                     <div id="refresh-rate" style="width: 95%"></div>
@@ -135,17 +136,31 @@
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-pitch-smoot-label" title="How smoothly the Aimbot should aim to the target vertically">Smooth (Pitch)</label>
+                    <label for="aimbot-pitch-smooth-label" title="How smoothly the Aimbot should aim to the target vertically">Smooth (Pitch)</label>
                     <input type="text" id="aimbot-pitch-smooth-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
                     <div id="aimbot-pitch-smooth" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
-                    <label for="aimbot-rand-freq-label" title="How often the Aimbot will randomly select a new point to aim at">Randomize Frequency</label>
-                    <input type="text" id="aimbot-rand-freq-label" readonly
+                    <label for="aimbot-delay-label" title="How far back (in milliseconds) Aimbot will aim at history positions">Aim Delay</label>
+                    <input type="text" id="aimbot-delay-label" readonly
                            style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
-                    <div id="aimbot-rand-freq" style="width: 95%"></div>
+                    <div id="aimbot-delay" style="width: 95%"></div>
+                </div>
+                <br>
+                <div>
+                    <label for="aimbot-rand-point-label" title="How often (in milliseconds) the Aimbot will randomly select a new point to aim at">Randomize Aim Point</label>
+                    <input type="text" id="aimbot-rand-point-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
+                    <div id="aimbot-rand-point" style="width: 95%"></div>
+                </div>
+                <br>
+                <div>
+                    <label for="aimbot-points-scale-label" title="How far away Aimbot aim points (5) will space from eachother">Points Scale</label>
+                    <input type="text" id="aimbot-points-scale-label" readonly
+                           style="border:0; color:#8dc63f; font-weight: 600; background-color:rgba(0, 0, 0, 0);">
+                    <div id="aimbot-points-scale" style="width: 95%"></div>
                 </div>
                 <br>
                 <div>
@@ -2150,24 +2165,26 @@
 		        		$("#aimbot-target").val(values[42]);
 		        		setRangeSlider("#aimbot-yaw-smooth", values[43], values[44], 1, 20, 0.1);
 		        		setRangeSlider("#aimbot-pitch-smooth", values[45], values[46], 1, 20, 0.1);
-		        		setRangeSlider("#aimbot-rand-freq", values[47], values[48], 1, 1000, 1);
-		        		setRangeSlider("#reach-expansion", values[49], values[50], 0, 1, 0.01);
-		        		setSlider("#hitboxes-expansion", values[51], 0.01, 1, 0.01);
-                        setSlider("#velocity-chance", values[52], 1, 100, 1);
-                        setSlider("#velocity-x", values[53], 0, 2, 0.01);
-                        setSlider("#velocity-y", values[54], 0, 2, 0.01);
-                        setSlider("#velocity-z", values[55], 0, 2, 0.01);
-                        setSlider("#fakelag-dist", values[56], 0.1, 6.0, 0.1);
-                        setSlider("#fakelag-fov", values[57], 1, 180, 1);
-                        setRangeSlider("#fakelag-packet-delay", values[58], values[59], 1, 1000, 1);
-		        		setSlider("#wtap-dist", values[60], 0.1, 6.0, 0.1);
-		        		setSlider("#wtap-fov", values[61], 1, 180, 1);
-		        		setRangeSlider("#wtap-tap-delay", values[62], values[63], 1, 1000, 1);
-		        		setRangeSlider("#throwpot-throw-delay", values[64], values[65], 1, 1000, 1);
-		        		setRangeSlider("#refill-fill-delay", values[66], values[67], 1, 1000, 1);
-		        		setRangeSlider("#refill-exit-delay", values[68], values[69], 1, 1000, 1);
-		        		setSlider("#refresh-rate", values[70], 1, 10, 1);
-		        		timeout = values[70] * 1000;
+		        		setRangeSlider("#aimbot-delay", values[47], values[48], 1, 1000, 1);
+		        		setRangeSlider("#aimbot-rand-point", values[49], values[50], 1, 1000, 1);
+		        		setSlider("#aimbot-points-scale", values[51], 0.01, 1, 0.01);
+		        		setRangeSlider("#reach-expansion", values[52], values[53], 0, 1, 0.01);
+		        		setSlider("#hitboxes-expansion", values[54], 0.01, 1, 0.01);
+                        setSlider("#velocity-chance", values[55], 1, 100, 1);
+                        setSlider("#velocity-x", values[56], 0, 2, 0.01);
+                        setSlider("#velocity-y", values[57], 0, 2, 0.01);
+                        setSlider("#velocity-z", values[58], 0, 2, 0.01);
+                        setSlider("#fakelag-dist", values[59], 0.1, 6.0, 0.1);
+                        setSlider("#fakelag-fov", values[60], 1, 180, 1);
+                        setRangeSlider("#fakelag-packet-delay", values[61], values[62], 1, 1000, 1);
+		        		setSlider("#wtap-dist", values[63], 0.1, 6.0, 0.1);
+		        		setSlider("#wtap-fov", values[64], 1, 180, 1);
+		        		setRangeSlider("#wtap-tap-delay", values[65], values[66], 1, 1000, 1);
+		        		setRangeSlider("#throwpot-throw-delay", values[67], values[68], 1, 1000, 1);
+		        		setRangeSlider("#refill-fill-delay", values[69], values[70], 1, 1000, 1);
+		        		setRangeSlider("#refill-exit-delay", values[71], values[72], 1, 1000, 1);
+		        		setSlider("#refresh-rate", values[73], 1, 10, 1);
+		        		timeout = values[73] * 1000;
 		        	}
 	        	}
 	        });
@@ -2192,7 +2209,7 @@
             $.ajax({
                 url: "/apply",
                 type: "POST",
-                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#velocity-bind").val() + ";" + $("#fakelag-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#velocity-enabled") + ";" + checkboxToNum("#fakelag-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#reach-req-sprint") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#hitboxes-req-sprint") + ";" + checkboxToNum("#velocity-req-sprint") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-rand-freq").slider("values")[0] + ";" + $("#aimbot-rand-freq").slider("values")[1] + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#velocity-chance").slider("value") + ";" + $("#velocity-x").slider("value") + ";" + $("#velocity-y").slider("value") + ";" + $("#velocity-z").slider("value") + ";" + $("#fakelag-dist").slider("value") + ";" + $("#fakelag-fov").slider("value") + ";" + $("#fakelag-packet-delay").slider("values")[0] + ";" + $("#fakelag-packet-delay").slider("values")[1] + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-fov").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
+                data: {config: $("#autoclicker-bind").val() + ";" + $("#aimbot-bind").val() + ";" + $("#nametags-bind").val() + ";" + $("#brightness-bind").val() + ";" + $("#reach-bind").val() + ";" + $("#hitboxes-bind").val() + ";" + $("#velocity-bind").val() + ";" + $("#fakelag-bind").val() + ";" + $("#wtap-bind").val() + ";" + $("#self-destruct-bind").val() + ";" + $("#HUD-bind").val() + ";" + $("#throwpot-bind").val() + ";" + $("#refill-bind").val() + ";" + checkboxToNum("#autoclicker-enabled") + ";" + checkboxToNum("#aimbot-enabled") + ";" + checkboxToNum("#nametags-enabled") + ";" + checkboxToNum("#brightness-enabled") + ";" + checkboxToNum("#reach-enabled") + ";" + checkboxToNum("#hitboxes-enabled") + ";" + checkboxToNum("#velocity-enabled") + ";" + checkboxToNum("#fakelag-enabled") + ";" + checkboxToNum("#wtap-enabled") + ";0;" + checkboxToNum("#HUD-enabled") + ";" + checkboxToNum("#autoclicker-req-item") + ";" + checkboxToNum("#aimbot-req-item") + ";" + checkboxToNum("#reach-req-item") + ";" + checkboxToNum("#reach-req-sprint") + ";" + checkboxToNum("#hitboxes-req-item") + ";" + checkboxToNum("#hitboxes-req-sprint") + ";" + checkboxToNum("#velocity-req-sprint") + ";" + checkboxToNum("#wtap-req-item") + ";" + $("#autoclicker-item-whitelist").val() + ";" + $("#aimbot-item-whitelist").val() + ";" + $("#reach-item-whitelist").val() + ";" + $("#hitboxes-item-whitelist").val() + ";" + $("#wtap-item-whitelist").val() + ";" + $("#autoclicker-CPS").slider("values")[0] + ";" + $("#autoclicker-CPS").slider("values")[1] + ";" + $("#aimbot-dist").slider("value") + ";" + $("#aimbot-fov").slider("value") + ";" + checkboxToNum("#aimbot-req-mouse") + ";" + $("#aimbot-target").val() + ";" + $("#aimbot-yaw-smooth").slider("values")[0] + ";" + $("#aimbot-yaw-smooth").slider("values")[1] + ";" + $("#aimbot-pitch-smooth").slider("values")[0] + ";" + $("#aimbot-pitch-smooth").slider("values")[1] + ";" + $("#aimbot-delay").slider("values")[0] + ";" + $("#aimbot-delay").slider("values")[1] + ";" + $("#aimbot-rand-point").slider("values")[0] + ";" + $("#aimbot-rand-point").slider("values")[1] + ";" + $("#aimbot-points-scale").slider("value") + ";" + $("#reach-expansion").slider("values")[0] + ";" + $("#reach-expansion").slider("values")[1] + ";" + $("#hitboxes-expansion").slider("value") + ";" + $("#velocity-chance").slider("value") + ";" + $("#velocity-x").slider("value") + ";" + $("#velocity-y").slider("value") + ";" + $("#velocity-z").slider("value") + ";" + $("#fakelag-dist").slider("value") + ";" + $("#fakelag-fov").slider("value") + ";" + $("#fakelag-packet-delay").slider("values")[0] + ";" + $("#fakelag-packet-delay").slider("values")[1] + ";" + $("#wtap-dist").slider("value") + ";" + $("#wtap-fov").slider("value") + ";" + $("#wtap-tap-delay").slider("values")[0] + ";" + $("#wtap-tap-delay").slider("values")[1] + ";" + $("#throwpot-throw-delay").slider("values")[0] + ";" + $("#throwpot-throw-delay").slider("values")[1] + ";" + $("#refill-fill-delay").slider("values")[0] + ";" + $("#refill-fill-delay").slider("values")[1] + ";" + $("#refill-exit-delay").slider("values")[0] + ";" + $("#refill-exit-delay").slider("values")[1] + ";" + $("#refresh-rate").slider("value"), players: $("#friends").val() + ";" + $("#enemies").val()},
                 success: function(res) {
                     alert(res);
                 }

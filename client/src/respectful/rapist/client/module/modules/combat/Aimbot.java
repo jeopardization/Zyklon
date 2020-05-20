@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Aimbot extends Module implements Mappings {
-    public float maxYawSmooth = 8.0F, minYawSmooth = 6.0F, maxPitchSmooth = 20.0F, minPitchSmooth = 16.0F, dist = 4.0F;
-    public int FOV = 90, minRand = 150, maxRand = 350, delay = Random.nextInt(minRand, maxRand), targetSelection = 0;
+    public float maxYawSmooth = 8.0F, minYawSmooth = 6.0F, maxPitchSmooth = 20.0F, minPitchSmooth = 16.0F, dist = 4.0F, scale = 0.75F;
+    public int FOV = 90, minDelay = 75, maxDelay = 150, delay = Random.nextInt(minDelay, maxDelay), minRand = 150, maxRand = 350, randDelay = Random.nextInt(minRand, maxRand), targetSelection = 0;
     public boolean reqItem, reqMouse;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
     public Object target;
-    private double randX, randY, randZ;
-    private Timer timer = new Timer();
+    private double x, y, z, randX, randY, randZ;
+    private Timer delayTimer = new Timer(), randDelayTimer = new Timer();
 
     public Aimbot() {
-        super(21, "Aimbot", "D63031");
+        super(21, "Aimbot", 0xD63031);
     }
 
     @Override
@@ -58,23 +58,30 @@ public class Aimbot extends Module implements Mappings {
                 }
             }
             if (this.target != null) {
-                if (timer.elapsed(delay)) {
-                    randX = Random.nextDouble(-0.15D, 0.15D);
-                    randY = Random.nextDouble(-0.15D, 0.15D);
-                    randZ = Random.nextDouble(-0.15D, 0.15D);
-                    delay = Random.nextInt(minRand, maxRand);
-                    timer = new Timer();
+                if (randDelayTimer.elapsed(randDelay)) {
+                    randX = Random.nextDouble(-0.08D, 0.08D);
+                    randY = Random.nextDouble(-0.08D, 0.08D);
+                    randZ = Random.nextDouble(-0.08D, 0.08D);
+                    randDelay = Random.nextInt(minRand, maxRand);
+                    randDelayTimer = new Timer();
                 }
-                double x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX, y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY, z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + randZ;
+                if (delayTimer.elapsed(delay)) {
+                    x = Entity.getPosX(this.target) - Entity.getPosX(Minecraft.getThePlayer()) + randX;
+                    y = Entity.getPosZ(this.target) - Entity.getPosZ(Minecraft.getThePlayer()) + randY;
+                    double z = Entity.getPosY(this.target) - Entity.getPosY(Minecraft.getThePlayer()) + randZ;
+                    ArrayList<AimPoint> aimPoints = new ArrayList<>(Collections.singletonList(new AimPoint(z + 0.9D)));
+                    for (int i = 1; i < 3; i++) {
+                        aimPoints.add(new AimPoint(z + 0.9D + i * scale * 0.36D));
+                        aimPoints.add(new AimPoint(z + 0.9D - i * scale * 0.36D));
+                    }
+                    Collections.sort(aimPoints);
+                    this.z = aimPoints.get(0).point;
+                    delay = Random.nextInt(minDelay, maxDelay);
+                    delayTimer = new Timer();
+                }
                 if (RealmsSharedConstants.getVersion().equals("1.8.9")) {
                     z -= 1.62D;
                 }
-                ArrayList<AimPoint> aimPoints = new ArrayList<>();
-                for (int i = 0; i < 5; i++) {
-                    aimPoints.add(new AimPoint(z + ((i + 1) * (0.3))));
-                }
-                Collections.sort(aimPoints);
-                z = aimPoints.get(0).point;
                 float[] neededRotations = Angle.findNeededRotations(x, y, z, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(this.target)));
                 Entity.setRotationYaw(Minecraft.getThePlayer(), Entity.getRotationYaw(Minecraft.getThePlayer()) + (neededRotations[0] / (Random.nextFloat(minYawSmooth, maxYawSmooth) * 50)));
                 Entity.setRotationPitch(Minecraft.getThePlayer(), Entity.getRotationPitch(Minecraft.getThePlayer()) + (neededRotations[1] / (Random.nextFloat(minPitchSmooth, maxPitchSmooth) * 50)));
@@ -91,7 +98,7 @@ public class Aimbot extends Module implements Mappings {
     }
 
     private static class AimPoint implements Comparable<AimPoint> {
-        double dist, point;
+        private final double dist, point;
 
         public AimPoint(double point) {
             dist = 1.62 - Math.abs(point);

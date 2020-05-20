@@ -18,9 +18,9 @@ public class FontRenderer extends MappedClass implements Mappings {
         }
     }
 
-    public int drawStringWithShadow(Object obj, String text, int x, int y, String color) {
+    public int drawStringWithShadow(Object obj, String text, int x, int y, int color) {
         try {
-            return (int) drawStringWithShadow.invoke(obj, text, x, y, Integer.parseInt(color, 16));
+            return (int) drawStringWithShadow.invoke(obj, text, x, y, color);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -14,7 +14,7 @@ public class AutoClicker extends Module implements Mappings {
     private Timer timer = new Timer();
 
     public AutoClicker() {
-        super(19, "AutoClicker", "D63031");
+        super(19, "AutoClicker", 0xD63031);
     }
 
     @Override

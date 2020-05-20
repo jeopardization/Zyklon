@@ -101,6 +101,6 @@ function setEnabled(index, enabled) {
     });
 }
 module.exports = app;
-app.listen(1337);
+app.listen(process.argv[2]);
 console.log("\x1b[32m%s\x1b[0m", "Starting cloud configuration server.");
-console.log("Visit http://localhost:1337 on your machine or http://192.168.x.x:1337 on an external device to use it.");
+console.log("Visit http://localhost:" + process.argv[2] + " on your machine or http://192.168.x.x:" + process.argv[2] + " on an external device to use it.");

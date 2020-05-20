@@ -14,7 +14,7 @@ public class Refill extends Module implements Mappings {
     private Timer timer = new Timer(), heldTimer;
 
     public Refill() {
-        super(34, "Refill", "000000");
+        super(34, "Refill", 0x000000);
     }
 
     @Override

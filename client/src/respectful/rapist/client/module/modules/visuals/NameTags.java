@@ -7,7 +7,7 @@ import respectful.rapist.client.module.Module;
 
 public class NameTags extends Module implements Mappings {
     public NameTags() {
-        super(49, "NameTags", "74B9FF");
+        super(49, "NameTags", 0x74B9FF);
     }
 
     @Override
@@ -28,8 +28,8 @@ public class NameTags extends Module implements Mappings {
                 GL11.glEnable(GL11.GL_BLEND);
                 OpenGLHelper.glBlendFunc(770, 771, 1, 0);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
-                String name = EntityPlayer.getCommandSenderName(entityPlayer), health = " " + Math.round((EntityLivingBase.getHealth(entityPlayer) / 2.0F) * 10.0F) / 10.0F, nameColor = "FFFFFF", healthColor = "008E34";
-                int x = FontRenderer.getStringWidth(Minecraft.getFontRenderer(), name + health) / 2;
+                String name = EntityPlayer.getCommandSenderName(entityPlayer), health = " " + Math.round((EntityLivingBase.getHealth(entityPlayer) / 2.0F) * 10.0F) / 10.0F;
+                int x = FontRenderer.getStringWidth(Minecraft.getFontRenderer(), name + health) / 2, nameColor = 0xFFFFFF, healthColor = 0x008E34;
                 float r = 0.0F, g = 0.0F, b = 0.0F;
                 if (Entity.isSneaking(entityPlayer)) {
                     r = 0.85098039215F;
@@ -55,20 +55,20 @@ public class NameTags extends Module implements Mappings {
                 Tessellator.draw(tessellator);
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
                 if (EventManager.playerManager.isFriend(name)) {
-                    nameColor = "00B894";
+                    nameColor = 0x00B894;
                 } else if (EventManager.playerManager.isEnemy(name) || (EventManager.moduleManager.aimbot.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.aimbot.target).equalsIgnoreCase(name)) || (EventManager.moduleManager.wTap.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.wTap.target).equalsIgnoreCase(name))) {
-                    nameColor = "D63031";
+                    nameColor = 0xD63031;
                 }
                 if (EntityLivingBase.getHealth(entityPlayer) <= 3.33F) {
-                    healthColor = "D91722";
+                    healthColor = 0xD91722;
                 } else if (EntityLivingBase.getHealth(entityPlayer) <= 6.67F) {
-                    healthColor = "F27111";
+                    healthColor = 0xF27111;
                 } else if (EntityLivingBase.getHealth(entityPlayer) <= 10.0F) {
-                    healthColor = "FFD700";
+                    healthColor = 0xFFD700;
                 } else if (EntityLivingBase.getHealth(entityPlayer) <= 13.33F) {
-                    healthColor = "D6E101";
+                    healthColor = 0xD6E101;
                 } else if (EntityLivingBase.getHealth(entityPlayer) <= 16.67F) {
-                    healthColor = "6BBE48";
+                    healthColor = 0x6BBE48;
                 }
                 FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), name, -x, 0, nameColor);
                 FontRenderer.drawStringWithShadow(Minecraft.getFontRenderer(), health, FontRenderer.getStringWidth(Minecraft.getFontRenderer(), name) - x, 0, healthColor);

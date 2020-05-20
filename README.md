@@ -16,6 +16,13 @@ https://github.com/xertxa/Zyklon/releases
 • Run "injector.jar" and load the cheat. The web GUI should now be running on your network at port 1337. You may visit http://localhost:1337 on your machine or http://192.168.x.x:1337 on an external device to use it.
 
 ## Changelog
+**4.0 - 5/17/2020**<br>
+• Improved cloud configuration UI<br>
+• Improved performance<br>
+• Added Aim Delay and Points Scale options to Aimbot<br>
+• Added ability to change localhost port and use external host<br>
+• Bug fixes
+
 **3.9 - 3/28/2020**<br>
 • Implemented support for 1.8.9<br>
 • Added Require Sprint mode to Reach, HitBoxes and Velocity<br>

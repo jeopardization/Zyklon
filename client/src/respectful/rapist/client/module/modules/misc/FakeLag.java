@@ -8,12 +8,12 @@ import respectful.rapist.client.util.Config;
 import respectful.rapist.client.util.Random;
 
 public class FakeLag extends Module implements Mappings {
-    public int FOV = 120, minDelay = 150, maxDelay = 250;
+    public int FOV = 100, minDelay = 150, maxDelay = 250;
     public float dist = 3.0F;
     public boolean attacking;
 
     public FakeLag() {
-        super(25, "FakeLag", "DFE6E9");
+        super(25, "FakeLag", 0xDFE6E9);
     }
 
     public static void sleep() {

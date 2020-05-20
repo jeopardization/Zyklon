@@ -15,7 +15,7 @@ public class ThrowPot extends Module implements Mappings {
     private boolean held;
 
     public ThrowPot() {
-        super(33, "ThrowPot", "000000");
+        super(33, "ThrowPot", 0x000000);
     }
 
     @Override

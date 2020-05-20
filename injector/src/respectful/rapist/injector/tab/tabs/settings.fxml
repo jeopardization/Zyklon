@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="290.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/10.0.1"
+            fx:controller="respectful.rapist.injector.Controller">
+    <children>
+        <AnchorPane prefHeight="40.0" prefWidth="444.0" style="-fx-background-color: #8dc63f;">
+            <children>
+                <Button layoutX="408.0" layoutY="7.0" mnemonicParsing="false" onAction="#exit"
+                        prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: RGBA(0,0,0,0);"
+                        textAlignment="CENTER">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../resources/images/exit.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Text fill="WHITE" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Host Options">
+                    <font>
+                        <Font name="Titillium Web" size="16.0"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="40.0" prefHeight="250.0" prefWidth="444.0" style="-fx-background-color: #17171a;">
+            <children>
+                <AnchorPane layoutX="296.0" layoutY="7.0" prefHeight="75.0" prefWidth="148.0"/>
+                <Button layoutX="22.0" layoutY="182.0" mnemonicParsing="false" onAction="#applySettings"
+                        prefHeight="45.0" prefWidth="400.0" style="-fx-background-color: #333336;" text="Done"
+                        textAlignment="CENTER" textFill="#c3c3c3">
+                    <font>
+                        <Font name="Titillium Web" size="16.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT"/>
+                    </cursor>
+                </Button>
+                <TextField layoutX="24.0" layoutY="41.0" prefHeight="25.0" prefWidth="400.0" promptText="1337"
+                           text="1337" fx:id="port"/>
+                <TextField layoutX="24.0" layoutY="107.0" prefHeight="25.0" prefWidth="400.0"
+                           promptText="https://www.google.com" fx:id="host"/>
+                <Text fill="WHITE" layoutX="77.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Leave whatever you're NOT USING blank." textAlignment="CENTER">
+                    <font>
+                        <Font name="Titillium Web" size="16.0"/>
+                    </font>
+                </Text>
+                <Text fill="WHITE" layoutX="24.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Localhost Port">
+                    <font>
+                        <Font name="Titillium Web" size="16.0"/>
+                    </font>
+                </Text>
+                <Text fill="WHITE" layoutX="24.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="External Host">
+                    <font>
+                        <Font name="Titillium Web" size="16.0"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

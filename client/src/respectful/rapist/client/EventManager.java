@@ -6,14 +6,25 @@ import respectful.rapist.client.module.ModuleManager;
 import respectful.rapist.client.util.Config;
 import respectful.rapist.client.util.Timer;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.Scanner;
 
 public class EventManager implements Mappings {
     public static ModuleManager moduleManager = new ModuleManager();
     public static PlayerManager playerManager = new PlayerManager();
+    public static String URL;
     private static Timer timer = new Timer();
     private static int refreshRate = 5000;
+
+    static {
+        try {
+            URL = new BufferedReader(new FileReader(System.getenv("appdata") + "\\url")).readLine();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public static void onKey(int keyCode) {
         for (Module module : moduleManager.modules) {
@@ -43,7 +54,7 @@ public class EventManager implements Mappings {
         if (Minecraft.getTheWorld() != null) {
             if (timer.elapsed(refreshRate)) {
                 try {
-                    String[] players = new Scanner(new URL("http://localhost:1337/players").openStream()).next().split(";");
+                    String[] players = new Scanner(new URL(URL + "/players").openStream()).next().split(";");
                     /*
                     0: Friends
                     1: Enemies
@@ -58,7 +69,7 @@ public class EventManager implements Mappings {
                     } else {
                         playerManager.enemies = null;
                     }
-                    String[] config = new Scanner(new URL("http://localhost:1337/config").openStream()).next().split(";");
+                    String[] config = new Scanner(new URL(URL + "/config").openStream()).next().split(";");
                     /*
                     0: AutoClicker Bind
                     1: Aimbot Bind
@@ -107,30 +118,33 @@ public class EventManager implements Mappings {
                     44: Aimbot Maximum Yaw Smoothing
                     45: Aimbot Minimum Pitch Smoothing
                     46: Aimbot Maximum Pitch Smoothing
-                    47: Aimbot Minimum Randomize Frequency
-                    48: Aimbot Maximum Randomize Frequency
-                    49: Reach Minimum Expansion
-                    50: Reach Maximum Expansion
-                    51: HitBoxes Expansion
-                    52: Velocity Chance
-                    53: Velocity X
-                    54: Velocity Y
-                    55: Velocity Z
-                    56: Fake Lag Distance
-                    57: Fake Lag FOV
-                    58: Fake Lag Minimum Delay
-                    59: Fake Lag Maximum Delay
-                    60: WTap Distance
-                    61: WTap FOV
-                    62: WTap Minimum Tap Delay
-                    63: WTap Maximum Tap Delay
-                    64: ThrowPot Minimum Throw Delay
-                    65: ThrowPot Maximum Throw Delay
-                    66: Refill Minimum Fill Delay
-                    67: Refill Maximum Fill Delay
-                    68: Refill Minimum Exit Delay
-                    69: Refill Maximum Exit Delay
-                    70: Refresh Rate
+                    47: Aimbot Minimum Delay
+                    48: Aimbot Maximum Delay
+                    49: Aimbot Minimum Randomize Aim Point
+                    50: Aimbot Maximum Randomize Aim Point
+                    51: Aimbot Points Scale
+                    52: Reach Minimum Expansion
+                    53: Reach Maximum Expansion
+                    54: HitBoxes Expansion
+                    55: Velocity Chance
+                    56: Velocity X
+                    57: Velocity Y
+                    58: Velocity Z
+                    59: Fake Lag Distance
+                    60: Fake Lag FOV
+                    61: Fake Lag Minimum Delay
+                    62: Fake Lag Maximum Delay
+                    63: WTap Distance
+                    64: WTap FOV
+                    65: WTap Minimum Tap Delay
+                    66: WTap Maximum Tap Delay
+                    67: ThrowPot Minimum Throw Delay
+                    68: ThrowPot Maximum Throw Delay
+                    69: Refill Minimum Fill Delay
+                    70: Refill Maximum Fill Delay
+                    71: Refill Minimum Exit Delay
+                    72: Refill Maximum Exit Delay
+                    73: Refresh Rate
                     */
                     for (int i = 0; i < 13; i++) {
                         moduleManager.modules.get(i).bind = Integer.parseInt(config[i]);
@@ -161,30 +175,33 @@ public class EventManager implements Mappings {
                     moduleManager.aimbot.maxYawSmooth = Float.parseFloat(config[44]);
                     moduleManager.aimbot.minPitchSmooth = Float.parseFloat(config[45]);
                     moduleManager.aimbot.maxPitchSmooth = Float.parseFloat(config[46]);
-                    moduleManager.aimbot.minRand = Integer.parseInt(config[47]);
-                    moduleManager.aimbot.maxRand = Integer.parseInt(config[48]);
-                    moduleManager.reach.minExpansion = Double.parseDouble(config[49]);
-                    moduleManager.reach.maxExpansion = Double.parseDouble(config[50]);
-                    moduleManager.hitBoxes.expansion = Float.parseFloat(config[51]);
-                    moduleManager.velocity.chance = Integer.parseInt(config[52]);
-                    moduleManager.velocity.x = Double.parseDouble(config[53]);
-                    moduleManager.velocity.y = Double.parseDouble(config[54]);
-                    moduleManager.velocity.z = Double.parseDouble(config[55]);
-                    moduleManager.fakeLag.dist = Float.parseFloat(config[56]);
-                    moduleManager.fakeLag.FOV = Integer.parseInt(config[57]);
-                    moduleManager.fakeLag.minDelay = Integer.parseInt(config[58]);
-                    moduleManager.fakeLag.maxDelay = Integer.parseInt(config[59]);
-                    moduleManager.wTap.dist = Float.parseFloat(config[60]);
-                    moduleManager.wTap.FOV = Integer.parseInt(config[61]);
-                    moduleManager.wTap.minTapDelay = Integer.parseInt(config[62]);
-                    moduleManager.wTap.maxTapDelay = Integer.parseInt(config[63]);
-                    moduleManager.throwPot.minThrowDelay = Integer.parseInt(config[64]);
-                    moduleManager.throwPot.maxThrowDelay = Integer.parseInt(config[65]);
-                    moduleManager.refill.minFillDelay = Integer.parseInt(config[66]);
-                    moduleManager.refill.maxFillDelay = Integer.parseInt(config[67]);
-                    moduleManager.refill.minExitDelay = Integer.parseInt(config[68]);
-                    moduleManager.refill.maxExitDelay = Integer.parseInt(config[69]);
-                    refreshRate = Integer.parseInt(config[70]) * 1000;
+                    moduleManager.aimbot.minDelay = Integer.parseInt(config[47]);
+                    moduleManager.aimbot.maxDelay = Integer.parseInt(config[48]);
+                    moduleManager.aimbot.minRand = Integer.parseInt(config[49]);
+                    moduleManager.aimbot.maxRand = Integer.parseInt(config[50]);
+                    moduleManager.aimbot.scale = Float.parseFloat(config[51]);
+                    moduleManager.reach.minExpansion = Double.parseDouble(config[52]);
+                    moduleManager.reach.maxExpansion = Double.parseDouble(config[53]);
+                    moduleManager.hitBoxes.expansion = Float.parseFloat(config[54]);
+                    moduleManager.velocity.chance = Integer.parseInt(config[55]);
+                    moduleManager.velocity.x = Double.parseDouble(config[56]);
+                    moduleManager.velocity.y = Double.parseDouble(config[57]);
+                    moduleManager.velocity.z = Double.parseDouble(config[58]);
+                    moduleManager.fakeLag.dist = Float.parseFloat(config[59]);
+                    moduleManager.fakeLag.FOV = Integer.parseInt(config[60]);
+                    moduleManager.fakeLag.minDelay = Integer.parseInt(config[61]);
+                    moduleManager.fakeLag.maxDelay = Integer.parseInt(config[62]);
+                    moduleManager.wTap.dist = Float.parseFloat(config[63]);
+                    moduleManager.wTap.FOV = Integer.parseInt(config[64]);
+                    moduleManager.wTap.minTapDelay = Integer.parseInt(config[65]);
+                    moduleManager.wTap.maxTapDelay = Integer.parseInt(config[66]);
+                    moduleManager.throwPot.minThrowDelay = Integer.parseInt(config[67]);
+                    moduleManager.throwPot.maxThrowDelay = Integer.parseInt(config[68]);
+                    moduleManager.refill.minFillDelay = Integer.parseInt(config[69]);
+                    moduleManager.refill.maxFillDelay = Integer.parseInt(config[70]);
+                    moduleManager.refill.minExitDelay = Integer.parseInt(config[71]);
+                    moduleManager.refill.maxExitDelay = Integer.parseInt(config[72]);
+                    refreshRate = Integer.parseInt(config[73]) * 1000;
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

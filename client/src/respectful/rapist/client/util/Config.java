@@ -49,7 +49,7 @@ public class Config implements Mappings {
 
     public static void setEnabledCloud(Module module, boolean enabled) {
         try {
-            URL URL = new URL("http://localhost:1337/setenabled/" + module.name + "/" + (enabled ? 1 : 0));
+            URL URL = new URL(EventManager.URL + "/setenabled/" + module.name + "/" + (enabled ? 1 : 0));
             InputStream inputStream = URL.openStream();
             inputStream.close();
         } catch (Exception ex) {
@@ -59,9 +59,7 @@ public class Config implements Mappings {
 
     public static class Target implements Comparable<Target> {
         public static Comparator<Target> distComparator = Comparator.comparing(target -> Float.toString(target.dist)), healthComparator = Comparator.comparing(target -> Float.toString(target.health));
-        private final float FOV;
-        private final float dist;
-        private final float health;
+        private final float FOV, dist, health;
         public Object target;
 
         public Target(Object target, float FOV, float dist) {
