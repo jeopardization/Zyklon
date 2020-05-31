@@ -1,5 +1,5 @@
 # Zyklon
-![](https://i.imgur.com/Zwo2Onog.png)<br>
+![](https://i.imgur.com/ykbhv5wg.png)<br>
 ![](https://i.imgur.com/li08zjx.png)<br>
 ![](https://i.imgur.com/sX2f3fV.png)<br>
 ![](https://i.imgur.com/UqEBubd.png)<br>
