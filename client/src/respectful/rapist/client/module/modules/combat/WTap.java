@@ -9,7 +9,7 @@ import respectful.rapist.client.util.Timer;
 
 public class WTap extends Module implements Mappings {
     public float dist = 2.8F;
-    public int FOV = 30, minTapDelay = 100, maxTapDelay = 200, delay = Random.nextInt(minTapDelay, maxTapDelay);
+    public int FOV = 45, minTapDelay = 100, maxTapDelay = 200, delay = Random.nextInt(minTapDelay, maxTapDelay);
     public boolean reqItem, released;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
     public Object target;

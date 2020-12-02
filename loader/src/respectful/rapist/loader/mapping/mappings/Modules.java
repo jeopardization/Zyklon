@@ -4,11 +4,11 @@ import respectful.rapist.loader.mapping.MappedClass;
 
 import java.lang.reflect.Field;
 
-public class ModuleManager extends MappedClass {
+public class Modules extends MappedClass {
     private Field nameTags;
 
-    public ModuleManager() {
-        super("respectful.rapist.client.module.ModuleManager");
+    public Modules() {
+        super("respectful.rapist.client.module.Modules");
         try {
             nameTags = clazz.getDeclaredField("nameTags");
         } catch (Exception ex) {

@@ -6,7 +6,7 @@ import respectful.rapist.client.util.Random;
 
 public class Reach extends Module {
     public static double add;
-    public double minExpansion = 0.1D, maxExpansion = 0.3D;
+    public double minExpansion = 0.05D, maxExpansion = 0.15D;
     public boolean reqItem, reqSprint;
     public int[] itemWhitelist = {267, 276, 272, 283, 268};
 

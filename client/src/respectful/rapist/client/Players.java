@@ -1,6 +1,6 @@
 package respectful.rapist.client;
 
-public class PlayerManager {
+public class Players {
     public String[] friends = {};
     public String[] enemies = {};
 

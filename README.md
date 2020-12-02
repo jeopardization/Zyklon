@@ -1,9 +1,13 @@
 # Zyklon
-![](https://i.imgur.com/Zwo2Onog.png)<br>
-![](https://i.imgur.com/li08zjx.png)<br>
-![](https://i.imgur.com/sX2f3fV.png)<br>
-![](https://i.imgur.com/UqEBubd.png)<br>
-![](https://i.imgur.com/SPnRt07.png)
+![](https://i.imgur.com/xpNFwjD.png)<br>
+![](https://i.imgur.com/byR3gAu.png)<br>
+![](https://i.imgur.com/mmSYDup.png)<br>
+![](https://i.imgur.com/cHpYNL0.png)<br>
+![](https://i.imgur.com/k8LvZGu.png)<br>
+![](https://i.imgur.com/ddzEWZB.png)<br>
+![](https://i.imgur.com/35g40G6.png)<br>
+![](https://i.imgur.com/bElZR5H.png)
+
 
 ## Download
 https://github.com/xertxa/Zyklon/releases
@@ -16,6 +20,10 @@ https://github.com/xertxa/Zyklon/releases
 • Run "injector.jar" and load the cheat. The web GUI should now be running on your network at port 1337. You may visit http://localhost:1337 on your machine or http://192.168.x.x:1337 on an external device to use it.
 
 ## Changelog
+**4.1 - 12/1/2020**<br>
+• Added Linux support<br>
+• Added Plugins<br>
+
 **4.0 - 5/17/2020**<br>
 • Improved cloud configuration UI<br>
 • Improved performance<br>

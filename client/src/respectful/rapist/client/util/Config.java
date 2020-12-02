@@ -1,7 +1,7 @@
 package respectful.rapist.client.util;
 
 import org.lwjgl.input.Mouse;
-import respectful.rapist.client.EventManager;
+import respectful.rapist.client.Events;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 
@@ -49,7 +49,7 @@ public class Config implements Mappings {
 
     public static void setEnabledCloud(Module module, boolean enabled) {
         try {
-            URL URL = new URL(EventManager.URL + "/setenabled/" + module.name + "/" + (enabled ? 1 : 0));
+            URL URL = new URL(Events.URL + "/setenabled/" + module.name + "/" + (enabled ? 1 : 0));
             InputStream inputStream = URL.openStream();
             inputStream.close();
         } catch (Exception ex) {
@@ -73,7 +73,7 @@ public class Config implements Mappings {
             if (entityPlayer != null) {
                 float[] rotations = Angle.findNeededRotations(Entity.getPosX(entityPlayer) - Entity.getPosX(Minecraft.getThePlayer()), Entity.getPosZ(entityPlayer) - Entity.getPosZ(Minecraft.getThePlayer()), Entity.getPosY(entityPlayer) - Entity.getPosY(Minecraft.getThePlayer()) + 1.0D, Entity.getDistanceToEntity(Minecraft.getThePlayer(), EntityPlayer.clazz.cast(entityPlayer)));
                 float dist = Entity.getDistanceToEntity(Minecraft.getThePlayer(), entityPlayer);
-                return ((!EntityPlayer.clazz.cast(entityPlayer).equals(Minecraft.getThePlayer()) && dist <= maxDist && Angle.isWithinFOV(rotations, maxFOV) && EntityLivingBase.isEntityAlive(entityPlayer) && !Entity.isInvisible(entityPlayer) && !EventManager.playerManager.isFriend(EntityPlayer.getCommandSenderName(entityPlayer)))) ? new Target(entityPlayer, Math.abs(rotations[0]) + Math.abs(rotations[1]), dist) : null;
+                return ((!EntityPlayer.clazz.cast(entityPlayer).equals(Minecraft.getThePlayer()) && dist <= maxDist && Angle.isWithinFOV(rotations, maxFOV) && EntityLivingBase.isEntityAlive(entityPlayer) && !Entity.isInvisible(entityPlayer) && !Events.players.isFriend(EntityPlayer.getCommandSenderName(entityPlayer)))) ? new Target(entityPlayer, Math.abs(rotations[0]) + Math.abs(rotations[1]), dist) : null;
             }
             return null;
         }

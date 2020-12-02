@@ -74,6 +74,11 @@ indexRouter.post("/apply", (req, res) => {
             console.log(err);
         }
     });
+    fs.writeFile("./public/plugins", req.body.plugins, function(err) {
+        if(err) {
+            console.log(err);
+        }
+    });
     res.send("Settings saved successfully.");
 });
 indexRouter.post("/self-destruct", (req, res) => {

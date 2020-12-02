@@ -11,14 +11,16 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class Main extends Application {
-    public static Index index;
-    public static Settings settings;
+    static Index index;
+    static Settings settings;
+    static boolean windows = System.getProperty("os.name").contains("Windows");
+    static String toolsPath = "file:///" + System.getenv("JAVA_HOME") + (windows ? "\\lib\\" : "lib/") + "tools.jar";
 
     public static void main(String[] args) {
         try {
             Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
             addURL.setAccessible(true);
-            addURL.invoke(ClassLoader.getSystemClassLoader(), new URL("file:///" + System.getenv("JAVA_HOME") + "\\lib\\tools.jar"));
+            addURL.invoke(ClassLoader.getSystemClassLoader(), new URL(toolsPath));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -26,7 +28,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Font.loadFont(getClass().getResourceAsStream("tab/resources/fonts/titilliumweb.ttf"), 10);
         index = new Index("index", primaryStage);
         settings = new Settings("settings", new Stage());

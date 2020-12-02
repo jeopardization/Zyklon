@@ -1,0 +1,17 @@
+public class Plugin {
+    public static void onKey(int keyCode) {
+
+    }
+
+    public static void onRenderGUI() {
+
+    }
+
+    public static void onRender() {
+
+    }
+
+    public static void onTick() {
+
+    }
+}

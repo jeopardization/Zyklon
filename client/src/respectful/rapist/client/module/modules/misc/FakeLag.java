@@ -1,7 +1,7 @@
 package respectful.rapist.client.module.modules.misc;
 
 import org.lwjgl.input.Mouse;
-import respectful.rapist.client.EventManager;
+import respectful.rapist.client.Events;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 import respectful.rapist.client.util.Config;
@@ -17,9 +17,9 @@ public class FakeLag extends Module implements Mappings {
     }
 
     public static void sleep() {
-        if (EventManager.moduleManager.fakeLag.enabled && !EventManager.moduleManager.fakeLag.attacking) {
+        if (Events.modules.fakeLag.enabled && !Events.modules.fakeLag.attacking) {
             try {
-                Thread.sleep(Random.nextInt(EventManager.moduleManager.fakeLag.minDelay, EventManager.moduleManager.fakeLag.maxDelay));
+                Thread.sleep(Random.nextInt(Events.modules.fakeLag.minDelay, Events.modules.fakeLag.maxDelay));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

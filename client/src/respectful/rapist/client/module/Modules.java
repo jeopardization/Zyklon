@@ -9,7 +9,7 @@ import respectful.rapist.client.module.modules.visuals.NameTags;
 
 import java.util.ArrayList;
 
-public class ModuleManager {
+public class Modules {
     public ArrayList<Module> modules = new ArrayList<>();
     public AutoClicker autoClicker = new AutoClicker();
     public Aimbot aimbot = new Aimbot();
@@ -25,7 +25,7 @@ public class ModuleManager {
     public ThrowPot throwPot = new ThrowPot();
     public Refill refill = new Refill();
 
-    public ModuleManager() {
+    public Modules() {
         modules.add(autoClicker);
         modules.add(aimbot);
         modules.add(nameTags);

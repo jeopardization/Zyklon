@@ -5,14 +5,14 @@ import respectful.rapist.loader.mapping.MappedClass;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class EventManager extends MappedClass {
-    private Field moduleManager;
+public class Events extends MappedClass {
+    private Field modules;
     private Method onKey, onRenderGUI, onRender, onTick;
 
-    public EventManager() {
-        super("respectful.rapist.client.EventManager");
+    public Events() {
+        super("respectful.rapist.client.Events");
         try {
-            moduleManager = clazz.getDeclaredField("moduleManager");
+            modules = clazz.getDeclaredField("modules");
             onKey = clazz.getDeclaredMethod("onKey", int.class);
             onRender = clazz.getDeclaredMethod("onRender");
             onRenderGUI = clazz.getDeclaredMethod("onRenderGUI");
@@ -54,9 +54,9 @@ public class EventManager extends MappedClass {
         }
     }
 
-    public Object getModuleManager() {
+    public Object getModules() {
         try {
-            return moduleManager.get(null);
+            return modules.get(null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

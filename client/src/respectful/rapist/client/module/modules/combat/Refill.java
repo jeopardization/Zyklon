@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class Refill extends Module implements Mappings {
-    public int minFillDelay = 65, maxFillDelay = 110, minExitDelay = 110, maxExitDelay = 200;
+    public int minFillDelay = 75, maxFillDelay = 125, minExitDelay = 125, maxExitDelay = 225;
     private int fillDelay = Random.nextInt(minFillDelay, maxFillDelay), exitDelay = Random.nextInt(minExitDelay, maxExitDelay), releaseDelay = fillDelay / 3;
     private Timer timer = new Timer(), heldTimer;
 

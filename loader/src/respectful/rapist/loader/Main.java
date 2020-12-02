@@ -16,16 +16,16 @@ import java.net.URLClassLoader;
 import java.util.List;
 
 public class Main {
-    public static String URL;
     public static URLClassLoader loader;
     public static Object launchClassLoader;
     public static Instrumentation inst;
-    public static ClassFileTransformer minecraft = new Minecraft(), entity = new Entity(), entityRenderer = new EntityRenderer(), render = new Render(), renderGlobal = new RenderGlobal(), rendererLivingEntity = new RendererLivingEntity(), guiIngame = new GuiIngame(), netHanderPlayClient = new NetHandlerPlayClient();
+    public static String[] URLs;
+    public static ClassFileTransformer minecraft = new Minecraft(), entity = new Entity(), entityRenderer = new EntityRenderer(), render = new Render(), renderGlobal = new RenderGlobal(), rendererLivingEntity = new RendererLivingEntity(), guiIngameForge = new GuiIngameForge(), netHandlerPlayClient = new NetHandlerPlayClient();
 
     static {
         try {
-            URL = new BufferedReader(new FileReader(System.getenv("appdata") + "\\url")).readLine();
-            loader = new URLClassLoader(new URL[]{new URL(URL + "/client.jar")});
+            URLs = new BufferedReader(new FileReader(((System.getProperty("os.name").contains("Windows") ? System.getenv("APPDATA") + "\\" : System.getProperty("user.home") + "/") + "urls"))).readLine().split(";");
+            loader = new URLClassLoader(new URL[]{new URL(URLs[0] + "/client.jar"), new URL(URLs[1])});
             launchClassLoader = ClassLoader.getSystemClassLoader().loadClass("net.minecraft.launchwrapper.Launch").getDeclaredField("classLoader").get(null);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -45,45 +45,28 @@ public class Main {
     }
 
     private static void transform() {
-        ClassFileTransformer transformer;
         Instrumentation inst = (Instrumentation) getField("inst");
         for (Class clazz : inst.getAllLoadedClasses()) {
-            switch (clazz.getName()) {
+            String name = clazz.getName();
+            switch (name) {
                 case "net.minecraft.client.Minecraft":
-                    transformer = (ClassFileTransformer) getField("minecraft");
-                    break;
                 case "net.minecraft.entity.Entity":
-                    transformer = (ClassFileTransformer) getField("entity");
-                    break;
                 case "net.minecraft.client.renderer.EntityRenderer":
-                    transformer = (ClassFileTransformer) getField("entityRenderer");
-                    break;
                 case "net.minecraft.client.renderer.entity.Render":
-                    transformer = (ClassFileTransformer) getField("render");
-                    break;
                 case "net.minecraft.client.renderer.RenderGlobal":
-                    transformer = (ClassFileTransformer) getField("renderGlobal");
-                    break;
                 case "net.minecraft.client.renderer.entity.RendererLivingEntity":
-                    transformer = (ClassFileTransformer) getField("rendererLivingEntity");
-                    break;
                 case "net.minecraftforge.client.GuiIngameForge":
-                    transformer = (ClassFileTransformer) getField("guiIngame");
-                    break;
                 case "net.minecraft.client.network.NetHandlerPlayClient":
-                    transformer = (ClassFileTransformer) getField("netHanderPlayClient");
-                    break;
-                default:
-                    transformer = null;
-            }
-            if (transformer != null) {
-                try {
-                    inst.addTransformer(transformer, true);
-                    inst.retransformClasses(clazz);
-                    inst.removeTransformer(transformer);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                    try {
+                        String[] split = name.split("\\.");
+                        String field = split[split.length - 1];
+                        ClassFileTransformer transformer = (ClassFileTransformer) getField(field.substring(0, 1).toLowerCase() + field.substring(1));
+                        inst.addTransformer(transformer, true);
+                        inst.retransformClasses(clazz);
+                        inst.removeTransformer(transformer);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
             }
         }
     }
@@ -99,7 +82,7 @@ public class Main {
 
     public static void destroy() {
         try {
-            InputStream inputStream = new URL(getField("URL") + "/setenabled/Self%20Destruct/0").openStream();
+            InputStream inputStream = new URL(((String[]) getField("URLs"))[0] + "/setenabled/Self%20Destruct/0").openStream();
             inputStream.close();
             transform();
             List<URL> sources = (List<URL>) launchClassLoader.getClass().getDeclaredMethod("getSources").invoke(launchClassLoader);
@@ -111,9 +94,10 @@ public class Main {
             }
             loader = null;
             launchClassLoader = null;
-            Mappings.ModuleManager = null;
+            URLs = null;
+            Mappings.Modules = null;
             Mappings.Module = null;
-            Mappings.EventManager = null;
+            Mappings.Events = null;
             Mappings.NameTags = null;
             Mappings.HitBoxes = null;
             Mappings.Reach = null;
@@ -125,8 +109,8 @@ public class Main {
             render = null;
             renderGlobal = null;
             rendererLivingEntity = null;
-            guiIngame = null;
-            netHanderPlayClient = null;
+            guiIngameForge = null;
+            netHandlerPlayClient = null;
             inst = null;
             for (Field field : ClassLoader.getSystemClassLoader().loadClass(Main.class.getName()).getDeclaredFields()) {
                 field.set(null, null);

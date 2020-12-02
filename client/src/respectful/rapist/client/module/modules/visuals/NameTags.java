@@ -1,7 +1,7 @@
 package respectful.rapist.client.module.modules.visuals;
 
 import org.lwjgl.opengl.GL11;
-import respectful.rapist.client.EventManager;
+import respectful.rapist.client.Events;
 import respectful.rapist.client.mapping.Mappings;
 import respectful.rapist.client.module.Module;
 
@@ -54,9 +54,9 @@ public class NameTags extends Module implements Mappings {
                 }
                 Tessellator.draw(tessellator);
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
-                if (EventManager.playerManager.isFriend(name)) {
+                if (Events.players.isFriend(name)) {
                     nameColor = 0x00B894;
-                } else if (EventManager.playerManager.isEnemy(name) || (EventManager.moduleManager.aimbot.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.aimbot.target).equalsIgnoreCase(name)) || (EventManager.moduleManager.wTap.target != null && EntityPlayer.getCommandSenderName(EventManager.moduleManager.wTap.target).equalsIgnoreCase(name))) {
+                } else if (Events.players.isEnemy(name) || (Events.modules.aimbot.target != null && EntityPlayer.getCommandSenderName(Events.modules.aimbot.target).equalsIgnoreCase(name)) || (Events.modules.wTap.target != null && EntityPlayer.getCommandSenderName(Events.modules.wTap.target).equalsIgnoreCase(name))) {
                     nameColor = 0xD63031;
                 }
                 if (EntityLivingBase.getHealth(entityPlayer) <= 3.33F) {

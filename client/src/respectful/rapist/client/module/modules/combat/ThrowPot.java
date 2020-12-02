@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class ThrowPot extends Module implements Mappings {
-    public int minThrowDelay = 65, maxThrowDelay = 110, slot = -1;
+    public int minThrowDelay = 75, maxThrowDelay = 125, slot = -1;
     private int delay = Random.nextInt(minThrowDelay, maxThrowDelay);
     private Timer timer = new Timer();
     private boolean held;

@@ -10,7 +10,7 @@ public class NameTags extends MappedClass {
 
     public boolean getEnabled() {
         try {
-            return Mappings.Module.getEnabled(Mappings.ModuleManager.getNameTags(Mappings.EventManager.getModuleManager()));
+            return Mappings.Module.getEnabled(Mappings.Modules.getNameTags(Mappings.Events.getModules()));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

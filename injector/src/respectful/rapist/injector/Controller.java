@@ -14,18 +14,20 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 
 import static net.bytebuddy.agent.ByteBuddyAgent.attach;
+import static respectful.rapist.injector.Main.toolsPath;
+import static respectful.rapist.injector.Main.windows;
 
 public class Controller {
     public void inject() {
         Alert alert;
         try {
-            System.setProperty("java.library.path", System.getenv("JAVA_HOME") + "\\jre\\bin");
+            System.setProperty("java.library.path", System.getenv("JAVA_HOME") + (windows ? "\\jre\\bin" : "jre/lib/amd64"));
             Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
             sysPath.setAccessible(true);
             sysPath.set(null, null);
             for (VirtualMachineDescriptor VM : VirtualMachine.list()) {
                 if (VM.displayName().contains("net.minecraft.launchwrapper.Launch")) {
-                    writeFile(System.getenv("appdata") + "\\url", (Main.settings.getHost().isEmpty()) ? "http://localhost:" + Main.settings.getPort() : Main.settings.getHost());
+                    writeFile(((windows ? System.getenv("APPDATA") + "\\" : System.getProperty("user.home") + "/") + "urls"), ((Main.settings.getHost().isEmpty()) ? "http://localhost:" + Main.settings.getPort() : Main.settings.getHost()) + ";" + toolsPath);
                     attach(new File("loader.jar"), VM.id());
                     alert = new Alert(Alert.AlertType.CONFIRMATION, "Success", ButtonType.OK);
                     alert.showAndWait();
@@ -56,8 +58,8 @@ public class Controller {
             String URL;
             if (Main.settings.getHost().isEmpty()) {
                 URL = "http://localhost:" + Main.settings.getPort() + "/client.jar";
-                writeFile("cloud.bat", "@echo off\ncd cloud\nnode app.js " + Main.settings.getPort());
-                Runtime.getRuntime().exec("cmd /c start cloud.bat");
+                writeFile("cloud." + (windows ? "bat" : "sh"), (windows ? "@echo off\n" : "") + "cd cloud\nnode app.js " + Main.settings.getPort());
+                Runtime.getRuntime().exec(windows ? "cmd /c start cloud.bat" : "sh cloud.sh");
             } else {
                 URL = Main.settings.getHost() + "/client.jar";
             }
@@ -66,6 +68,7 @@ public class Controller {
             Main.index.show();
             Main.settings.hide();
         } catch (Exception ex) {
+            ex.printStackTrace();
             alert = new Alert(Alert.AlertType.ERROR, ex.toString(), ButtonType.OK);
             alert.showAndWait();
         }
