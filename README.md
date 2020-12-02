@@ -8,7 +8,6 @@
 ![](https://i.imgur.com/35g40G6.png)<br>
 ![](https://i.imgur.com/bElZR5H.png)
 
-
 ## Download
 https://github.com/xertxa/Zyklon/releases
 
@@ -27,6 +26,7 @@ https://github.com/xertxa/Zyklon/releases
 **4.0 - 5/17/2020**<br>
 • Improved cloud configuration UI<br>
 • Improved performance<br>
+• Improved Aimbot accuracy<br>
 • Added Aim Delay and Points Scale options to Aimbot<br>
 • Added ability to change localhost port and use external host<br>
 • Bug fixes
