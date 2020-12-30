@@ -24,7 +24,7 @@ public class Main {
 
     static {
         try {
-            URLs = new BufferedReader(new FileReader(((System.getProperty("os.name").contains("Windows") ? System.getenv("APPDATA") + "\\" : System.getProperty("user.home") + "/") + "urls"))).readLine().split(";");
+            URLs = new BufferedReader(new FileReader(((System.getProperty("os.name").contains("Windows") ? System.getenv("APPDATA") : System.getProperty("user.home")) + System.getProperty("file.separator") + "urls"))).readLine().split(";");
             loader = new URLClassLoader(new URL[]{new URL(URLs[0] + "/client.jar"), new URL(URLs[1])});
             launchClassLoader = ClassLoader.getSystemClassLoader().loadClass("net.minecraft.launchwrapper.Launch").getDeclaredField("classLoader").get(null);
         } catch (Exception ex) {

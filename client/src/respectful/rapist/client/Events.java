@@ -22,7 +22,7 @@ public class Events implements Mappings {
     static {
         try {
             String code = "";
-            URL = new BufferedReader(new FileReader(((System.getProperty("os.name").contains("Windows") ? System.getenv("APPDATA") + "\\" : System.getProperty("user.home") + "/") + "urls"))).readLine().split(";")[0];
+            URL = new BufferedReader(new FileReader(((System.getProperty("os.name").contains("Windows") ? System.getenv("APPDATA") : System.getProperty("user.home")) + System.getProperty("file.separator") + "urls"))).readLine().split(";")[0];
             Scanner scanner = new Scanner(new URL(URL + "/plugins").openStream());
             while (scanner.hasNextLine()) {
                 code += scanner.nextLine();

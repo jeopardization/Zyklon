@@ -13,14 +13,13 @@ import java.net.URLClassLoader;
 public class Main extends Application {
     static Index index;
     static Settings settings;
-    static boolean windows = System.getProperty("os.name").contains("Windows");
-    static String toolsPath = "file:///" + System.getenv("JAVA_HOME") + (windows ? "\\lib\\" : "lib/") + "tools.jar";
+    static String seperator = System.getProperty("file.separator"), tools = "file:///" + System.getenv("JAVA_HOME") + seperator + "lib" + seperator + "tools.jar";
 
     public static void main(String[] args) {
         try {
             Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
             addURL.setAccessible(true);
-            addURL.invoke(ClassLoader.getSystemClassLoader(), new URL(toolsPath));
+            addURL.invoke(ClassLoader.getSystemClassLoader(), new URL(tools));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -14,20 +14,31 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 
 import static net.bytebuddy.agent.ByteBuddyAgent.attach;
-import static respectful.rapist.injector.Main.toolsPath;
-import static respectful.rapist.injector.Main.windows;
+import static respectful.rapist.injector.Main.seperator;
+import static respectful.rapist.injector.Main.tools;
 
 public class Controller {
     public void inject() {
         Alert alert;
         try {
-            System.setProperty("java.library.path", System.getenv("JAVA_HOME") + (windows ? "\\jre\\bin" : "jre/lib/amd64"));
+            String OS = System.getProperty("os.name");
+            boolean windows = OS.contains("Windows");
+            String libs = System.getenv("JAVA_HOME") + seperator + "jre" + seperator, urls = (windows ? System.getenv("APPDATA") : System.getProperty("user.home")) + seperator + "urls";
+            if (windows) {
+                libs += "bin";
+            } else {
+                libs += "lib";
+                if (OS.contains("nix") || OS.contains("nux")) {
+                    libs += seperator + "amd64";
+                }
+            }
+            System.setProperty("java.library.path", libs);
             Field sysPath = ClassLoader.class.getDeclaredField("sys_paths");
             sysPath.setAccessible(true);
             sysPath.set(null, null);
             for (VirtualMachineDescriptor VM : VirtualMachine.list()) {
                 if (VM.displayName().contains("net.minecraft.launchwrapper.Launch")) {
-                    writeFile(((windows ? System.getenv("APPDATA") + "\\" : System.getProperty("user.home") + "/") + "urls"), ((Main.settings.getHost().isEmpty()) ? "http://localhost:" + Main.settings.getPort() : Main.settings.getHost()) + ";" + toolsPath);
+                    writeFile(urls, ((Main.settings.getHost().isEmpty()) ? "http://localhost:" + Main.settings.getPort() : Main.settings.getHost()) + ";" + tools);
                     attach(new File("loader.jar"), VM.id());
                     alert = new Alert(Alert.AlertType.CONFIRMATION, "Success", ButtonType.OK);
                     alert.showAndWait();
@@ -57,6 +68,7 @@ public class Controller {
         try {
             String URL;
             if (Main.settings.getHost().isEmpty()) {
+                boolean windows = System.getProperty("os.name").contains("Windows");
                 URL = "http://localhost:" + Main.settings.getPort() + "/client.jar";
                 writeFile("cloud." + (windows ? "bat" : "sh"), (windows ? "@echo off\n" : "") + "cd cloud\nnode app.js " + Main.settings.getPort());
                 Runtime.getRuntime().exec(windows ? "cmd /c start cloud.bat" : "sh cloud.sh");
