@@ -20,7 +20,7 @@ https://github.com/SexuallyAbusive/Zyklon/releases
 
 ## Changelog
 **4.1 - 12/1/2020**<br>
-• Added Linux support<br>
+• Added support for Mac and Linux<br>
 • Added Plugins<br>
 
 **4.0 - 5/17/2020**<br>
