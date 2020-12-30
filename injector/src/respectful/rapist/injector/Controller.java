@@ -21,9 +21,8 @@ public class Controller {
     public void inject() {
         Alert alert;
         try {
-            String OS = System.getProperty("os.name");
+            String OS = System.getProperty("os.name"), libs = System.getenv("JAVA_HOME") + seperator + "jre" + seperator;
             boolean windows = OS.contains("Windows");
-            String libs = System.getenv("JAVA_HOME") + seperator + "jre" + seperator, urls = (windows ? System.getenv("APPDATA") : System.getProperty("user.home")) + seperator + "urls";
             if (windows) {
                 libs += "bin";
             } else {
@@ -38,7 +37,7 @@ public class Controller {
             sysPath.set(null, null);
             for (VirtualMachineDescriptor VM : VirtualMachine.list()) {
                 if (VM.displayName().contains("net.minecraft.launchwrapper.Launch")) {
-                    writeFile(urls, ((Main.settings.getHost().isEmpty()) ? "http://localhost:" + Main.settings.getPort() : Main.settings.getHost()) + ";" + tools);
+                    writeFile((windows ? System.getenv("APPDATA") : System.getProperty("user.home")) + seperator + "urls", ((Main.settings.getHost().isEmpty()) ? "http://localhost:" + Main.settings.getPort() : Main.settings.getHost()) + ";" + tools);
                     attach(new File("loader.jar"), VM.id());
                     alert = new Alert(Alert.AlertType.CONFIRMATION, "Success", ButtonType.OK);
                     alert.showAndWait();

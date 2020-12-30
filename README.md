@@ -1,5 +1,5 @@
 # Zyklon
-![](https://i.imgur.com/xpNFwjD.png)<br>
+![](https://i.imgur.com/JGqz8de.png)<br>
 ![](https://i.imgur.com/byR3gAu.png)<br>
 ![](https://i.imgur.com/mmSYDup.png)<br>
 ![](https://i.imgur.com/cHpYNL0.png)<br>
@@ -20,7 +20,7 @@ https://github.com/SexuallyAbusive/Zyklon/releases
 
 ## Changelog
 **4.1 - 12/1/2020**<br>
-• Added Linux support<br>
+• Added support for Mac and Linux<br>
 • Added Plugins<br>
 
 **4.0 - 5/17/2020**<br>
