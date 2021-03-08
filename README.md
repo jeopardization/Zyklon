@@ -19,6 +19,9 @@ https://github.com/SexuallyAbusive/Zyklon/releases
 • Run "injector.jar" and load the cheat. The web GUI should now be running on your network at port 1337. You may visit http://localhost:1337 on your machine or http://192.168.x.x:1337 on an external device to use it.
 
 ## Changelog
+**2/23/2021**<br>
+• Zyklon private edition is now available. It is slotted, rewritten in C++, ran off an external server, easier to setup, and has support for staying undetected in screenshares. The free version will no longer receive updates or support. If you are interested, please add me on the Discord in my bio. The price is $20 lifetime, BTC accepted only.<br>
+
 **4.1 - 12/1/2020**<br>
 • Added support for Mac and Linux<br>
 • Added Plugins<br>
