@@ -21,6 +21,7 @@ https://github.com/SexuallyAbusive/Zyklon/releases
 ## Changelog
 **5.0+ - 2/23/2021 (Purchase at https://zyklon.club/)**<br>
 • Fully recoded in C++<br>
+• Lunar support<br>
 • Absolutely no setup required<br>
 • Undetected in screenshares<br>
 • Many serverside detections and bugs fixed<br>
