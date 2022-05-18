@@ -20,14 +20,14 @@ https://github.com/SexuallyAbusive/Zyklon/releases
 
 ## Changelog
 **5.0+ - 2/23/2021 (Purchase at https://zyklon.club/)**<br>
-• Fully recoded in C++<br>
-• Lunar support<br>
-• Absolutely no setup required<br>
-• Undetected in screenshares<br>
-• Many serverside detections and bugs fixed<br>
-• Many new features added<br>
-• Slotted<br>
-Please note that the free version will no longer receive updates or support.
+• Full client recode & optimization (C++)<br>
+• New design<br>
+• New features<br>
+• Lunar & LabyMod support<br>
+• Setup no longer required<br>
+• Undetected via screenshare & serverside<br>
+• Bug fixes<br>
+The free version will no longer receive updates or support.
 
 **4.1 - 12/1/2020**<br>
 • Added support for Mac and Linux<br>
