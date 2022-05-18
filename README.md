@@ -1,4 +1,4 @@
-# Zyklon
+# Zyklon (Free version)
 ![](https://i.imgur.com/JGqz8de.png)<br>
 ![](https://i.imgur.com/byR3gAu.png)<br>
 ![](https://i.imgur.com/mmSYDup.png)<br>
