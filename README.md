@@ -20,13 +20,13 @@ https://github.com/jeopardization/Zyklon/releases/tag/4.1
 
 ## Changelog
 **5.0+ - 2/23/2021 (Purchase at https://zyklon.club/)**<br>
-• Full client recode & optimization (C++)<br>
+• Fully rebuilt from the ground up in C++ - Nothing like the previous versions<br>
 • New design<br>
 • New features<br>
-• Lunar & LabyMod support<br>
-• Setup no longer required<br>
+• Lunar 1.7.10/1.8.9 & LabyMod 1.7.10/1.8.9 support<br>
+• No setup required<br>
 • Undetected via screenshare & serverside<br>
-• Bug fixes<br>
+• Much more<br>
 The free version will no longer receive updates or support.
 
 **4.1 - 12/1/2020**<br>
