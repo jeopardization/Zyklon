@@ -1,4 +1,4 @@
-# Zyklon (Free version)
+# Zyklon V4 (Free version)
 ![](https://i.imgur.com/JGqz8de.png)<br>
 ![](https://i.imgur.com/byR3gAu.png)<br>
 ![](https://i.imgur.com/mmSYDup.png)<br>
@@ -21,11 +21,11 @@ https://github.com/jeopardization/Zyklon/releases/tag/4.1
 ## Changelog
 **5.0+ - 2/23/2021 (Purchase at https://zyklon.club/)**<br>
 • Fully rebuilt from the ground up in C++ - Nothing like the previous versions<br>
-• New design<br>
-• New features<br>
+• Newly designed<br>
+• Many new enhancements & features<br>
 • Lunar 1.7.10/1.8.9 & LabyMod 1.7.10/1.8.9 support<br>
 • No setup required<br>
-• Undetected via screenshare & serverside<br>
+• Vastly enhanced screenshare & serverside security<br>
 • Much more<br>
 The free version will no longer receive updates or support.
 
